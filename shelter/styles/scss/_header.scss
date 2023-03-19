@@ -1,12 +1,9 @@
 .page-header {
-  padding: 30px 40px;
+  padding: $padding-m $padding-l;
+  background-color: $color-light-xl;
 
-  &_main {
-    padding-top: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  @include m-tablet {
+    padding: $padding-m $padding-m;
   }
 
   .header-container {
@@ -63,12 +60,25 @@
       border-color: $color-primary;
     }
 
-    &:hover {
-      color: $color-dark-3xl;
+    @include m-hover {
+      &:hover {
+        color: $color-dark-3xl;
+      }
     }
   }
 
-  &_dark {
+  &_main {
+    padding-top: $padding-xl;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(34, 34, 79);
+
+    @include m-tablet {
+      padding-top: $padding-m;
+    }
+
     .title {
       color: $color-primary;
     }
@@ -84,9 +94,10 @@
       &:active {
         color: $color-light-s;
       }
-
-      &:hover {
-        color: $color-light-s;
+      @include m-hover {
+        &:hover {
+          color: $color-light-s;
+        }
       }
     }
   }

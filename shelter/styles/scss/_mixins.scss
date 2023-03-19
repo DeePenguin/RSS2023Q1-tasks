@@ -1,3 +1,14 @@
+%list {
+  list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+%transition-s {
+  transition: all 0.3s ease;
+}
+
 @mixin primary_font ($weight: 400, $style:normal) {
   font: {
     family: "Arial", sans-serif;
@@ -27,13 +38,22 @@
   @include flex(column, $wrap, $jc, $ali);
 }
 
-%list {
-  list-style: none;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0;
+@mixin m-hover {
+  @media (hover: hover) { @content; }
 }
 
-%transition-s {
-  transition: all 0.3s ease;
+@mixin m-laptop {
+  @media (max-width: $content-width) { @content; }
+}
+
+@mixin m-tablet {
+  @media (max-width: $tablet-width) { @content; }
+}
+
+@mixin m-mobile {
+  @media (max-width: $mobile-big-width) { @content; }
+}
+
+@mixin m-mobilesmall {
+  @media (max-width: $mobile-small-width) { @content; }
 }
