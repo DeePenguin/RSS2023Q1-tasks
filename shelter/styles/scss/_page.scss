@@ -1,0 +1,21 @@
+.page {
+  @include primary_font();
+  font-size: 62.5%;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a,
+a:active,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+p,
+h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
