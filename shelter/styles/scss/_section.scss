@@ -1,0 +1,12 @@
+.section {
+  &-title {
+    @include header_font();
+    margin: 0;
+    font-size: 3.5em;
+    line-height: 130%;
+    color: $color-dark-l;
+    &_light {
+      color: $color-light-xl;
+    }
+  }
+}

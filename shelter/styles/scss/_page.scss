@@ -1,4 +1,11 @@
+:root {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 .page {
+  min-height: 100%;
+  @include flex-col($ali: stretch);
   @include primary_font();
   font-size: 62.5%;
 }
