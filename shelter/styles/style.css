@@ -96,7 +96,7 @@
   padding-inline-start: 0;
 }
 
-.page-header .nav-link {
+.btn, .page-header .nav-link {
   transition: all 0.3s ease;
 }
 
@@ -238,6 +238,15 @@ h1 {
   }
 }
 
+.main .section {
+  padding: 0 40px;
+}
+@media (max-width: 768px) {
+  .main .section {
+    padding: 0 30px;
+  }
+}
+
 .section-title {
   font-family: "Georgia", serif;
   font-weight: 400;
@@ -251,11 +260,104 @@ h1 {
 .section-title_light {
   color: #FFFFFF;
 }
+.section-title_xl {
+  font-size: 4.4em;
+  letter-spacing: 0.001em;
+}
+.section-paragraph {
+  font-family: "Arial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5em;
+  line-height: 160%;
+  color: #4C4C4C;
+}
+.section-paragraph_light {
+  color: #CDCDCD;
+}
+
+.btn {
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  line-height: 100%;
+  font-size: 1.7em;
+  color: #292929;
+  background-color: #FFFFFF;
+  border: 2px solid #F1CDB3;
+  padding: 15px 45px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.btn:active {
+  box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.1);
+}
+.btn_filled {
+  background-color: #F1CDB3;
+}
+@media (hover: hover) {
+  .btn:hover {
+    background-color: #FDDCC4;
+    border-color: #FDDCC4;
+  }
+}
+
+.section.hero {
+  padding-top: 15em;
+  background: url("../assets/images/noise_transparent@2x.png"), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+}
+.section.hero .container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  padding-top: 3em;
+}
+@media (max-width: 768px) {
+  .section.hero .container {
+    flex-direction: column;
+    padding-top: 0;
+  }
+}
+.section.hero .section-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+  flex-basis: 39%;
+  max-width: 46em;
+  gap: 4.2em;
+  padding-bottom: 83px;
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .section.hero .section-content .btn {
+    align-self: center;
+  }
+}
+.section.hero .section-image {
+  flex-shrink: 1;
+  align-self: end;
+}
+@media (max-width: 768px) {
+  .section.hero .section-image {
+    width: 80.1%;
+  }
+}
+.section.hero .section-image .img {
+  vertical-align: bottom;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .page-main {
   flex-grow: 1;
-  background-color: antiquewhite;
-  padding: 40px;
 }
 
 .page-footer {

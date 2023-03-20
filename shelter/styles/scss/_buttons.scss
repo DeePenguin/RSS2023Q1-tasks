@@ -1,0 +1,28 @@
+.btn {
+  @include header_font();
+  @extend %transition-s;
+  display: inline-block;
+  line-height: 100%;
+  font-size: 1.7em;
+  color: $color-dark-3xl;
+  background-color: $color-light-xl;
+  border: 2px solid $color-primary;
+  padding: 15px 45px;
+  border-radius: 100px;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: inset 1px 1px 3px 0px rgb(0 0 0 / 10%);
+  }
+
+  &_filled {
+    background-color: $color-primary;
+  }
+
+  @include m-hover {
+    &:hover {
+      background-color: $color-primary-light;
+      border-color: $color-primary-light;
+    }
+  }
+}

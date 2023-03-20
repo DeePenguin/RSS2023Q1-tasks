@@ -1,3 +1,10 @@
+.main .section {
+    padding: 0 $padding-l;
+    @include m-tablet {
+      padding: 0 $padding-m;
+  }
+}
+
 .section {
   &-title {
     @include header_font();
@@ -5,8 +12,25 @@
     font-size: 3.5em;
     line-height: 130%;
     color: $color-dark-l;
+
     &_light {
       color: $color-light-xl;
+    }
+
+    &_xl {
+      font-size: 4.4em;
+      letter-spacing: 0.001em;
+    }
+  }
+
+  &-paragraph {
+    @include primary_font();
+    font-size: 1.5em;
+    line-height: 160%;
+    color: $color-dark-xl;
+
+    &_light {
+      color: $color-dark-s;
     }
   }
 }

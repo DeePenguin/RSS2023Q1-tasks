@@ -1,7 +1,7 @@
 @import "_section";
+@import "_buttons";
+@import "_hero";
 
 .page-main {
   flex-grow: 1;
-  background-color: antiquewhite;
-  padding: $padding-l;
 }
