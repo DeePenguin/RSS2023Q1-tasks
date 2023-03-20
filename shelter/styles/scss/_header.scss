@@ -68,13 +68,12 @@
   }
 
   &_main {
-    padding-top: $padding-xl;
     position: absolute;
     z-index: 5;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(34, 34, 79);
+    background-color: transparent;
 
     @include m-tablet {
       padding-top: $padding-m;
