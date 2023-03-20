@@ -238,11 +238,11 @@ h1 {
   }
 }
 
-.main .section {
+.page-main .section {
   padding: 0 40px;
 }
 @media (max-width: 768px) {
-  .main .section {
+  .page-main .section {
     padding: 0 30px;
   }
 }
