@@ -1,10 +1,3 @@
-.page-main .section {
-    padding: 0 $padding-l;
-    @include m-tablet {
-      padding: 0 $padding-m;
-  }
-}
-
 .section {
   &-title {
     @include header_font();
@@ -31,6 +24,55 @@
 
     &_light {
       color: $color-dark-s;
+    }
+  }
+
+  &_light {
+    background-color: $color-light-xl;
+  }
+
+  &_dark {
+    background-color: $color-light-l;
+  }
+
+  &-main {
+    padding: 80px $padding-l 100px;
+    @include m-tablet {
+      padding: 80px $padding-m 100px;
+    }
+
+    .container {
+      @include flex($wrap: nowrap, $jc: center);
+
+      @include m-tablet {
+        @include flex-col();
+
+        .section-image {
+          order: 10;
+        }
+      }
+    }
+
+    & .section-image .img {
+      vertical-align: bottom;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &.about {
+    .container {
+      gap: 10%;
+      @include m-tablet {
+        gap: 8em;
+      }
+    }
+
+    .section-content {
+      @include flex-col($ali: start);
+      gap: 2.5em;
+      max-width: 43em;
     }
   }
 }
