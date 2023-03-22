@@ -5,7 +5,7 @@
   line-height: 100%;
   font-size: 1.7em;
   color: $color-dark-3xl;
-  background-color: $color-light-xl;
+  background-color: transparent;
   border: 2px solid $color-primary;
   padding: 15px 45px;
   border-radius: 100px;
@@ -17,6 +17,16 @@
 
   &_filled {
     background-color: $color-primary;
+  }
+
+  &_round {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
   }
 
   &_credit-card {

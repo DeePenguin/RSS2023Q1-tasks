@@ -98,7 +98,6 @@
   }
 
   &.help {
-    padding-top: 7.7em; /* pp */
     .section-content {
       @include flex-col();
       gap: 6em;
@@ -160,5 +159,14 @@
       gap: 2em;
       max-width: 38em;
     }
+  }
+
+  &.our-friends {
+    .section-content {
+      @include flex-col();
+      gap: 60px;
+      width: 100%;
+    }
+
   }
 }

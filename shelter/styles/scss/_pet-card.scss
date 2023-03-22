@@ -1,0 +1,35 @@
+.pet-card {
+  @include flex-col();
+  max-width: 27em;
+  min-width: 27em;
+  border-radius: 9px;
+  background: $color-light-s;
+  overflow: hidden;
+  cursor: pointer;
+  gap: 2.9em; /*pp */
+  padding-bottom: 3em;
+  @extend %transition-s;
+
+  @include m-hover {
+    &:hover{
+      background: $color-light-xl;
+      & .btn {
+        background: $color-primary-light;
+        border-color: $color-primary-light;
+      }
+    }
+  }
+
+  &__title {
+    @include header_font();
+    font-size: 2em;
+    line-height: 115%;
+    color: $color-dark-l;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
