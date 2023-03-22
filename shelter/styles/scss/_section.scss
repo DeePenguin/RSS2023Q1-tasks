@@ -20,6 +20,13 @@
     }
   }
 
+  &-subtitle {
+    @include header_font();
+    font-size: 1.5em;
+    line-height: 110%;
+    color: $color-dark-l
+  }
+
   &-paragraph {
     @include primary_font();
     font-size: 1.5em;
@@ -28,6 +35,16 @@
 
     &_light {
       color: $color-dark-s;
+    }
+
+    &_light-m {
+      color: $color-dark-m;
+    }
+
+    &_xs {
+      font-size: 1.2em;
+      font-style: italic;
+      line-height: 150%;
     }
   }
 
@@ -127,6 +144,21 @@
           background-image: url("../assets/svg/#{$icon}.svg");
         }
       }
+    }
+  }
+
+  &.donate {
+    .container {
+      gap: 30px;
+
+      @include m-tablet {
+        gap: 5.8em;
+      }
+    }
+    .section-content {
+      @include flex-col($ali: flex-start);
+      gap: 2em;
+      max-width: 38em;
     }
   }
 }
