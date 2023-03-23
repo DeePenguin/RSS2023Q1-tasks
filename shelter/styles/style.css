@@ -96,7 +96,7 @@
   padding-inline-start: 0;
 }
 
-.pet-card, .btn, .page-header .nav-link {
+.footer-container .icon::before, .footer-container .list-link, .pet-card, .btn, .page-header .nav-link {
   transition: all 0.3s ease;
 }
 
@@ -705,6 +705,14 @@ h1 {
   align-items: center;
   gap: 1em;
   min-height: 2.3em;
+}
+@media (hover: hover) {
+  .footer-container .list-link:hover {
+    color: #FDDCC4;
+  }
+  .footer-container .list-link:hover::before {
+    transform: scale(1.2);
+  }
 }
 .footer-container .icon::before {
   content: "";

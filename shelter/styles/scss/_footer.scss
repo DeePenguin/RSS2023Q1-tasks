@@ -51,13 +51,24 @@
   }
 
   .list-link {
+    @extend %transition-s;
     @include flex($wrap: nowrap);
     gap: 1em;
     min-height: 2.3em;
+
+    @include m-hover {
+      &:hover {
+        color: $color-primary-light;
+        &::before {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
 
   .icon {
     &::before {
+      @extend %transition-s;
       content: "";
       display: inline-block;
       background-position: center center;
