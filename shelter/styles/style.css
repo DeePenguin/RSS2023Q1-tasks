@@ -446,6 +446,22 @@ h1 {
   gap: 60px;
   width: 100%;
 }
+.section.our-friends .cards-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 3em;
+}
+.section.our-friends .pagination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+}
 
 .btn {
   font-family: "Georgia", serif;
@@ -600,7 +616,7 @@ h1 {
   background: #FAFAFA;
   overflow: hidden;
   cursor: pointer;
-  gap: 2.9em; /*pp */
+  gap: 3em;
   padding-bottom: 3em;
 }
 @media (hover: hover) {
@@ -622,10 +638,14 @@ h1 {
   line-height: 115%;
   color: #545454;
 }
+.pet-card__pic {
+  height: 27em;
+  width: 27em;
+}
 .pet-card__img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .page-main {

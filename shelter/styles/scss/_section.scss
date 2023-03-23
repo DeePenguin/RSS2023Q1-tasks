@@ -168,5 +168,14 @@
       width: 100%;
     }
 
+    .cards-wrapper {
+      @include flex();
+      row-gap: 3em;
+    }
+
+    .pagination {
+      @include flex();
+      gap: 2em;
+    }
   }
 }

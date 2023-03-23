@@ -1,12 +1,13 @@
 .pet-card {
+  $card-with: 27em;
   @include flex-col();
-  max-width: 27em;
-  min-width: 27em;
+  max-width: $card-with;
+  min-width: $card-with;
   border-radius: 9px;
   background: $color-light-s;
   overflow: hidden;
   cursor: pointer;
-  gap: 2.9em; /*pp */
+  gap: 3em;
   padding-bottom: 3em;
   @extend %transition-s;
 
@@ -28,9 +29,14 @@
     color: $color-dark-l;
   }
 
+  &__pic {
+    height: $card-with;
+    width: $card-with;
+  }
+
   &__img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
