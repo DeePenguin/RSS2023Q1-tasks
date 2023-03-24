@@ -29,6 +29,12 @@
     padding: 0;
   }
 
+  &_disabled {
+    border-color: $color-dark-s;
+    color: $color-dark-s;
+    pointer-events: none;
+  }
+
   &_credit-card {
     border-radius: 9px;
     padding: 8px 14px;

@@ -493,6 +493,11 @@ h1 {
   height: 52px;
   padding: 0;
 }
+.btn_disabled {
+  border-color: #CDCDCD;
+  color: #CDCDCD;
+  pointer-events: none;
+}
 .btn_credit-card {
   border-radius: 9px;
   padding: 8px 14px;
