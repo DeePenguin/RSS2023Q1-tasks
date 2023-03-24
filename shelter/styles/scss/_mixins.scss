@@ -1,0 +1,72 @@
+%list {
+  list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+%transition-s {
+  transition: all 0.3s ease;
+}
+
+@mixin primary_font ($weight: 400, $style:normal) {
+  font: {
+    family: "Arial", sans-serif;
+    weight: $weight;
+    style: $style;
+  }
+}
+
+@mixin header_font ($weight: 400, $style:normal) {
+  font: {
+    family: "Georgia", serif;
+    weight: $weight;
+    style: $style;
+  }
+  letter-spacing: 0.06em;
+}
+
+@mixin flex($direction: row, $wrap: wrap, $jc: space-between, $ali: center) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $jc;
+  align-items: $ali;
+}
+
+@mixin flex-col($wrap: wrap, $jc: space-between, $ali: center) {
+  @include flex(column, $wrap, $jc, $ali);
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin m-hover {
+  @media (hover: hover) { @content; }
+}
+
+@mixin m-laptop {
+  @media (max-width: $content-width) { @content; }
+}
+
+@mixin m-tablet {
+  @media (max-width: $tablet-width) { @content; }
+}
+
+@mixin m-mobile {
+  @media (max-width: $mobile-big-width) { @content; }
+}
+
+@mixin m-mobilesmall {
+  @media (max-width: $mobile-small-width) { @content; }
+}

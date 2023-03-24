@@ -1,0 +1,23 @@
+.slider {
+  @include flex();
+  width: 100%;
+  gap: 1.2em;
+
+  &__content {
+    @include flex($wrap: nowrap);
+    max-width: 989px;
+    flex-grow: 1;
+
+    @include m-tablet {
+      > *:nth-child(n + 3) {
+        display: none;
+      }
+    }
+
+    @include m-mobile {
+      > *:nth-child(n + 2) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.btn {
+  @include header_font();
+  @extend %transition-s;
+  display: inline-block;
+  line-height: 100%;
+  font-size: 1.7em;
+  color: $color-dark-3xl;
+  background-color: transparent;
+  border: 2px solid $color-primary;
+  padding: 15px 45px;
+  border-radius: 100px;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: inset 1px 1px 3px 0px rgb(0 0 0 / 10%);
+  }
+
+  &_filled {
+    background-color: $color-primary;
+  }
+
+  &_round {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+  }
+
+  &_disabled {
+    border-color: $color-dark-s;
+    color: $color-dark-s;
+    pointer-events: none;
+  }
+
+  &_credit-card {
+    border-radius: 9px;
+    padding: 8px 14px;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    color: $color-dark-l;
+    font-size: 2em;
+    line-height: 115%;
+
+    .icon-credit {
+      display: block;
+      width: 30px;
+      height: 23px;
+      background: url("../assets/svg/credit-card.svg") center / contain no-repeat;
+    }
+  }
+
+  @include m-hover {
+    &:hover {
+      background-color: $color-primary-light;
+      border-color: $color-primary-light;
+    }
+  }
+}

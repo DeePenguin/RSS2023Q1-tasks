@@ -1,0 +1,105 @@
+.page-header {
+  padding: $padding-m $padding-l;
+  background-color: $color-light-xl;
+
+  @include m-tablet {
+    padding: $padding-m $padding-m;
+  }
+
+  .header-container {
+    @include flex($ali: stretch);
+  }
+
+  .logo {
+    @include flex-col();
+    gap: 1em;
+    cursor: pointer;
+  }
+
+    .title {
+      @include header_font;
+      font-size: 3.2em;
+      color: $color-dark-l;
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      letter-spacing: 0.1em;
+      color: $color-dark-3xl;
+    }
+
+
+  .nav-list {
+    @extend %list;
+    @include flex($wrap: nowrap);
+    height: 100%;
+    font-size: 1.5em;
+    gap: 2.33em;
+  }
+
+  .nav-item {
+    padding: 0.6em 0;
+  }
+
+  .nav-link {
+    @extend %transition-s;
+    display: block;
+    height: 100%;
+    line-height: 160%;
+    color: $color-dark-l;
+    letter-spacing: 0.004em; /* pp */
+    margin-bottom: 3px; /* pp */
+    border-bottom: 3px solid transparent;
+
+    &.active {
+      pointer-events: none;
+    }
+
+    &.active,
+    &:active {
+      border-color: $color-primary;
+    }
+
+    @include m-hover {
+      &:hover {
+        color: $color-dark-3xl;
+      }
+    }
+  }
+
+  &_main {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+
+    @include m-tablet {
+      padding-top: $padding-m;
+    }
+
+    .title {
+      color: $color-primary;
+    }
+
+    .subtitle {
+      color: $color-light-xl;
+    }
+
+    .nav-link {
+      color: $color-dark-s;
+
+      &.active,
+      &:active {
+        color: $color-light-s;
+      }
+      @include m-hover {
+        &:hover {
+          color: $color-light-s;
+        }
+      }
+    }
+  }
+
+}
