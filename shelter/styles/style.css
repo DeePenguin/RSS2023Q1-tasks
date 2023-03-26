@@ -97,7 +97,7 @@
 }
 
 .footer-container .icon::before, .footer-container .list-link, .pet-card, .btn, .page-header .nav-link {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 :root {
@@ -200,6 +200,7 @@ h1 {
 }
 .page-header .nav-link.active, .page-header .nav-link:active {
   border-color: #F1CDB3;
+  color: #292929;
 }
 @media (hover: hover) {
   .page-header .nav-link:hover {

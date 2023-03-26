@@ -58,6 +58,7 @@
     &.active,
     &:active {
       border-color: $color-primary;
+      color: $color-dark-3xl;
     }
 
     @include m-hover {
