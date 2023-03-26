@@ -197,10 +197,13 @@ h1 {
 }
 .page-header .nav-link.active {
   pointer-events: none;
+  color: #292929;
 }
 .page-header .nav-link.active, .page-header .nav-link:active {
   border-color: #F1CDB3;
-  color: #292929;
+}
+.page-header .nav-link:active {
+  color: #545454;
 }
 @media (hover: hover) {
   .page-header .nav-link:hover {

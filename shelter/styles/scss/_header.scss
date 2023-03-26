@@ -53,12 +53,16 @@
 
     &.active {
       pointer-events: none;
+      color: $color-dark-3xl;
     }
 
     &.active,
     &:active {
       border-color: $color-primary;
-      color: $color-dark-3xl;
+    }
+
+    &:active {
+      color: $color-dark-l;
     }
 
     @include m-hover {
