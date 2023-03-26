@@ -14,5 +14,5 @@ console.groupEnd('Страница Pets (40)');
 
 console.log(
   '%cВсего: 100 / 100',
-  'font-weight: 600; font-size: 18px;'
+  'font-weight: 600; font-size: 16px;'
 );
