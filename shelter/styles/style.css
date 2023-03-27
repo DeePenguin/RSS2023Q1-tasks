@@ -96,7 +96,7 @@
   padding-inline-start: 0;
 }
 
-.footer-container .icon::before, .footer-container .list-link, .pet-card, .btn, .page-header .nav-link {
+.footer-container .icon::before, .footer-container .list-link, .pet-card, .btn, .page-header .nav-link, .page-header .logo {
   transition: all 0.5s ease;
 }
 
@@ -154,6 +154,11 @@ h1 {
   align-items: center;
   gap: 1em;
   cursor: pointer;
+}
+@media (hover: hover) {
+  .page-header .logo:hover {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
 }
 .page-header .title {
   font-family: "Georgia", serif;
@@ -218,6 +223,11 @@ h1 {
 }
 .page-header_main .subtitle {
   color: #FFFFFF;
+}
+@media (hover: hover) {
+  .page-header_main .logo:hover {
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+  }
 }
 .page-header_main .nav-link {
   color: #CDCDCD;

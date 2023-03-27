@@ -10,6 +10,13 @@
     @include flex-col();
     gap: 1em;
     cursor: pointer;
+    @extend %transition-s;
+
+    @include m-hover {
+      &:hover {
+        text-shadow: 2px 2px 5px rgb(0 0 0 / 50%);
+      }
+    }
   }
 
     .title {
@@ -84,6 +91,14 @@
       color: $color-light-xl;
     }
 
+    .logo {
+      @include m-hover {
+        &:hover {
+          text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+        }
+      }
+    }
+
     .nav-link {
       color: $color-dark-s;
 
@@ -91,6 +106,7 @@
       &:active {
         color: $color-light-s;
       }
+
       @include m-hover {
         &:hover {
           color: $color-light-s;
