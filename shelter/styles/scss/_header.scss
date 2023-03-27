@@ -2,10 +2,6 @@
   padding: $padding-m $padding-l;
   background-color: $color-light-xl;
 
-  @include m-tablet {
-    padding: $padding-m $padding-m;
-  }
-
   .header-container {
     @include flex($ali: stretch);
   }
@@ -79,10 +75,6 @@
     left: 0;
     width: 100%;
     background-color: transparent;
-
-    @include m-tablet {
-      padding-top: $padding-m;
-    }
 
     .title {
       color: $color-primary;

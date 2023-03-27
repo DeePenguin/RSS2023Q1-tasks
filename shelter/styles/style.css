@@ -131,18 +131,13 @@ h1 {
 }
 
 .container {
-  max-width: 1200px;
+  width: 1200px;
   margin: 0 auto;
 }
 
 .page-header {
   padding: 30px 40px;
   background-color: #FFFFFF;
-}
-@media (max-width: 768px) {
-  .page-header {
-    padding: 30px 30px;
-  }
 }
 .page-header .header-container {
   display: flex;
@@ -217,11 +212,6 @@ h1 {
   left: 0;
   width: 100%;
   background-color: transparent;
-}
-@media (max-width: 768px) {
-  .page-header_main {
-    padding-top: 30px;
-  }
 }
 .page-header_main .title {
   color: #F1CDB3;
@@ -298,29 +288,12 @@ h1 {
 .section-main {
   padding: 80px 40px 100px;
 }
-@media (max-width: 768px) {
-  .section-main {
-    padding: 80px 30px 100px;
-  }
-}
 .section-main .container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-}
-@media (max-width: 768px) {
-  .section-main .container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .section-main .container .section-image {
-    order: 10;
-  }
 }
 .section-main .section-image .img {
   vertical-align: bottom;
@@ -330,11 +303,6 @@ h1 {
 }
 .section.about .container {
   gap: 10%;
-}
-@media (max-width: 768px) {
-  .section.about .container {
-    gap: 8em;
-  }
 }
 .section.about .section-content {
   display: flex;
@@ -361,12 +329,6 @@ h1 {
   align-items: center;
   gap: 5.5em 11.4%;
 }
-@media (max-width: 768px) {
-  .section.help .help-list {
-    justify-content: space-evenly;
-    column-gap: 0;
-  }
-}
 .section.help .help-list__item {
   display: flex;
   flex-direction: column;
@@ -374,11 +336,6 @@ h1 {
   justify-content: space-between;
   align-items: center;
   gap: 3em;
-}
-@media (max-width: 768px) {
-  .section.help .help-list__item {
-    flex-basis: 30%;
-  }
 }
 .section.help .help-list .text {
   font-family: "Georgia", serif;
@@ -426,11 +383,6 @@ h1 {
 }
 .section.donate .container {
   gap: 30px;
-}
-@media (max-width: 768px) {
-  .section.donate .container {
-    gap: 5.8em;
-  }
 }
 .section.donate .section-content {
   display: flex;
@@ -531,11 +483,6 @@ h1 {
   padding: 15em 40px 0;
   background: url("../assets/images/noise_transparent@2x.png"), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
 }
-@media (max-width: 768px) {
-  .section-hero {
-    padding: 15em 30px 0;
-  }
-}
 .section-hero .container {
   display: flex;
   flex-direction: row;
@@ -544,12 +491,6 @@ h1 {
   align-items: center;
   gap: 2em;
   padding-top: 3em;
-}
-@media (max-width: 768px) {
-  .section-hero .container {
-    flex-direction: column;
-    padding-top: 0;
-  }
 }
 .section-hero .section-content {
   display: flex;
@@ -563,19 +504,9 @@ h1 {
   padding-bottom: 83px;
   flex-shrink: 0;
 }
-@media (max-width: 768px) {
-  .section-hero .section-content .btn {
-    align-self: center;
-  }
-}
 .section-hero .section-image {
   flex-shrink: 1;
   align-self: end;
-}
-@media (max-width: 768px) {
-  .section-hero .section-image {
-    width: 80.1%;
-  }
 }
 .section-hero .section-image .img {
   vertical-align: bottom;
@@ -601,16 +532,6 @@ h1 {
   align-items: center;
   max-width: 989px;
   flex-grow: 1;
-}
-@media (max-width: 768px) {
-  .slider__content > *:nth-child(n+3) {
-    display: none;
-  }
-}
-@media (max-width: 480px) {
-  .slider__content > *:nth-child(n+2) {
-    display: none;
-  }
 }
 
 .pet-card {
@@ -666,12 +587,6 @@ h1 {
   padding: 40px;
   padding-bottom: 0;
 }
-@media (max-width: 768px) {
-  .page-footer {
-    padding: 30px;
-    padding-bottom: 0;
-  }
-}
 
 .footer-container {
   display: flex;
@@ -679,11 +594,6 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: stretch;
-}
-@media (max-width: 768px) {
-  .footer-container {
-    justify-content: space-around;
-  }
 }
 .footer-container .footer-puppy .img {
   height: 100%;
@@ -702,12 +612,6 @@ h1 {
   align-items: start;
   gap: 3.2em;
   padding-bottom: 5.3em;
-}
-@media (max-width: 768px) {
-  .footer-container .section {
-    padding-top: 0;
-    padding-bottom: 5.8em;
-  }
 }
 .footer-container .section.locations {
   max-width: 30.3em;
