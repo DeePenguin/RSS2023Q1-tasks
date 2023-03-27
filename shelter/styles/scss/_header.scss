@@ -14,6 +14,13 @@
     @include flex-col();
     gap: 1em;
     cursor: pointer;
+    @extend %transition-s;
+
+    @include m-hover {
+      &:hover {
+        text-shadow: 2px 2px 5px rgb(0 0 0 / 50%);
+      }
+    }
   }
 
     .title {
@@ -90,6 +97,14 @@
 
     .subtitle {
       color: $color-light-xl;
+    }
+
+    .logo {
+      @include m-hover {
+        &:hover {
+          text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
+        }
+      }
     }
 
     .nav-link {
