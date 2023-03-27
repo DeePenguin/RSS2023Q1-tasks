@@ -2,18 +2,10 @@
   background: url("../assets/images/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
   padding: $padding-l;
   padding-bottom: 0;
-
-  @include m-tablet {
-    padding: $padding-m;
-    padding-bottom: 0;
-  }
 }
 
 .footer-container {
   @include flex($wrap:wrap, $ali: stretch);
-  @include m-tablet {
-    justify-content: space-around;
-  }
 
   .footer-puppy {
     .img {
@@ -31,10 +23,6 @@
     @include flex-col($ali: start);
     gap: 3.2em;
     padding-bottom: 5.3em;
-    @include m-tablet {
-      padding-top: 0;
-      padding-bottom: 5.8em;
-    }
   }
 
   .section.locations {

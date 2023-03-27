@@ -58,20 +58,9 @@
 
   &-main {
     padding: 80px $padding-l 100px;
-    @include m-tablet {
-      padding: 80px $padding-m 100px;
-    }
 
     .container {
       @include flex($wrap: nowrap, $jc: center);
-
-      @include m-tablet {
-        @include flex-col();
-
-        .section-image {
-          order: 10;
-        }
-      }
     }
 
     & .section-image .img {
@@ -85,9 +74,6 @@
   &.about {
     .container {
       gap: 10%;
-      @include m-tablet {
-        gap: 8em;
-      }
     }
 
     .section-content {
@@ -108,18 +94,9 @@
       @include flex($jc: center);
       gap: 5.5em 11.4%;
 
-      @include m-tablet {
-        justify-content: space-evenly;
-        column-gap: 0;
-      }
-
       &__item {
         @include flex-col();
         gap: 3em;
-
-        @include m-tablet {
-          flex-basis: 30%
-        }
       }
 
       .text {
@@ -149,10 +126,6 @@
   &.donate {
     .container {
       gap: 30px;
-
-      @include m-tablet {
-        gap: 5.8em;
-      }
     }
     .section-content {
       @include flex-col($ali: flex-start);
