@@ -11,10 +11,6 @@
   border-radius: 100px;
   cursor: pointer;
 
-  &:active {
-    box-shadow: inset 1px 1px 3px 0px rgb(0 0 0 / 10%);
-  }
-
   &_filled {
     background-color: $color-primary;
   }
@@ -60,5 +56,10 @@
       background-color: $color-primary-light;
       border-color: $color-primary-light;
     }
+  }
+
+  &:active {
+    background-color: $color-primary !important;
+    border-color:$color-primary !important;
   }
 }
