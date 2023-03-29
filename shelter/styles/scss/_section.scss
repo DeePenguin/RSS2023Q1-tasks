@@ -169,8 +169,37 @@
     }
 
     .cards-wrapper {
-      @include flex();
-      row-gap: 3em;
+      max-width: 100%;
+      display: grid;
+      justify-items: start;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      gap: 3em 4em;
+      grid-template-columns: repeat(auto-fill, $pet-card-size);
+      grid-auto-rows: min-content;
+
+      /* костыль для пп без js */
+      $cards-amount: 8;
+      .pet-card:nth-child(n + #{$cards-amount + 1}) {
+        display: none;
+      }
+
+      @include m-tablet {
+        $cards-amount: 6;
+        .pet-card:nth-child(n + #{$cards-amount + 1}) {
+          display: none;
+        }
+      }
+
+      @include m-mobile {
+        $cards-amount: 3;
+        .pet-card:nth-child(n + #{$cards-amount + 1}) {
+          display: none;
+        }
+      }
+
+
     }
 
     .pagination {

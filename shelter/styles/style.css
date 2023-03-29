@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Arial";
   src: local("Arial Black"), local("Arial-Black"), url("../assets/fonts/Arial-Black.woff2") format("woff2"), url("../assets/fonts/Arial-Black.woff") format("woff");
@@ -97,7 +98,7 @@
 }
 
 .footer-container .icon::before, .footer-container .list-link, .pet-card, .btn, .page-header .nav-link, .page-header .logo {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 :root {
@@ -461,12 +462,29 @@ h1 {
   width: 100%;
 }
 .section.our-friends .cards-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  max-width: 100%;
+  display: grid;
+  justify-items: start;
   align-items: center;
-  row-gap: 3em;
+  justify-content: center;
+  align-content: center;
+  gap: 3em 4em;
+  grid-template-columns: repeat(auto-fill, 27em);
+  grid-auto-rows: min-content;
+  /* костыль для пп без js */
+}
+.section.our-friends .cards-wrapper .pet-card:nth-child(n+9) {
+  display: none;
+}
+@media (max-width: 768px) {
+  .section.our-friends .cards-wrapper .pet-card:nth-child(n+7) {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .section.our-friends .cards-wrapper .pet-card:nth-child(n+4) {
+    display: none;
+  }
 }
 .section.our-friends .pagination {
   display: flex;
@@ -491,9 +509,6 @@ h1 {
   padding: 15px 45px;
   border-radius: 100px;
   cursor: pointer;
-}
-.btn:active {
-  box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.1);
 }
 .btn_filled {
   background-color: #F1CDB3;
@@ -535,6 +550,10 @@ h1 {
     background-color: #FDDCC4;
     border-color: #FDDCC4;
   }
+}
+.btn:active {
+  background-color: #F1CDB3 !important;
+  border-color: #F1CDB3 !important;
 }
 
 .section-hero {
