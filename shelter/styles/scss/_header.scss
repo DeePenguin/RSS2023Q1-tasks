@@ -114,6 +114,7 @@
       &:active {
         color: $color-light-s;
       }
+
       @include m-hover {
         &:hover {
           color: $color-light-s;
