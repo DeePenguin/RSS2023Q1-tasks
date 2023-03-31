@@ -8,6 +8,7 @@
 
     @include m-mobile {
       font-size: 2.5em;
+      text-align: center;
     }
 
     &_centered {
@@ -33,7 +34,11 @@
     @include header_font();
     font-size: 1.5em;
     line-height: 110%;
-    color: $color-dark-l
+    color: $color-dark-l;
+    @include m-mobile {
+      letter-spacing: normal;
+      line-height: 160%;
+    }
   }
 
   &-paragraph {
@@ -92,6 +97,10 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+
+      @include m-mobile {
+        max-width: 26em;
+      }
     }
   }
 
@@ -101,12 +110,26 @@
       @include m-tablet {
         gap: 8em;
       }
+      @include m-mobile {
+        gap: 4.2em;
+      }
     }
 
     .section-content {
       @include flex-col($ali: start);
       gap: 2.5em;
       max-width: 43em;
+      @include m-mobile {
+        align-items: center;
+        padding: 0 5%;
+
+        .section-paragraph {
+          text-align: justify;
+          &:last-of-type {
+            margin-top: -4px;
+          }
+        }
+      }
     }
   }
 
@@ -114,6 +137,9 @@
     .section-content {
       @include flex-col();
       gap: 6em;
+      @include m-mobile {
+        gap: 4.2em;
+      }
     }
     .help-list {
       $icon-list: food, transportation, toys, bowl, shampoos, vitamins, medicines, collar, home;
@@ -126,12 +152,23 @@
         column-gap: 0;
       }
 
+      @include m-mobile {
+        gap: 3em 10%;
+        justify-content: start;
+        padding: 0 5px;
+      }
+
       &__item {
         @include flex-col();
         gap: 3em;
 
         @include m-tablet {
           flex-basis: 30%
+        }
+
+        @include m-mobile {
+          flex-basis: 45%;
+          gap: 2em;
         }
       }
 
@@ -140,6 +177,9 @@
         font-size: 2em;
         color: $color-dark-l;
         text-align: center;
+        @include m-mobile {
+          font-size: 1.5em;
+        }
       }
 
       .icon {
@@ -149,6 +189,10 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        @include m-mobile {
+          height: 5em;
+          width: 5em;
+        }
       }
 
       @each $icon in $icon-list {
@@ -166,19 +210,36 @@
       @include m-tablet {
         gap: 5.8em;
       }
+
+      @include m-mobile {
+        gap: 4.2em;
+
+        .section-paragraph {
+          text-align: justify;
+          padding: 0 10px;
+        }
+      }
     }
     .section-content {
       @include flex-col($ali: flex-start);
       gap: 2em;
       max-width: 38em;
+
+      @include m-mobile {
+        align-items: center;
+      }
     }
   }
 
   &.our-friends {
     .section-content {
       @include flex-col();
-      gap: 60px;
+      gap: 6em;
       width: 100%;
+
+      @include m-mobile {
+        gap: 4.2em;
+      }
     }
 
     .cards-wrapper {
