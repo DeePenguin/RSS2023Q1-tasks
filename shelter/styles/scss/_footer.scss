@@ -7,6 +7,10 @@
     padding: $padding-m;
     padding-bottom: 0;
   }
+
+  @include m-mobile {
+    padding: $padding-m $padding-s 0;
+  }
 }
 
 .footer-container {
@@ -14,18 +18,19 @@
 
   @include m-laptop {
     justify-content: space-around;
-    .footer-puppy {
-      flex-basis: 100%;
-    }
   }
 
   .footer-puppy {
+    @include m-laptop {
+      flex-basis: 85.5%;
+    }
+
     .img {
       display: block;
       margin: 0 auto;
       height: 100%;
       max-height: 31em;
-      width: auto;
+      width: 100%;
       object-fit: contain;
     }
   }
@@ -36,15 +41,26 @@
     @include flex-col($ali: start);
     gap: 3.2em;
     padding-bottom: 5.3em;
-    
+
     @include m-laptop {
       padding-top: 0;
       padding-bottom: 5.8em;
+    }
+
+    @include m-mobile {
+      align-items: center;
+      padding-bottom: 3.2em;
     }
   }
 
   .section.locations {
     max-width: 30.3em;
+    @include m-mobile {
+      gap: 4em;
+      .section-list {
+        gap: 1.6em;
+      }
+    }
   }
 
   .section-list {

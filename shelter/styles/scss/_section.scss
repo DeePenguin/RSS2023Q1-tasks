@@ -93,10 +93,11 @@
     }
 
     & .section-image .img {
-      vertical-align: bottom;
+      // vertical-align: bottom;
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: block;
 
       @include m-mobile {
         max-width: 26em;
@@ -209,10 +210,18 @@
 
       @include m-tablet {
         gap: 5.8em;
+
+        .section-image {
+          padding-top: 3px;
+        }
       }
 
       @include m-mobile {
         gap: 4.2em;
+        
+        .section-image {
+          padding-top: 0;
+        }
 
         .section-paragraph {
           text-align: justify;
