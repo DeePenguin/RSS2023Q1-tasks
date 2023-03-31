@@ -11,17 +11,22 @@
 
 .footer-container {
   @include flex($wrap:wrap, $ali: stretch);
-  @include m-tablet {
+
+  @include m-laptop {
     justify-content: space-around;
+    .footer-puppy {
+      flex-basis: 100%;
+    }
   }
 
   .footer-puppy {
     .img {
+      display: block;
+      margin: 0 auto;
       height: 100%;
       max-height: 31em;
       width: auto;
       object-fit: contain;
-      vertical-align: bottom;
     }
   }
 
@@ -31,7 +36,8 @@
     @include flex-col($ali: start);
     gap: 3.2em;
     padding-bottom: 5.3em;
-    @include m-tablet {
+    
+    @include m-laptop {
       padding-top: 0;
       padding-bottom: 5.8em;
     }

@@ -6,6 +6,10 @@
     padding: $padding-m $padding-m;
   }
 
+  @include m-mobile {
+    padding: $padding-m 20px;
+  }
+
   .header-container {
     @include flex($ali: stretch);
   }
@@ -42,6 +46,10 @@
     height: 100%;
     font-size: 1.5em;
     gap: 2.33em;
+
+    @include m-mobile {
+      display: none;
+    }
   }
 
   .nav-item {

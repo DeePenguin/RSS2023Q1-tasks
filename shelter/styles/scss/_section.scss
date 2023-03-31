@@ -6,6 +6,10 @@
     line-height: 130%;
     color: $color-dark-l;
 
+    @include m-mobile {
+      font-size: 2.5em;
+    }
+
     &_centered {
       text-align: center;
     }
@@ -17,6 +21,11 @@
     &_xl {
       font-size: 4.4em;
       letter-spacing: 0.001em;
+
+      @include m-mobile {
+        font-size: 2.5em;
+        letter-spacing: 0.06em;
+      }
     }
   }
 
@@ -60,6 +69,10 @@
     padding: 80px $padding-l 100px;
     @include m-tablet {
       padding: 80px $padding-m 100px;
+    }
+
+    @include m-mobile {
+      padding: 42px $padding-s 42px;
     }
 
     .container {
