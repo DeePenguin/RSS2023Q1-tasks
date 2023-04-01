@@ -574,7 +574,31 @@ h1 {
     gap: 4.2em;
   }
 }
-.section.our-friends .cards-wrapper {
+@media (max-width: 900px) {
+  .section.pets {
+    padding-bottom: 78px;
+  }
+}
+.section.pets .section-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6em;
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .section.pets .section-content {
+    gap: 3em;
+  }
+}
+@media (max-width: 480px) {
+  .section.pets .section-content {
+    gap: 4.2em;
+  }
+}
+.section.pets .cards-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -584,16 +608,20 @@ h1 {
   /* костыль для пп без js */
 }
 @media (max-width: 1279.98px) {
-  .section.our-friends .cards-wrapper .pet-card:nth-child(n+7) {
+  .section.pets .cards-wrapper {
+    padding: 0 9%;
+    margin-bottom: 1em;
+  }
+  .section.pets .cards-wrapper .pet-card:nth-child(n+7) {
     display: none;
   }
 }
 @media (max-width: 639.98px) {
-  .section.our-friends .cards-wrapper .pet-card:nth-child(n+4) {
+  .section.pets .cards-wrapper .pet-card:nth-child(n+4) {
     display: none;
   }
 }
-.section.our-friends .pagination {
+.section.pets .pagination {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

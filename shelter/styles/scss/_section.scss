@@ -245,13 +245,31 @@
       @include flex-col();
       gap: 6em;
       width: 100%;
-      // container: pets / inline-size;
 
       @include m-mobile {
         gap: 4.2em;
       }
     }
+  }
 
+  &.pets {
+    @include m-tablet {
+      padding-bottom: 78px;
+  }
+    .section-content {
+      @include flex-col();
+      gap: 6em;
+      width: 100%;
+      // container: pets / inline-size;
+
+      @include m-tablet {
+          gap: 3em;
+      }
+
+      @include m-mobile {
+        gap: 4.2em;
+      }
+    }
     .cards-wrapper {
       @include flex($jc: space-evenly);
       gap: 3em 4em;
@@ -271,6 +289,8 @@
       // }
 
       @include m-custom(1279.98px) {
+        padding: 0 9%;
+        margin-bottom: 1em;
         .pet-card:nth-child(n + 7) {
           display: none;
         }
