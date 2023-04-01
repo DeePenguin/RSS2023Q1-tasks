@@ -579,6 +579,11 @@ h1 {
     padding-bottom: 78px;
   }
 }
+@media (max-width: 900px) {
+  .section.pets {
+    padding-bottom: 42px;
+  }
+}
 .section.pets .section-content {
   display: flex;
   flex-direction: column;
@@ -621,6 +626,12 @@ h1 {
     display: none;
   }
 }
+@media (max-width: 480px) {
+  .section.pets .cards-wrapper {
+    padding: 0;
+    margin-bottom: 0;
+  }
+}
 .section.pets .pagination {
   display: flex;
   flex-direction: row;
@@ -628,6 +639,12 @@ h1 {
   justify-content: space-between;
   align-items: center;
   gap: 2em;
+}
+@media (max-width: 480px) {
+  .section.pets .pagination {
+    gap: 0;
+    width: 100%;
+  }
 }
 
 .btn {

@@ -256,6 +256,9 @@
     @include m-tablet {
       padding-bottom: 78px;
   }
+  @include m-tablet {
+    padding-bottom: 42px;
+}
     .section-content {
       @include flex-col();
       gap: 6em;
@@ -301,11 +304,20 @@
           display: none;
         }
       }
+
+      @include m-mobile {
+        padding: 0;
+        margin-bottom: 0;
+      }
     }
 
     .pagination {
       @include flex();
       gap: 2em;
+      @include m-mobile {
+        gap: 0;
+        width: 100%;
+      }
     }
   }
 }
