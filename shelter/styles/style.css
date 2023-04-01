@@ -575,26 +575,20 @@ h1 {
   }
 }
 .section.our-friends .cards-wrapper {
-  max-width: 100%;
-  display: grid;
-  justify-items: start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  align-content: center;
   gap: 3em 4em;
-  grid-template-columns: repeat(auto-fill, 27em);
-  grid-auto-rows: min-content;
   /* костыль для пп без js */
 }
-.section.our-friends .cards-wrapper .pet-card:nth-child(n+9) {
-  display: none;
-}
-@media (max-width: 900px) {
+@media (max-width: 1279.98px) {
   .section.our-friends .cards-wrapper .pet-card:nth-child(n+7) {
     display: none;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 639.98px) {
   .section.our-friends .cards-wrapper .pet-card:nth-child(n+4) {
     display: none;
   }

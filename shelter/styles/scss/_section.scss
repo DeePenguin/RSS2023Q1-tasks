@@ -218,7 +218,7 @@
 
       @include m-mobile {
         gap: 4.2em;
-        
+
         .section-image {
           padding-top: 0;
         }
@@ -245,6 +245,7 @@
       @include flex-col();
       gap: 6em;
       width: 100%;
+      // container: pets / inline-size;
 
       @include m-mobile {
         gap: 4.2em;
@@ -252,37 +253,34 @@
     }
 
     .cards-wrapper {
-      max-width: 100%;
-      display: grid;
-      justify-items: start;
-      align-items: center;
-      justify-content: center;
-      align-content: center;
+      @include flex($jc: space-evenly);
       gap: 3em 4em;
-      grid-template-columns: repeat(auto-fill, $pet-card-size);
-      grid-auto-rows: min-content;
 
       /* костыль для пп без js */
-      $cards-amount: 8;
-      .pet-card:nth-child(n + #{$cards-amount + 1}) {
-        display: none;
-      }
 
-      @include m-tablet {
-        $cards-amount: 6;
-        .pet-card:nth-child(n + #{$cards-amount + 1}) {
+      // @container pets (width < 1200px) {
+      //   .pet-card:nth-child(n + 7) {
+      //     display: none;
+      //   }
+      // }
+
+      // @container pets (width < 891px) {
+      //   max-width: 58em;
+      //   background-color: #F1CDB3;
+      //   @extend %transition-m;
+      // }
+
+      @include m-custom(1279.98px) {
+        .pet-card:nth-child(n + 7) {
           display: none;
         }
       }
 
-      @include m-mobile {
-        $cards-amount: 3;
-        .pet-card:nth-child(n + #{$cards-amount + 1}) {
+      @include m-custom(639.98px) {
+        .pet-card:nth-child(n + 4) {
           display: none;
         }
       }
-
-
     }
 
     .pagination {
