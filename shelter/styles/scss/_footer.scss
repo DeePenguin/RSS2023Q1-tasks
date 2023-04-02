@@ -2,18 +2,36 @@
   background: url("../assets/images/noise_transparent@2x.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
   padding: $padding-l;
   padding-bottom: 0;
+
+  @include m-tablet {
+    padding: $padding-m;
+    padding-bottom: 0;
+  }
+
+  @include m-mobile {
+    padding: $padding-m $padding-s 0;
+  }
 }
 
 .footer-container {
   @include flex($wrap:wrap, $ali: stretch);
 
+  @include m-laptop {
+    justify-content: space-around;
+  }
+
   .footer-puppy {
+    @include m-laptop {
+      flex-basis: 85.5%;
+    }
+
     .img {
+      display: block;
+      margin: 0 auto;
       height: 100%;
       max-height: 31em;
-      width: auto;
+      width: 100%;
       object-fit: contain;
-      vertical-align: bottom;
     }
   }
 
@@ -23,10 +41,26 @@
     @include flex-col($ali: start);
     gap: 3.2em;
     padding-bottom: 5.3em;
+
+    @include m-laptop {
+      padding-top: 0;
+      padding-bottom: 5.8em;
+    }
+
+    @include m-mobile {
+      align-items: center;
+      padding-bottom: 3.2em;
+    }
   }
 
   .section.locations {
     max-width: 30.3em;
+    @include m-mobile {
+      gap: 4em;
+      .section-list {
+        gap: 1.6em;
+      }
+    }
   }
 
   .section-list {

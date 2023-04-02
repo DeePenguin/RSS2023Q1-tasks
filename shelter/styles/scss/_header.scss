@@ -1,6 +1,16 @@
 .page-header {
   padding: $padding-m $padding-l;
   background-color: $color-light-xl;
+  max-height: 12.2em;
+  overflow: hidden;
+
+  @include m-tablet {
+    padding: $padding-m $padding-m;
+  }
+
+  @include m-mobile {
+    padding: $padding-m 20px;
+  }
 
   .header-container {
     @include flex($ali: stretch);
@@ -19,58 +29,122 @@
     }
   }
 
-    .title {
-      @include header_font;
-      font-size: 3.2em;
-      color: $color-dark-l;
-    }
-
-    .subtitle {
-      font-size: 1.3em;
-      letter-spacing: 0.1em;
-      color: $color-dark-3xl;
-    }
-
-
-  .nav-list {
-    @extend %list;
-    @include flex($wrap: nowrap);
-    height: 100%;
-    font-size: 1.5em;
-    gap: 2.33em;
-  }
-
-  .nav-item {
-    padding: 0.6em 0;
-  }
-
-  .nav-link {
-    @extend %transition-s;
-    display: block;
-    height: 100%;
-    line-height: 160%;
+  .title {
+    @include header_font;
+    font-size: 3.2em;
     color: $color-dark-l;
-    letter-spacing: 0.004em; /* pp */
-    margin-bottom: 3px; /* pp */
-    border-bottom: 3px solid transparent;
+  }
 
-    &.active {
-      pointer-events: none;
-      color: $color-dark-3xl;
+  .subtitle {
+    font-size: 1.3em;
+    letter-spacing: 0.1em;
+    color: $color-dark-3xl;
+  }
+
+  .nav {
+    position: relative;
+    @include flex($wrap: nowrap);
+
+    .burger {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      cursor: pointer;
+      @extend %transition-m;
+
+      &.open {
+        transform: rotate(90deg);
+      }
+
+      &-icon,
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 0.2em;
+        background-color: $color-dark-l;
+      }
+
+      @include m-custom($burger-breakpoint) {
+        @include flex-col();
+        width: 3em;
+        max-width: 3em;
+        height: 2.2em;
+        position: relative;
+        z-index: 5;
+      }
     }
 
-    &.active,
-    &:active {
-      border-color: $color-primary;
+    &-list {
+      @extend %list;
+      @include flex($wrap: nowrap);
+      height: 100%;
+      font-size: 1.5em;
+      gap: 2.33em;
+      opacity: 1;
+      transition: right 0.5s ease-in-out, opacity 1s ease;
+
+      @include m-custom($burger-breakpoint) {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100vw;
+        max-width: 320px;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 3.2em;
+        gap: 1.1em;
+        background: $color-light-xl;
+        opacity: 0;
+
+
+
+        &.open {
+          right: 0;
+          opacity: 1;
+        }
+      }
     }
 
-    &:active {
+    &-item {
+      padding: 0.6em 0;
+      @include m-custom($burger-breakpoint) {
+        padding: 0;
+      }
+    }
+
+    &-link {
+      @extend %transition-s;
+      display: block;
+      height: 100%;
+      line-height: 160%;
       color: $color-dark-l;
-    }
+      letter-spacing: 0.004em;
+      /* pp */
+      margin-bottom: 3px;
+      /* pp */
+      border-bottom: 3px solid transparent;
 
-    @include m-hover {
-      &:hover {
+      &.active {
+        pointer-events: none;
         color: $color-dark-3xl;
+      }
+
+      &.active,
+      &:active {
+        border-color: $color-primary;
+      }
+
+      &:active {
+        color: $color-dark-l;
+      }
+
+      @include m-hover {
+        &:hover {
+          color: $color-dark-3xl;
+        }
       }
     }
   }
@@ -82,6 +156,10 @@
     left: 0;
     width: 100%;
     background-color: transparent;
+
+    @include m-tablet {
+      padding-top: $padding-m;
+    }
 
     .title {
       color: $color-primary;
@@ -99,20 +177,35 @@
       }
     }
 
-    .nav-link {
-      color: $color-dark-s;
-
-      &.active,
-      &:active {
-        color: $color-light-s;
+    .nav {
+      .burger {
+        &-icon,
+        &::before,
+        &::after {
+          background-color: $color-primary;
+        }
       }
 
-      @include m-hover {
-        &:hover {
+      &-list {
+        @include m-custom($burger-breakpoint) {
+          background: $color-dark-3xl;
+        }
+      }
+
+      &-link {
+        color: $color-dark-s;
+
+        &.active,
+        &:active {
           color: $color-light-s;
+        }
+
+        @include m-hover {
+          &:hover {
+            color: $color-light-s;
+          }
         }
       }
     }
   }
-
 }

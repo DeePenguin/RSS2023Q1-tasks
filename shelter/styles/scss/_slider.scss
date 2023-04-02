@@ -1,11 +1,78 @@
 .slider {
-  @include flex();
+  $cards-gap: 4em;
+  $card-size: $pet-card-size;
+  $medium: $card-size * 3 + $cards-gap * 2;
+  $small: $card-size * 2 + $cards-gap;
+
+  @include m-mobile {
+    grid-template-columns: 1fr;
+
+    row-gap: 2em;
+  }
+
+  @extend %transition-s;
+
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: $round-button-size 1fr $round-button-size;
+  justify-content: space-between;
   width: 100%;
-  gap: 1.2em;
+
+  column-gap: 1em;
+
+  row-gap: 0;
+
+  .btn-wrapper {
+    @include flex();
+
+    @include m-mobile {
+      grid-row: 2/3;
+      grid-column: 1/2;
+      justify-self: center;
+      width: 61%;
+
+      gap: 1em;
+    }
+
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+  }
 
   &__content {
+    @include flex($wrap: nowrap, $jc: center);
+
+    @include m-mobile {
+      grid-column: 1 / 2;
+    }
+
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    justify-self: center;
+    width: 100%;
+    max-width: 99em;
+    overflow: hidden;
+
+    container: slider/ inline-size;
+  }
+
+  &__slide {
     @include flex($wrap: nowrap);
-    max-width: 989px;
-    flex-grow: 1;
+    @extend %transition-m;
+
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    overflow: hidden;
+
+    gap: $cards-gap;
+
+    @container slider (max-width: #{$medium}) {
+      width: $small;
+    }
+
+    @container slider (max-width: #{$small}) {
+      width: $card-size;
+    }
   }
 }
