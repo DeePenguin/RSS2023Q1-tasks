@@ -6,6 +6,10 @@
 }
 
 %transition-s {
+  transition: all 0.3s ease;
+}
+
+%transition-m {
   transition: all 0.5s ease;
 }
 
@@ -56,7 +60,7 @@
 }
 
 @mixin m-laptop {
-  @media (max-width: $content-width) { @content; }
+  @media (max-width: $laptop-width) { @content; }
 }
 
 @mixin m-tablet {
@@ -69,4 +73,8 @@
 
 @mixin m-mobilesmall {
   @media (max-width: $mobile-small-width) { @content; }
+}
+
+@mixin m-custom($width) {
+  @media (max-width: $width) { @content; }
 }

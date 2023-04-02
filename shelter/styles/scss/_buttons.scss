@@ -11,10 +11,6 @@
   border-radius: 100px;
   cursor: pointer;
 
-  &:active {
-    box-shadow: inset 1px 1px 3px 0px rgb(0 0 0 / 10%);
-  }
-
   &_filled {
     background-color: $color-primary;
   }
@@ -24,8 +20,8 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    width: 52px;
-    height: 52px;
+    width: $round-button-size;
+    height: $round-button-size;
     padding: 0;
   }
 
@@ -47,6 +43,10 @@
     font-size: 2em;
     line-height: 115%;
 
+    @include m-mobile {
+      font-size: 1.5em;
+    }
+
     .icon-credit {
       display: block;
       width: 30px;
@@ -60,5 +60,10 @@
       background-color: $color-primary-light;
       border-color: $color-primary-light;
     }
+  }
+
+  &:active {
+    background-color: $color-primary !important;
+    border-color:$color-primary !important;
   }
 }

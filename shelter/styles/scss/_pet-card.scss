@@ -1,5 +1,5 @@
 .pet-card {
-  $card-with: 27em;
+  $card-with: $pet-card-size;
   @include flex-col();
   max-width: $card-with;
   min-width: $card-with;
