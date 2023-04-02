@@ -20,3 +20,39 @@ console.log(
   '%cВсего: 100 / 100',
   'font-weight: 600; font-size: 16px;'
 );
+
+// elements
+const burger = document.querySelector('.burger');
+const menu = document.querySelector('.nav-list');
+const menuLinks = menu.querySelectorAll('.nav-link');
+const overlay = document.createElement('div');
+overlay.className = 'overlay';
+document.body.append(overlay);
+
+// state
+const state = {
+  isMenuOpen: false,
+}
+
+// functions
+const toggleMenu = () => {
+  state.isMenuOpen = !state.isMenuOpen;
+  burger.classList.toggle('open', state.isMenuOpen);
+  menu.classList.toggle('open', state.isMenuOpen);
+  toggleOverlay(state.isMenuOpen);
+}
+
+const toggleOverlay = (isOpen) => {
+  overlay.classList.toggle('open', isOpen);
+}
+
+const closeEverything = () => {
+  if (state.isMenuOpen) {
+    toggleMenu();
+  }
+}
+
+// add listeners
+burger.addEventListener('click', toggleMenu);
+menuLinks.forEach((link) => link.addEventListener('click', closeEverything));
+overlay.addEventListener('click', closeEverything);

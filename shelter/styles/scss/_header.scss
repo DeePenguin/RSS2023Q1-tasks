@@ -99,11 +99,13 @@
         background: $color-light-xl;
         opacity: 0;
 
-
-
         &.open {
           right: 0;
           opacity: 1;
+          z-index: 4;
+          .nav-link.active {
+            pointer-events: all;
+          }
         }
       }
     }
@@ -151,7 +153,6 @@
 
   &_main {
     position: absolute;
-    z-index: 5;
     top: 0;
     left: 0;
     width: 100%;
