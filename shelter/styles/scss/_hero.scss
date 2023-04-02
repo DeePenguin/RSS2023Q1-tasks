@@ -1,4 +1,5 @@
 .section-hero {
+  @extend %transition-s;
   padding: 15em $padding-l 0;
 
   @include m-tablet {

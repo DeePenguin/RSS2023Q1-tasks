@@ -1,6 +1,7 @@
 .section {
   &-title {
     @include header_font();
+    @extend %transition-s;
     margin: 0;
     font-size: 3.5em;
     line-height: 130%;
@@ -22,6 +23,7 @@
     &_xl {
       font-size: 4.4em;
       letter-spacing: 0.001em;
+      @extend %transition-s;
 
       @include m-mobile {
         font-size: 2.5em;
@@ -35,6 +37,8 @@
     font-size: 1.5em;
     line-height: 110%;
     color: $color-dark-l;
+    @extend %transition-s;
+
     @include m-mobile {
       letter-spacing: normal;
       line-height: 160%;
@@ -71,7 +75,9 @@
   }
 
   &-main {
+    @extend %transition-s;
     padding: 80px $padding-l 100px;
+
     @include m-tablet {
       padding: 80px $padding-m 100px;
     }
@@ -82,6 +88,7 @@
 
     .container {
       @include flex($wrap: nowrap, $jc: center);
+      @extend %transition-s;
 
       @include m-tablet {
         @include flex-col();
@@ -93,7 +100,6 @@
     }
 
     & .section-image .img {
-      // vertical-align: bottom;
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -108,9 +114,11 @@
   &.about {
     .container {
       gap: 10%;
+
       @include m-tablet {
         gap: 8em;
       }
+
       @include m-mobile {
         gap: 4.2em;
       }
@@ -120,6 +128,7 @@
       @include flex-col($ali: start);
       gap: 2.5em;
       max-width: 43em;
+
       @include m-mobile {
         align-items: center;
         padding: 0 5%;
@@ -138,6 +147,8 @@
     .section-content {
       @include flex-col();
       gap: 6em;
+      @extend %transition-s;
+
       @include m-mobile {
         gap: 4.2em;
       }
@@ -147,6 +158,7 @@
       @extend %list;
       @include flex($jc: center);
       gap: 5.5em 11.4%;
+      @extend %transition-s;
 
       @include m-tablet {
         justify-content: space-evenly;
@@ -162,6 +174,7 @@
       &__item {
         @include flex-col();
         gap: 3em;
+        @extend %transition-s;
 
         @include m-tablet {
           flex-basis: 30%
@@ -178,6 +191,8 @@
         font-size: 2em;
         color: $color-dark-l;
         text-align: center;
+        @extend %transition-s;
+
         @include m-mobile {
           font-size: 1.5em;
         }
@@ -190,6 +205,7 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+        
         @include m-mobile {
           height: 5em;
           width: 5em;
@@ -245,6 +261,7 @@
       @include flex-col();
       gap: 6em;
       width: 100%;
+      @extend %transition-s;
 
       @include m-mobile {
         gap: 4.2em;
@@ -255,15 +272,16 @@
   &.pets {
     @include m-tablet {
       padding-bottom: 78px;
-  }
-  @include m-tablet {
-    padding-bottom: 42px;
-}
+    }
+
+    @include m-mobile {
+      padding-bottom: 45px;
+    }
+
     .section-content {
       @include flex-col();
       gap: 6em;
       width: 100%;
-      // container: pets / inline-size;
 
       @include m-tablet {
           gap: 3em;
@@ -278,18 +296,6 @@
       gap: 3em 4em;
 
       /* костыль для пп без js */
-
-      // @container pets (width < 1200px) {
-      //   .pet-card:nth-child(n + 7) {
-      //     display: none;
-      //   }
-      // }
-
-      // @container pets (width < 891px) {
-      //   max-width: 58em;
-      //   background-color: #F1CDB3;
-      //   @extend %transition-m;
-      // }
 
       @include m-custom(1279.98px) {
         padding: 0 9%;
