@@ -103,6 +103,8 @@
           right: 0;
           opacity: 1;
           z-index: 4;
+          overscroll-behavior: contain;
+
           .nav-link.active {
             pointer-events: all;
           }

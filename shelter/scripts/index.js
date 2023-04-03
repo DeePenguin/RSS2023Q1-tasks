@@ -44,6 +44,7 @@ const toggleMenu = () => {
 
 const toggleOverlay = (isOpen) => {
   overlay.classList.toggle('open', isOpen);
+  document.body.classList.toggle('modal-open', isOpen);
 }
 
 const closeEverything = () => {

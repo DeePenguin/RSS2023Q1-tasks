@@ -257,6 +257,7 @@ body {
     right: 0;
     opacity: 1;
     z-index: 4;
+    overscroll-behavior: contain;
   }
   .page-header .nav-list.open .nav-link.active {
     pointer-events: all;
@@ -1124,6 +1125,10 @@ body {
   font-style: normal;
   font-size: 62.5%;
 }
+.page.modal-open {
+  left: 0;
+  overflow: hidden;
+}
 
 a {
   color: inherit;
@@ -1149,6 +1154,7 @@ h1 {
   position: fixed;
   left: 0;
   top: 0;
+  overscroll-behavior: none;
 }
 .overlay.open {
   width: 100%;

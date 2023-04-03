@@ -22,6 +22,13 @@
   @include flex-col($ali: stretch);
   @include primary_font();
   font-size: 62.5%;
+
+  &.modal-open {
+    // position: fixed;
+    left: 0;
+    // width: 100%;
+    overflow: hidden;
+  }
 }
 
 a {
@@ -48,6 +55,7 @@ h1 {
   position: fixed;
   left: 0;
   top: 0;
+  overscroll-behavior: none;
   @extend %transition-s;
 
   &.open {
