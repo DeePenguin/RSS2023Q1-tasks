@@ -2,7 +2,6 @@
   position: relative;
   max-width: 90em;
   width: 82%;
-  margin: 50px auto;
   background: $color-light-s;
   @include flex($wrap: nowrap, $ali: start);
   border-radius: 9px;
