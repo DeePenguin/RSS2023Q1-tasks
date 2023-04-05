@@ -9,7 +9,7 @@
 @import "_hero";
 @import "_slider";
 @import "_footer";
-
+@import "_popup";
 
 :root {
   height: 100%;
@@ -37,7 +37,12 @@ a {
 }
 
 p,
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-block-start: 0;
   margin-block-end: 0;
 }
@@ -56,6 +61,7 @@ h1 {
   left: 0;
   top: 0;
   overscroll-behavior: none;
+  @include flex();
   @extend %transition-s;
 
   &.open {
