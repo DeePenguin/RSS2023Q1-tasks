@@ -1,15 +1,11 @@
 import {state, overlay, toggleOverlay} from './overlay.js';
-export const petsData = {};
 
-const getPetsInfo = async () => {
+export const petsData = await getPetsInfo();
+
+async function getPetsInfo() {
   const res = await fetch('./assets/pets.json');
   const data = await res.json();
-  savePetsInfo(data);
-  Object.entries(petsData).map(([id, info]) => renderCard(id, info, document.querySelector('.cards-wrapper')))
-}
-
-const savePetsInfo = (data) => {
-  data.forEach((obj, i) => petsData[i] = obj);
+  return data.reduce((acc, value, i) => {acc[i] = value; return acc;}, {})
 }
 
 export const renderCard = (id, info, parent) => {
@@ -81,4 +77,3 @@ function closeModal(e) {
 }
 
 state.closeModal = closeModal;
-window.addEventListener('DOMContentLoaded', getPetsInfo);
