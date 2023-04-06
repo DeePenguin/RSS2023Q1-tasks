@@ -73,7 +73,8 @@ function showModal () {
   toggleOverlay(state.isModalOpen);
 }
 
-export function closeModal() {
+function closeModal(e) {
+  if (e) e.stopImmediatePropagation();
   state.isModalOpen = false;
   toggleOverlay(state.isModalOpen);
   overlay.innerHTML = '';

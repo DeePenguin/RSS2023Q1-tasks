@@ -9,9 +9,10 @@ export const toggleOverlay = (isOpen) => {
   document.body.classList.toggle('modal-open', isOpen);
 }
 
-export const closeEverything = () => {
+export const closeEverything = (e) => {
+  if (e.target !== overlay) return;
   if (state.isMenuOpen) state.closeMenu();
-  else if (state.isModalOpen) state.closeModal();
+  if (state.isModalOpen) state.closeModal();
 }
 
 overlay.addEventListener('click', closeEverything);

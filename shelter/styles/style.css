@@ -204,6 +204,7 @@ body {
 }
 .page-header .nav .burger.open {
   transform: rotate(90deg);
+  z-index: 5;
 }
 .page-header .nav .burger-icon, .page-header .nav .burger::before, .page-header .nav .burger::after {
   content: "";
@@ -223,7 +224,6 @@ body {
     max-width: 3em;
     height: 2.2em;
     position: relative;
-    z-index: 5;
   }
 }
 .page-header .nav-list {
