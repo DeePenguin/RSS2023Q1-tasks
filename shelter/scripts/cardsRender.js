@@ -1,50 +1,18 @@
-// elements
-const burger = document.querySelector('.burger');
-const menu = document.querySelector('.nav-list');
-const menuLinks = menu.querySelectorAll('.nav-link');
-const overlay = document.createElement('div');
-overlay.className = 'overlay';
-document.body.append(overlay);
+import {state, overlay, toggleOverlay} from './overlay.js';
+export const petsData = {};
 
-// state and data
-const state = {
-  isMenuOpen: false,
-  isModalOpen: false,
-}
-const petsData = {};
-
-// functions
-const toggleMenu = () => {
-  state.isMenuOpen = !state.isMenuOpen;
-  burger.classList.toggle('open', state.isMenuOpen);
-  menu.classList.toggle('open', state.isMenuOpen);
-  toggleOverlay(state.isMenuOpen);
-}
-
-const toggleOverlay = (isOpen) => {
-  overlay.classList.toggle('open', isOpen);
-  document.body.classList.toggle('modal-open', isOpen);
-}
-
-const closeEverything = () => {
-  if (state.isMenuOpen) toggleMenu();
-  else if (state.isModalOpen) closeModal();
-}
-
-// cards render
 const getPetsInfo = async () => {
   const res = await fetch('./assets/pets.json');
   const data = await res.json();
   savePetsInfo(data);
-  renderCard(0, petsData[0], document.querySelector('.slider__slide'));
-  // Object.entries(petsData).map(([id, info]) => renderCard(id, info, document.querySelector('.cards-wrapper')))
+  Object.entries(petsData).map(([id, info]) => renderCard(id, info, document.querySelector('.cards-wrapper')))
 }
 
 const savePetsInfo = (data) => {
   data.forEach((obj, i) => petsData[i] = obj);
 }
 
-const renderCard = (id, info, parent) => {
+export const renderCard = (id, info, parent) => {
   const card = document.createElement('div');
   card.className = 'pet-card';
   card.dataset.petId = id;
@@ -61,12 +29,12 @@ const renderCard = (id, info, parent) => {
   parent.append(card);
 }
 
-function showModal (e) {
+function showModal () {
   const id = this.dataset.petId;
   const pet = petsData[id];
   const node = `
   <div class="popup">
-    <button class="btn btn_round" onclick="closeModal()">&#10006;</button>
+    <button class="btn btn_round" id="close-btn">&#10006;</button>
     <div class="popup-pic">
       <img src="${pet.img}" alt="${pet.name} photo" class="popup-img">
     </div>
@@ -100,18 +68,16 @@ function showModal (e) {
   </div>
   `;
   overlay.innerHTML = node;
+  document.getElementById('close-btn').onclick = closeModal;
   state.isModalOpen = true;
   toggleOverlay(state.isModalOpen);
 }
 
-const closeModal = () => {
+export function closeModal() {
   state.isModalOpen = false;
   toggleOverlay(state.isModalOpen);
   overlay.innerHTML = '';
 }
 
-// add listeners
+state.closeModal = closeModal;
 window.addEventListener('DOMContentLoaded', getPetsInfo);
-burger.addEventListener('click', toggleMenu);
-menuLinks.forEach((link) => link.addEventListener('click', closeEverything));
-overlay.addEventListener('click', closeEverything);

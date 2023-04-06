@@ -1118,6 +1118,7 @@ body {
   justify-content: space-between;
   align-items: start;
   border-radius: 9px;
+  overscroll-behavior: contain;
 }
 @media (max-width: 600px) {
   .popup {

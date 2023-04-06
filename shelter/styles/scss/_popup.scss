@@ -5,6 +5,7 @@
   background: $color-light-s;
   @include flex($wrap: nowrap, $ali: start);
   border-radius: 9px;
+  overscroll-behavior: contain;
 
   @include m-custom(600px) {
     width: 75%;
