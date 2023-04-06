@@ -84,7 +84,7 @@ function showCurrentPage() {
   hasRenderedCards = true;
   wrapper.style.height = '';
   console.log(`Page ${currentPage}:`, cardsForPage);
-  wrapper.scrollIntoView();
+  if(wrapper.getBoundingClientRect().top < 0) wrapper.scrollIntoView();
 }
 
 function toggleButtonsDisability() {
