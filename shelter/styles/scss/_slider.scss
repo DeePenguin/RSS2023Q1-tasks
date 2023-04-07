@@ -55,17 +55,18 @@
     container: slider/ inline-size;
   }
 
-  &__slide {
+  &__wrapper {
     @include flex($wrap: nowrap);
-    @extend %transition-m;
-
     position: relative;
-    z-index: 1;
+    gap: $cards-gap;
+    left: calc(-100% - 4em);
+  }
 
+  &__overflow,
+  &__slide {
     width: 100%;
     overflow: hidden;
-
-    gap: $cards-gap;
+    @extend %transition-m;
 
     @container slider (max-width: #{$medium}) {
       width: $small;
@@ -74,5 +75,14 @@
     @container slider (max-width: #{$small}) {
       width: $card-size;
     }
+  }
+
+  &__slide {
+    @include flex($wrap: nowrap);
+
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    gap: $cards-gap;
   }
 }
