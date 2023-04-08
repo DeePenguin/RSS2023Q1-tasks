@@ -8,7 +8,8 @@ async function getPetsInfo() {
   return data.reduce((acc, value, i) => {acc[i] = value; return acc;}, {})
 }
 
-export const renderCard = (id, info, parent) => {
+export const renderCard = (id, parent) => {
+  const info = petsData[id];
   const card = document.createElement('div');
   card.className = 'pet-card';
   card.dataset.petId = id;

@@ -1,4 +1,4 @@
-import { petsData, renderCard } from './cardsRender.js';
+import { renderCard } from './cardsRender.js';
 
 const sliderEl = document.querySelector('.slider');
 const leftBtn = document.querySelector('#prev-btn');
@@ -34,9 +34,9 @@ function init() {
   currentArr = createNextSlide();
   rightArr = createNextSlide(currentArr);
   leftArr = createNextSlide(currentArr);
-  currentArr.forEach(id => renderCard(id, petsData[id], centerSlide));
-  rightArr.forEach(id => renderCard(id, petsData[id], rightSlide));
-  leftArr.forEach(id => renderCard(id, petsData[id], leftSlide));
+  currentArr.forEach(id => renderCard(id, centerSlide));
+  rightArr.forEach(id => renderCard(id, rightSlide));
+  leftArr.forEach(id => renderCard(id, leftSlide));
   console.log('init', leftArr, currentArr, rightArr)
 }
 
@@ -65,11 +65,11 @@ function moveLeft() {
 function swapSlides() {
   wrapper.classList.remove(`transition-${direction}`);
   centerSlide.innerHTML = '';
-  currentArr.forEach(id => renderCard(id, petsData[id], centerSlide));
+  currentArr.forEach(id => renderCard(id, centerSlide));
   leftSlide.innerHTML = '';
-  leftArr.forEach(id => renderCard(id, petsData[id], leftSlide));
+  leftArr.forEach(id => renderCard(id, leftSlide));
   rightSlide.innerHTML = '';
-  rightArr.forEach(id => renderCard(id, petsData[id], rightSlide));
+  rightArr.forEach(id => renderCard(id, rightSlide));
   leftBtn.addEventListener('click', moveLeft);
   rightBtn.addEventListener('click', moveRight);
 }

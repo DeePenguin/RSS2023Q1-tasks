@@ -1,5 +1,5 @@
 import './burger.js';
-import { petsData, renderCard } from './cardsRender.js';
+import { renderCard } from './cardsRender.js';
 
 const currentPageBtn = document.getElementById('current-page');
 const firstPageBtn = document.getElementById('first-page');
@@ -80,7 +80,7 @@ function showCurrentPage() {
   }
   const startIndex = currentPage > 1 ? (currentPage - 1) * cardsAmount : 0;
   const cardsForPage = shuffledCards.slice(startIndex, currentPage * cardsAmount);
-  cardsForPage.forEach(id => renderCard(id, petsData[id], wrapper));
+  cardsForPage.forEach(id => renderCard(id, wrapper));
   hasRenderedCards = true;
   wrapper.style.height = '';
   console.log(`Page ${currentPage}:`, cardsForPage);
