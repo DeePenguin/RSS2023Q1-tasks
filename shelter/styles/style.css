@@ -895,6 +895,22 @@ body {
   object-fit: contain;
 }
 
+@keyframes move-right {
+  from {
+    left: calc(-100% - 4em);
+  }
+  to {
+    left: calc(-200% - 8em);
+  }
+}
+@keyframes move-left {
+  from {
+    left: calc(-100% - 4em);
+  }
+  to {
+    left: 0;
+  }
+}
 .slider {
   display: grid;
   grid-template-rows: repeat(2, min-content);
@@ -956,6 +972,14 @@ body {
   position: relative;
   gap: 4em;
   left: calc(-100% - 4em);
+}
+.slider__wrapper.transition-right {
+  animation-name: move-right;
+  animation-duration: 1.2s;
+}
+.slider__wrapper.transition-left {
+  animation-name: move-left;
+  animation-duration: 1.2s;
 }
 .slider__overflow, .slider__slide {
   width: 100%;

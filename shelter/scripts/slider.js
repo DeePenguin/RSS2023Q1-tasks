@@ -1,14 +1,15 @@
 import { petsData, renderCard } from './cardsRender.js';
 
 const sliderEl = document.querySelector('.slider');
-const prevBtn = document.querySelector('#prev-btn');
-const nextBtn = document.querySelector('#next-btn');
+const leftBtn = document.querySelector('#prev-btn');
+const rightBtn = document.querySelector('#next-btn');
+const wrapper = sliderEl.querySelector('.slider__wrapper');
 const centerSlide = sliderEl.querySelector('.slider__slide.center');
 const leftSlide = sliderEl.querySelector('.slider__slide.left');
 const rightSlide = sliderEl.querySelector('.slider__slide.right');
 
-let currentArr, nextArr, pastArr;
-
+let leftArr, rightArr, currentArr;
+let direction;
 
 function shuffle(excludeFromResult, length) {
   const array = [0,1,2,3,4,5,6,7];
@@ -31,29 +32,50 @@ function createNextSlide(currentArr = []) {
 
 function init() {
   currentArr = createNextSlide();
-  nextArr = createNextSlide(currentArr);
-  pastArr = createNextSlide(currentArr);
+  rightArr = createNextSlide(currentArr);
+  leftArr = createNextSlide(currentArr);
   currentArr.forEach(id => renderCard(id, petsData[id], centerSlide));
-  nextArr.forEach(id => renderCard(id, petsData[id], rightSlide));
-  pastArr.forEach(id => renderCard(id, petsData[id], leftSlide));
-
-  console.log('pastArr', pastArr, 'currentArr', currentArr, 'nextArr', nextArr)
+  rightArr.forEach(id => renderCard(id, petsData[id], rightSlide));
+  leftArr.forEach(id => renderCard(id, petsData[id], leftSlide));
+  console.log('init', leftArr, currentArr, rightArr)
 }
 
-function moveForward() {
-  pastArr = currentArr;
-  currentArr = nextArr;
-  nextArr = createNextSlide(currentArr);
-  console.log('pastArr', pastArr, 'currentArr', currentArr, 'nextArr', nextArr)
-
+function moveRight() {
+  direction = 'right';
+  leftArr = currentArr;
+  currentArr = rightArr;
+  rightArr = createNextSlide(currentArr);
+  wrapper.classList.add("transition-right");
+  leftBtn.removeEventListener('click', moveLeft);
+  rightBtn.removeEventListener('click', moveRight);
+  console.log('right', leftArr, currentArr, rightArr)
 }
 
-function moveBackward() {
-  [pastArr, currentArr] = [currentArr, pastArr];
-  nextArr = createNextSlide(currentArr);
-  console.log('pastArr', pastArr, 'currentArr', currentArr, 'nextArr', nextArr)
-
+function moveLeft() {
+  direction = 'left';
+  rightArr = currentArr;
+  currentArr = leftArr;
+  leftArr = createNextSlide(currentArr);
+  wrapper.classList.add("transition-left");
+  leftBtn.removeEventListener('click', moveLeft);
+  rightBtn.removeEventListener('click', moveRight);
+  console.log('left', leftArr, currentArr, rightArr)
 }
 
+function swapSlides() {
+  wrapper.classList.remove(`transition-${direction}`);
+  centerSlide.innerHTML = '';
+  currentArr.forEach(id => renderCard(id, petsData[id], centerSlide));
+  leftSlide.innerHTML = '';
+  leftArr.forEach(id => renderCard(id, petsData[id], leftSlide));
+  rightSlide.innerHTML = '';
+  rightArr.forEach(id => renderCard(id, petsData[id], rightSlide));
+  leftBtn.addEventListener('click', moveLeft);
+  rightBtn.addEventListener('click', moveRight);
+}
 
 init();
+
+leftBtn.addEventListener('click', moveLeft);
+rightBtn.addEventListener('click', moveRight);
+wrapper.addEventListener('animationend', swapSlides);
