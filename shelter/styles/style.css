@@ -639,12 +639,12 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 6em;
+  gap: 5em;
   width: 100%;
 }
 @media (max-width: 480px) {
   .section.our-friends .section-content {
-    gap: 4.2em;
+    gap: 3.2em;
   }
 }
 @media (max-width: 900px) {
@@ -729,7 +729,7 @@ body {
 @media (hover: hover) {
   .pet-card:hover {
     background: #FFFFFF;
-    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    box-shadow: 0px 2px 15px 1px rgba(13, 13, 13, 0.06);
   }
   .pet-card:hover .btn {
     background: #FDDCC4;
@@ -917,13 +917,14 @@ body {
   grid-template-columns: 52px 1fr 52px;
   justify-content: space-between;
   width: 100%;
-  column-gap: 1em;
   row-gap: 0;
+  margin-bottom: 0;
 }
 @media (max-width: 480px) {
   .slider {
     grid-template-columns: 1fr;
-    row-gap: 2em;
+    row-gap: 1em;
+    margin-bottom: 1em;
   }
 }
 .slider .btn-wrapper {
@@ -954,7 +955,7 @@ body {
   grid-column: 2/3;
   justify-self: center;
   width: 100%;
-  max-width: 99em;
+  max-width: 101em;
   overflow: hidden;
   container: slider/inline-size;
 }
@@ -985,14 +986,14 @@ body {
   width: 100%;
   overflow: hidden;
 }
-@container slider (max-width: 89em) {
+@container slider (max-width: 91em) {
   .slider__overflow, .slider__slide {
-    width: 58em;
+    width: 60em;
   }
 }
-@container slider (max-width: 58em) {
+@container slider (max-width: 60em) {
   .slider__overflow, .slider__slide {
-    width: 27em;
+    width: 29em;
   }
 }
 .slider__slide {
@@ -1005,6 +1006,7 @@ body {
   z-index: 1;
   flex-shrink: 0;
   gap: 4em;
+  padding: 1em;
 }
 
 .page-footer {

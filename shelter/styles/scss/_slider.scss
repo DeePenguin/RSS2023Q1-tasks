@@ -11,26 +11,24 @@
 .slider {
   $cards-gap: 4em;
   $card-size: $pet-card-size;
-  $medium: $card-size * 3 + $cards-gap * 2;
-  $small: $card-size * 2 + $cards-gap;
-
-  @include m-mobile {
-    grid-template-columns: 1fr;
-
-    row-gap: 2em;
-  }
-
+  $padding-size: 1em;
+  $medium: $card-size * 3 + $cards-gap * 2  + $padding-size * 2;
+  $small: $card-size * 2 + $cards-gap  + $padding-size * 2;
   @extend %transition-s;
-
   display: grid;
   grid-template-rows: repeat(2, min-content);
   grid-template-columns: $round-button-size 1fr $round-button-size;
   justify-content: space-between;
   width: 100%;
-
-  column-gap: 1em;
-
   row-gap: 0;
+  margin-bottom: 0;
+
+  @include m-mobile {
+    grid-template-columns: 1fr;
+
+    row-gap: 1em;
+    margin-bottom: 1em;
+  }
 
   .btn-wrapper {
     @include flex();
@@ -59,7 +57,7 @@
     grid-column: 2 / 3;
     justify-self: center;
     width: 100%;
-    max-width: 99em;
+    max-width: 101em;
     overflow: hidden;
 
     container: slider/ inline-size;
@@ -93,7 +91,7 @@
     }
 
     @container slider (max-width: #{$small}) {
-      width: $card-size;
+      width: $card-size + $padding-size * 2;
     }
   }
 
@@ -104,5 +102,6 @@
     z-index: 1;
     flex-shrink: 0;
     gap: $cards-gap;
+    padding: $padding-size;
   }
 }

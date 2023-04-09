@@ -259,12 +259,12 @@
   &.our-friends {
     .section-content {
       @include flex-col();
-      gap: 6em;
+      gap: 5em;
       width: 100%;
       @extend %transition-s;
 
       @include m-mobile {
-        gap: 4.2em;
+        gap: 3.2em;
       }
     }
   }

@@ -14,7 +14,7 @@
   @include m-hover {
     &:hover{
       background: $color-light-xl;
-      box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+      box-shadow: 0px 2px 15px 1px rgba(13, 13, 13, 0.06);
       & .btn {
         background: $color-primary-light;
         border-color: $color-primary-light;
