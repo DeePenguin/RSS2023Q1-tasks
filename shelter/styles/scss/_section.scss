@@ -205,7 +205,7 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
-        
+
         @include m-mobile {
           height: 5em;
           width: 5em;
@@ -259,12 +259,12 @@
   &.our-friends {
     .section-content {
       @include flex-col();
-      gap: 6em;
+      gap: 5em;
       width: 100%;
       @extend %transition-s;
 
       @include m-mobile {
-        gap: 4.2em;
+        gap: 3.2em;
       }
     }
   }
@@ -292,27 +292,14 @@
       }
     }
     .cards-wrapper {
-      @include flex($jc: space-evenly);
+      @include flex($jc: center);
       gap: 3em 4em;
 
-      /* костыль для пп без js */
-
       @include m-custom(1279.98px) {
-        padding: 0 9%;
         margin-bottom: 1em;
-        .pet-card:nth-child(n + 7) {
-          display: none;
-        }
-      }
-
-      @include m-custom(639.98px) {
-        .pet-card:nth-child(n + 4) {
-          display: none;
-        }
       }
 
       @include m-mobile {
-        padding: 0;
         margin-bottom: 0;
       }
     }

@@ -108,40 +108,17 @@
           </h3>
           <div class="slider">
             <div class="slider__content">
-              <div class="slider__slide">
-
-                <div class="pet-card">
-                  <div class="pet-card__pic">
-                    <img class="pet-card__img" src="./assets/images/pets/katrine.png" alt="pet photo">
-                  </div>
-                  <p class="pet-card__title">
-                    Katrine
-                  </p>
-                  <button class="btn" type="button">Learn more</button>
-                </div>
-                <div class="pet-card">
-                  <div class="pet-card__pic">
-                    <img class="pet-card__img" src="./assets/images/pets/jennifer.png" alt="pet photo">
-                  </div>
-                  <p class="pet-card__title">
-                    Jennifer
-                  </p>
-                  <button class="btn" type="button">Learn more</button>
-                </div>
-                <div class="pet-card">
-                  <div class="pet-card__pic">
-                    <img class="pet-card__img" src="./assets/images/pets/woody.png" alt="pet photo">
-                  </div>
-                  <p class="pet-card__title">
-                    Woody
-                  </p>
-                  <button class="btn" type="button">Learn more</button>
+              <div class="slider__overflow">
+                <div class="slider__wrapper">
+                  <div class="slider__slide left"></div>
+                  <div class="slider__slide center"></div>
+                  <div class="slider__slide right"></div>
                 </div>
               </div>
             </div>
             <div class="btn-wrapper">
-              <button class="btn btn_round" type="button">&#129060;</button>
-              <button class="btn btn_round" type="button">&#129062;</button>
+              <button class="btn btn_round" id="prev-btn" type="button">&#129060;</button>
+              <button class="btn btn_round" id="next-btn" type="button">&#129062;</button>
             </div>
           </div>
           <a class="btn btn_filled" href="./pets.html">Get to know the rest</a>
@@ -255,7 +232,7 @@
       </div>
     </div>
   </footer>
-  <script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js" type="module"></script>
 </body>
 
 </html>

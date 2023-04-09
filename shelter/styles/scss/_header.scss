@@ -54,6 +54,7 @@
 
       &.open {
         transform: rotate(90deg);
+        z-index: 5;
       }
 
       &-icon,
@@ -72,7 +73,6 @@
         max-width: 3em;
         height: 2.2em;
         position: relative;
-        z-index: 5;
       }
     }
 
@@ -99,11 +99,15 @@
         background: $color-light-xl;
         opacity: 0;
 
-
-
         &.open {
           right: 0;
           opacity: 1;
+          z-index: 4;
+          overscroll-behavior: contain;
+
+          .nav-link.active {
+            pointer-events: all;
+          }
         }
       }
     }
@@ -151,7 +155,6 @@
 
   &_main {
     position: absolute;
-    z-index: 5;
     top: 0;
     left: 0;
     width: 100%;
