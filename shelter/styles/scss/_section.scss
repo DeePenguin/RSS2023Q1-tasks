@@ -292,16 +292,14 @@
       }
     }
     .cards-wrapper {
-      @include flex($jc: space-evenly);
+      @include flex($jc: center);
       gap: 3em 4em;
 
       @include m-custom(1279.98px) {
-        padding: 0 9%;
         margin-bottom: 1em;
       }
 
       @include m-mobile {
-        padding: 0;
         margin-bottom: 0;
       }
     }

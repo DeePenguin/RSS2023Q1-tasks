@@ -9,8 +9,8 @@ const lastPageBtn = document.getElementById('last-page');
 const wrapper = document.querySelector('.cards-wrapper');
 
 const smallWidthMediaQuery = window.matchMedia('(max-width: 639.98px)');
-const mediumWidthMediaQuery = window.matchMedia('(min-width: 640px) and (max-width: 899.98px)');
-const largeWidthMediaQuery = window.matchMedia('(min-width: 900px)');
+const mediumWidthMediaQuery = window.matchMedia('(min-width: 640px) and (max-width: 1279.98px)');
+const largeWidthMediaQuery = window.matchMedia('(min-width: 1279.98px)');
 
 const smallPageCardsAmount = 3;
 const mediumPageCardsAmount = 6;
