@@ -1,0 +1,44 @@
+.cell {
+  border: 1px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: #cacaca;
+  @include flex($jc: center);
+  font-weight: 800;
+  &::after {
+    display: block;
+    content: "";
+  }
+
+  &.open {
+    background-color: #f7f7f7;
+    &::after {
+      content: attr(data-bombs);
+    }
+  }
+
+  &[data-bombs='1'] {
+    color: rgb(25, 122, 25);
+  }
+
+  &[data-bombs='2'] {
+    color: rgb(9, 13, 220);
+  }
+
+  &[data-bombs='3'] {
+    color: rgb(178, 12, 9);
+  }
+
+  &.bomb {
+    background-color: rgb(254, 86, 120);
+    &::after {
+      content: "💣";
+    }
+  }
+
+  &.flag {
+    &::after {
+      content: "🚩";
+    }
+  }
+}

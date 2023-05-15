@@ -9,7 +9,7 @@ export default class BaseComponent {
     const node = document.createElement(tag);
     node.className = className;
     node.innerHTML = content;
-    Object.entries(attributes).forEach(([prop, value]) => node.setAttribute(prop, value));
+    this.setAttributes(attributes);
     if (parentNode) parentNode.append(node);
     this.node = node;
   }
@@ -28,5 +28,21 @@ export default class BaseComponent {
 
   addListener(eventName, callback) {
     this.node.addEventListener(eventName, callback);
+  }
+
+  setAttributes(attributes) {
+    Object.entries(attributes).forEach(([prop, value]) => this.node.setAttribute(prop, value));
+  }
+
+  setContent(content) {
+    this.node.textContent = content;
+  }
+
+  addClass(...classNames) {
+    this.node.classList.add(...classNames);
+  }
+
+  toggleClass(className, state) {
+    this.node.classList.toggle(className, state);
   }
 }
