@@ -1,4 +1,6 @@
-export default class BaseComponent {
+import EventEmitter from './event-emitter';
+
+export default class BaseComponent extends EventEmitter {
   constructor({
     parentNode = null,
     tag = 'div',
@@ -6,6 +8,7 @@ export default class BaseComponent {
     content = '',
     attributes = {},
   }) {
+    super();
     const node = document.createElement(tag);
     node.className = className;
     node.innerHTML = content;
@@ -18,11 +21,19 @@ export default class BaseComponent {
     this.node.remove();
   }
 
-  appendTo(parentNode) {
+  appendTo(parent) {
+    const parentNode = parent instanceof HTMLElement
+      ? parent
+      : parent.node;
     parentNode.append(this.node);
   }
 
-  append(...nodes) {
+  append(...components) {
+    const nodes = components.map((component) => (
+      component instanceof HTMLElement
+        ? component
+        : component.node
+    ));
     this.node.append(...nodes);
   }
 

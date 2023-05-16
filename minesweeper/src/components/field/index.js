@@ -3,85 +3,99 @@ import Cell from '../cell';
 import './field.scss';
 
 export default class Field extends BaseComponent {
-  constructor(parentNode, size, bombsAmount) {
+  constructor(parentNode, settings, game) {
     super({
       parentNode,
       className: 'field',
     });
-    this.size = size;
-    this.bombsAmount = bombsAmount;
-    this.cells = [];
-    this.bombs = this.createBombs();
+    this.size = settings.size;
+    this.bombsAmount = settings.bombsAmount;
+    this.game = game;
+    this.on('revealCell', (cell) => this.revealCell(cell));
+    this.cells = {};
     this.createCells();
-    this.countBombs();
-    // this.openAll();
+    this.revealedCells = 0;
   }
 
-  createBombs() {
-    const bombPositions = new Set();
-    while (bombPositions.size < this.bombsAmount) {
-      const row = Math.floor(Math.random() * this.size);
-      const col = Math.floor(Math.random() * this.size);
-      bombPositions.add(`${row},${col}`);
+  createBombs(excluded) {
+    const excludedKey = `${excluded.row},${excluded.col}`;
+    this.bombs = new Set();
+    const positions = Object.keys(this.cells).filter((key) => key !== excludedKey);
+    while (this.bombs.size < this.bombsAmount) {
+      const randomNum = Math.floor(Math.random() * positions.length);
+      this.bombs.add(positions[randomNum]);
+      positions.splice(randomNum, 1);
     }
-    console.log(bombPositions);
-    return bombPositions;
+    this.bombs.forEach((position) => this.cells[position].setBomb());
+    console.log(this.bombs);
+    this.countBombs();
+  }
+
+  revealCell(cell) {
+    if (this.revealedCells === 0) {
+      this.createBombs(cell);
+    }
+    cell.reveal();
+    if (cell.isBomb) {
+      this.revealBombs();
+      this.emit('bomb');
+      return;
+    }
+    if (cell.isEmpty) this.revealNeighbours(cell);
+    this.revealedCells = Object.values(this.cells).filter((c) => c.isOpen).length;
+  }
+
+  revealNeighbours(cell) {
+    const neighbours = new Set(this.getNeighbours(cell));
+    // eslint-disable-next-line no-restricted-syntax
+    for (const currentCell of neighbours) {
+      currentCell.reveal();
+      if (currentCell.isEmpty) {
+        const newCells = this.getNeighbours(currentCell);
+        newCells.forEach((newCell) => neighbours.add(newCell));
+      }
+    }
   }
 
   createCells() {
     for (let i = 0; i < this.size; i += 1) {
-      const row = [];
       const rowEl = new BaseComponent({ parentNode: this.node, className: 'row' });
       for (let j = 0; j < this.size; j += 1) {
-        const isBomb = this.bombs.has(`${i},${j}`);
-        const cell = new Cell(rowEl, this, i, j, isBomb);
-        row.push(cell);
+        const key = `${i},${j}`;
+        const cell = new Cell(rowEl, i, j);
+        this.cells[key] = cell;
       }
-      this.cells.push(row);
     }
     console.log(this.cells);
   }
 
   countBombs() {
-    this.cells.forEach((row) => {
-      row.forEach((cell) => {
-        cell.setBombsAmount(this.countNeighboursBombs(cell));
-      });
+    Object.values(this.cells).forEach((cell) => {
+      cell.setBombsAmount(this.countNeighboursBombs(cell));
     });
+  }
+
+  getNeighbours(cell) {
+    const { row, col } = cell;
+    const neighbours = [];
+    for (let i = row - 1; i <= row + 1; i += 1) {
+      for (let j = col - 1; j <= col + 1; j += 1) {
+        const key = `${i},${j}`;
+        if (key !== `${row},${col}`) {
+          const currentCell = this.cells[key];
+          if (currentCell) neighbours.push(currentCell);
+        }
+      }
+    }
+    return neighbours;
   }
 
   countNeighboursBombs(cell) {
-    const { row, col } = cell;
-    let counter = 0;
-    for (let i = row - 1; i <= row + 1; i += 1) {
-      for (let j = col - 1; j <= col + 1; j += 1) {
-        if (i === row && j === col) continue;
-        if (i < 0 || i >= this.size) continue;
-        if (j < 0 || j >= this.size) continue;
-        if (this.cells[i][j].isBomb) counter += 1;
-      }
-    }
-    return counter;
+    const neighbours = this.getNeighbours(cell);
+    return neighbours.filter((neighbour) => neighbour.isBomb).length;
   }
 
-  openNeighbours(cell) {
-    const { row, col } = cell;
-    for (let i = row - 1; i <= row + 1; i += 1) {
-      for (let j = col - 1; j <= col + 1; j += 1) {
-        if (i === row && j === col) continue;
-        if (i < 0 || i >= this.size) continue;
-        if (j < 0 || j >= this.size) continue;
-        const currentCell = this.cells[i][j];
-        currentCell.open();
-      }
-    }
-  }
-
-  openAll() {
-    this.cells.forEach((row) => {
-      row.forEach((cell) => {
-        cell.open();
-      });
-    });
+  revealBombs() {
+    this.bombs.forEach((position) => this.cells[position].reveal());
   }
 }
