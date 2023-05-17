@@ -3,20 +3,21 @@ import Cell from '../cell';
 import './field.scss';
 
 export default class Field extends BaseComponent {
-  constructor(parentNode, settings) {
+  constructor(parentNode, rows, cols, bombs) {
     super({
       parentNode,
       className: 'field',
     });
-    this.size = settings.size;
-    this.bombsAmount = settings.bombsAmount;
+    this.rows = rows;
+    this.cols = cols;
+    this.bombsAmount = bombs;
     this.on('clickOnCell', (cell) => this.revealCell(cell));
     this.on('flag', (isAdded) => this.handleFlag(isAdded));
     this.bombHandler = this.on('bomb', () => this.handleBomb());
+    this.isBombListnerActive = true;
     this.cells = {};
     this.createCells();
     this.revealedCells = 0;
-    this.flaggedCells = 0;
   }
 
   createBombs(excluded) {
@@ -37,7 +38,9 @@ export default class Field extends BaseComponent {
       this.createBombs(cell);
       this.emit('startGame');
     }
+    if (cell.isOpen && cell.isEmpty) return;
     if (cell.isOpen && !cell.isEmpty) {
+      if (this.getNeighbours(cell).filter((c) => !c.isOpen && !c.isFlagged).length === 0) return;
       this.revealNeighbours(cell);
     }
     cell.reveal();
@@ -45,6 +48,7 @@ export default class Field extends BaseComponent {
       this.revealBombs();
       return;
     }
+    this.emit('move');
     if (cell.isEmpty) this.revealNeighbours(cell);
     this.revealedCells = Object.values(this.cells).filter((c) => c.isOpen).length;
     this.emit('updateCellsCounter', this.revealedCells);
@@ -63,9 +67,9 @@ export default class Field extends BaseComponent {
   }
 
   createCells() {
-    for (let i = 0; i < this.size; i += 1) {
+    for (let i = 0; i < this.rows; i += 1) {
       const rowEl = new BaseComponent({ parentNode: this.node, className: 'row' });
-      for (let j = 0; j < this.size; j += 1) {
+      for (let j = 0; j < this.cols; j += 1) {
         const key = `${i},${j}`;
         const cell = new Cell(rowEl, i, j);
         this.cells[key] = cell;
@@ -106,7 +110,14 @@ export default class Field extends BaseComponent {
 
   handleBomb() {
     this.off('bomb', this.bombHandler);
+    this.isBombListnerActive = false;
     this.revealBombs();
     this.emit('lose');
+  }
+
+  reset() {
+    this.revealedCells = 0;
+    Object.values(this.cells).forEach((cell) => cell.reset());
+    if (!this.isBombListnerActive) this.on('bomb', this.bombHandler);
   }
 }

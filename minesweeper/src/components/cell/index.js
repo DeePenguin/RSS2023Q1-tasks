@@ -51,4 +51,14 @@ export default class Cell extends BaseComponent {
   setBomb() {
     this.isBomb = true;
   }
+
+  reset() {
+    this.isBomb = false;
+    this.isOpen = false;
+    this.isFlagged = false;
+    this.toggleClass('flag', this.isFlagged);
+    this.toggleClass('open', this.isOpen);
+    this.toggleClass('bomb', this.isBomb);
+    this.removeAttributes('data-bombs');
+  }
 }
