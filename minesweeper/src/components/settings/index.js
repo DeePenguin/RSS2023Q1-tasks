@@ -21,15 +21,15 @@ export default class Settings extends BaseComponent {
       this.emit('newGame');
     });
 
-    Object.keys(levels).forEach((level) => {
-      const props = levels[level];
-      const content = `${level}: ${props.rows} x ${props.cols}, ${props.bombs} bombs`;
-      const levelButton = new BaseComponent({
-        tag: 'button',
-        parentNode: this.node,
-        className: 'level-button',
-        content,
-      });
-    });
+    // Object.keys(levels).forEach((level) => {
+    //   const props = levels[level];
+    //   const content = `${level}: ${props.rows} x ${props.cols}, ${props.bombs} bombs`;
+    //   const levelButton = new BaseComponent({
+    //     tag: 'button',
+    //     parentNode: this.node,
+    //     className: 'level-button',
+    //     content,
+    //   });
+    // });
   }
 }

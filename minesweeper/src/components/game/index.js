@@ -1,5 +1,6 @@
 import BaseComponent from '../../utils/base-component';
 import Field from '../field';
+import './game.scss';
 
 const defaultSettings = {
   rows: 10,
@@ -11,14 +12,19 @@ export default class Game extends BaseComponent {
   constructor(parentNode, settings = defaultSettings) {
     super({ parentNode, className: 'game' });
     this.settings = settings;
-    this.cellsToWin = this.settings.size ** 2 - this.settings.bombs;
-    this.field = new Field(this, this.settings.rows, this.settings.cols, this.settings.bombs);
-    this.isActive = false;
+    this.createStatusElements();
     this.init();
-    this.increaseTime = () => { this.time += 1; };
-    this.on('startGame', () => this.start());
+    this.cellsToWin = this.settings.rows * this.settings.cols - this.settings.bombs;
+    this.field = new Field(this, this.settings.rows, this.settings.cols, this.settings.bombs);
+    this.pausePopup = new BaseComponent({
+      parentNode: this.field.node,
+      className: 'popup-pause',
+    });
+    this.isActive = false;
+    this.increaseTime = () => { this.time += 1; this.renderTime(); };
+    this.on('startGame', () => this.startTimer());
     this.on('lose', () => this.end());
-    this.on('move', () => { this.moves += 1; console.log('moves:', this.moves); });
+    this.on('move', () => { this.moves += 1; this.renderMoves(); });
     this.on('updateCellsCounter', (cellsNumber) => this.checkWin(cellsNumber));
     this.on('updateFlagsCounter', (isIncreased) => this.updateBombsLeftCounter(isIncreased));
     this.on('newGame', () => this.newGame());
@@ -29,33 +35,87 @@ export default class Game extends BaseComponent {
     this.revealedCells = 0;
     this.moves = 0;
     this.time = 0;
+    this.isEnded = false;
+    this.isPaused = false;
+    this.renderBombs();
+    this.renderMoves();
+    this.renderTime();
+  }
+
+  createStatusElements() {
+    const wrapper = new BaseComponent({
+      parentNode: this.node,
+      className: 'game-status',
+    });
+    this.bombsEl = new BaseComponent({
+      parentNode: wrapper,
+      className: 'game-bombs',
+    });
+    this.movesEl = new BaseComponent({
+      parentNode: wrapper,
+      className: 'game-moves',
+    });
+    this.pauseBtn = new BaseComponent({
+      parentNode: wrapper,
+      tag: 'button',
+      className: 'game-pause',
+      content: 'Pause',
+    });
+    this.timeEl = new BaseComponent({
+      parentNode: wrapper,
+      className: 'game-time',
+    });
+    this.pauseBtn.addListener('click', () => this.togglePause());
+  }
+
+  renderTime() {
+    this.timeEl.setContent(this.time.toString().padStart(3, '0'));
+  }
+
+  renderMoves() {
+    this.movesEl.setContent(this.moves);
+  }
+
+  renderBombs() {
+    this.bombsEl.setContent(this.bombsLeft);
   }
 
   newGame() {
-    if (this.isActive) console.log('already active');
-    this.isActive = false;
+    if (this.isActive) {
+      this.end();
+    }
     this.field.reset();
     this.init();
   }
 
-  start() {
-    console.log('start');
+  startTimer() {
+    if (this.isEnded) return;
     this.isActive = true;
     this.timer = setInterval(() => {
       this.increaseTime();
     }, 1000);
   }
 
-  pause() {
-    clearInterval(this.timer);
+  stopTimer() {
     this.isActive = false;
-    console.log('seconds:', this.time);
+    clearInterval(this.timer);
+  }
+
+  togglePause() {
+    if (this.isEnded) return;
+    this.isPaused = !this.isPaused;
+    this.pausePopup.toggleClass('active', this.isPaused);
+    if (this.isPaused) {
+      this.stopTimer();
+      return;
+    }
+    this.startTimer();
   }
 
   end() {
-    this.pause();
+    this.stopTimer();
+    this.isEnded = true;
     console.log('end');
-    console.log('moves:', this.moves);
   }
 
   checkWin(cellsNumber) {
@@ -69,6 +129,6 @@ export default class Game extends BaseComponent {
   updateBombsLeftCounter(isIncreased) {
     const difference = isIncreased ? 1 : -1;
     this.bombsLeft -= difference;
-    console.log('bombsLeft', this.bombsLeft);
+    this.renderBombs();
   }
 }
