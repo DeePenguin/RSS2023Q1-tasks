@@ -16,14 +16,18 @@ export default class Game extends BaseComponent {
     this.init();
     this.cellsToWin = this.settings.rows * this.settings.cols - this.settings.bombs;
     this.field = new Field(this, this.settings.rows, this.settings.cols, this.settings.bombs);
-    this.pausePopup = new BaseComponent({
+    this.fieldBlocker = new BaseComponent({
       parentNode: this.field.node,
-      className: 'popup-pause',
+      className: 'game-blocker',
     });
-    this.isActive = false;
+    this.resultEl = new BaseComponent({
+      parentNode: this.node,
+      className: 'game-result',
+    });
+    this.isGameActive = false;
     this.increaseTime = () => { this.time += 1; this.renderTime(); };
     this.on('startGame', () => this.startTimer());
-    this.on('lose', () => this.end());
+    this.on('lose', () => this.lose());
     this.on('move', () => { this.moves += 1; this.renderMoves(); });
     this.on('updateCellsCounter', (cellsNumber) => this.checkWin(cellsNumber));
     this.on('updateFlagsCounter', (isIncreased) => this.updateBombsLeftCounter(isIncreased));
@@ -81,30 +85,33 @@ export default class Game extends BaseComponent {
   }
 
   newGame() {
-    if (this.isActive) {
+    if (this.isGameActive) {
       this.end();
     }
     this.field.reset();
     this.init();
+    this.fieldBlocker.toggleClass('active', this.isEnded);
+    this.hideResult();
   }
 
   startTimer() {
     if (this.isEnded) return;
-    this.isActive = true;
+    this.isGameActive = true;
     this.timer = setInterval(() => {
       this.increaseTime();
     }, 1000);
   }
 
   stopTimer() {
-    this.isActive = false;
+    this.isGameActive = false;
     clearInterval(this.timer);
   }
 
   togglePause() {
     if (this.isEnded) return;
     this.isPaused = !this.isPaused;
-    this.pausePopup.toggleClass('active', this.isPaused);
+    this.fieldBlocker.toggleClass('active', this.isPaused);
+    this.fieldBlocker.toggleClass('paused', this.isPaused);
     if (this.isPaused) {
       this.stopTimer();
       return;
@@ -115,15 +122,33 @@ export default class Game extends BaseComponent {
   end() {
     this.stopTimer();
     this.isEnded = true;
-    console.log('end');
+    this.fieldBlocker.toggleClass('active', this.isEnded);
   }
 
   checkWin(cellsNumber) {
     this.revealedCells = cellsNumber;
     if (this.revealedCells === this.cellsToWin) {
-      console.log('win');
       this.end();
+      const message = `Hooray! You found all mines in ${this.time} seconds and ${this.moves} moves!`;
+      this.showResult(message);
     }
+  }
+
+  lose() {
+    this.end();
+    const message = 'Game over. Try again';
+    this.showResult(message);
+  }
+
+  showResult(content) {
+    this.resultEl.message = new BaseComponent({
+      content,
+    });
+    this.resultEl.append(this.resultEl.message);
+  }
+
+  hideResult() {
+    this.resultEl.message.remove();
   }
 
   updateBombsLeftCounter(isIncreased) {
