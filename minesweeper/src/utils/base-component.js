@@ -12,9 +12,9 @@ export default class BaseComponent extends EventEmitter {
     const node = document.createElement(tag);
     node.className = className;
     node.innerHTML = content;
-    this.setAttributes(attributes);
     if (parentNode) parentNode.append(node);
     this.node = node;
+    this.setAttributes(attributes);
   }
 
   remove() {
@@ -43,6 +43,10 @@ export default class BaseComponent extends EventEmitter {
 
   setAttributes(attributes) {
     Object.entries(attributes).forEach(([prop, value]) => this.node.setAttribute(prop, value));
+  }
+
+  removeAttributes(...args) {
+    args.forEach((attribute) => this.node.removeAttribute(attribute));
   }
 
   setContent(content) {

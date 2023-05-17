@@ -8,6 +8,9 @@ const root = new BaseComponent({
   className: 'root',
 });
 root.append(page.header);
-// const settings = new Settings(root);
+const settings = new Settings(root);
 
 const game = new Game(root);
+
+window.addEventListener('DOMContentLoaded', () => console.log('load'));
+window.addEventListener('beforeunload', () => console.log('beforeunload'));
