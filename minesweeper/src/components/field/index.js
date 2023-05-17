@@ -3,18 +3,20 @@ import Cell from '../cell';
 import './field.scss';
 
 export default class Field extends BaseComponent {
-  constructor(parentNode, settings, game) {
+  constructor(parentNode, settings) {
     super({
       parentNode,
       className: 'field',
     });
     this.size = settings.size;
     this.bombsAmount = settings.bombsAmount;
-    this.game = game;
-    this.on('revealCell', (cell) => this.revealCell(cell));
+    this.on('clickOnCell', (cell) => this.revealCell(cell));
+    this.on('flag', (isAdded) => this.handleFlag(isAdded));
+    this.bombHandler = this.on('bomb', () => this.handleBomb());
     this.cells = {};
     this.createCells();
     this.revealedCells = 0;
+    this.flaggedCells = 0;
   }
 
   createBombs(excluded) {
@@ -27,22 +29,25 @@ export default class Field extends BaseComponent {
       positions.splice(randomNum, 1);
     }
     this.bombs.forEach((position) => this.cells[position].setBomb());
-    console.log(this.bombs);
     this.countBombs();
   }
 
   revealCell(cell) {
     if (this.revealedCells === 0) {
       this.createBombs(cell);
+      this.emit('startGame');
+    }
+    if (cell.isOpen && !cell.isEmpty) {
+      this.revealNeighbours(cell);
     }
     cell.reveal();
     if (cell.isBomb) {
       this.revealBombs();
-      this.emit('bomb');
       return;
     }
     if (cell.isEmpty) this.revealNeighbours(cell);
     this.revealedCells = Object.values(this.cells).filter((c) => c.isOpen).length;
+    this.emit('updateCellsCounter', this.revealedCells);
   }
 
   revealNeighbours(cell) {
@@ -97,5 +102,11 @@ export default class Field extends BaseComponent {
 
   revealBombs() {
     this.bombs.forEach((position) => this.cells[position].reveal());
+  }
+
+  handleBomb() {
+    this.off('bomb', this.bombHandler);
+    this.revealBombs();
+    this.emit('lose');
   }
 }
