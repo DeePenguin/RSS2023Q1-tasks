@@ -1,5 +1,7 @@
 .field {
   @include flex-col();
+  position: relative;
+  width: fit-content;
 }
 
 .row {
