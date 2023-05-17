@@ -7,6 +7,7 @@ export default class EventEmitter {
       EventEmitter.#listeners[event] = [];
     }
     EventEmitter.#listeners[event].push(listener);
+    return listener;
   }
 
   off(event, listener) {

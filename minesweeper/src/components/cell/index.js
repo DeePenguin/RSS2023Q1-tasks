@@ -11,20 +11,21 @@ export default class Cell extends BaseComponent {
     this.col = col;
     this.isBomb = false;
     this.isOpen = false;
-    this.isFlag = false;
+    this.isFlagged = false;
     this.node.onclick = () => this.handleClick();
     this.node.oncontextmenu = (e) => this.flag(e);
   }
 
   handleClick() {
-    if (this.isOpen || this.isFlag) return;
-    this.emit('revealCell', this);
+    if (this.isFlagged) return;
+    this.emit('clickOnCell', this);
   }
 
   reveal() {
-    if (this.isOpen || this.isFlag) return;
+    if (this.isOpen || this.isFlagged) return;
     if (this.isBomb) {
       this.addClass('bomb');
+      this.emit('bomb');
       return;
     }
     this.isOpen = true;
@@ -37,8 +38,9 @@ export default class Cell extends BaseComponent {
   flag(e) {
     e.preventDefault();
     if (this.isOpen) return;
-    this.isFlag = !this.isFlag;
-    this.toggleClass('flag', this.isFlag);
+    this.isFlagged = !this.isFlagged;
+    this.toggleClass('flag', this.isFlagged);
+    this.emit('updateFlagsCounter', this.isFlagged);
   }
 
   setBombsAmount(amount) {
