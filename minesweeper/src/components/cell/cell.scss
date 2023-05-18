@@ -1,3 +1,15 @@
+@keyframes not-flagged {
+  0% {
+    background-color: #cacaca;
+  }
+  50% {
+    background-color: rgb(248, 183, 241);
+  }
+  100% {
+    background-color: #cacaca;
+  }
+}
+
 .cell {
   border: 1px solid black;
   height: 30px;
@@ -60,5 +72,10 @@
     &::after {
       content: "🚩";
     }
+  }
+
+  &.neighbour {
+    animation-name: not-flagged;
+    animation-duration: 0.5s;
   }
 }

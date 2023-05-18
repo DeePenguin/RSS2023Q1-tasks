@@ -40,7 +40,15 @@ export default class Field extends BaseComponent {
     }
     if (cell.isOpen && cell.isEmpty) return;
     if (cell.isOpen && !cell.isEmpty) {
-      if (this.getNeighbours(cell).filter((c) => !c.isOpen && !c.isFlagged).length === 0) return;
+      const neighbours = this.getNeighbours(cell);
+      const closedCells = neighbours.filter((c) => !c.isOpen && !c.isFlagged);
+      if (closedCells.length === 0) return;
+      if (neighbours.filter((c) => c.isFlagged).length !== cell.bombsAround) {
+        closedCells.forEach((el) => {
+          el.addClass('neighbour');
+        });
+        return;
+      }
       this.revealNeighbours(cell);
     }
     cell.reveal();

@@ -57,6 +57,10 @@ export default class BaseComponent extends EventEmitter {
     this.node.classList.add(...classNames);
   }
 
+  removeClass(...classNames) {
+    this.node.classList.remove(...classNames);
+  }
+
   toggleClass(className, state) {
     this.node.classList.toggle(className, state);
   }
