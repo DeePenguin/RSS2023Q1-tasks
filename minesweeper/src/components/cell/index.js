@@ -14,6 +14,7 @@ export default class Cell extends BaseComponent {
     this.isFlagged = false;
     this.node.onclick = () => this.handleClick();
     this.node.oncontextmenu = (e) => this.flag(e);
+    this.node.onanimationend = () => this.removeClass('neighbour');
   }
 
   handleClick() {
