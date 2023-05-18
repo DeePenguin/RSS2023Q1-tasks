@@ -30,7 +30,6 @@ export default class Game extends BaseComponent {
 
   init() {
     this.bombsLeft = this.settings.bombs;
-    this.revealedCells = 0;
     this.moves = 0;
     this.flagsCounter = 0;
     this.time = 0;
@@ -107,7 +106,6 @@ export default class Game extends BaseComponent {
   }
 
   stopTimer() {
-    this.isGameActive = false;
     clearInterval(this.timer);
   }
 
@@ -125,13 +123,13 @@ export default class Game extends BaseComponent {
 
   end() {
     this.stopTimer();
+    this.isGameActive = false;
     this.isEnded = true;
     this.fieldBlocker.toggleClass('active', this.isEnded);
   }
 
   checkWin(cellsNumber) {
-    this.revealedCells = cellsNumber;
-    if (this.revealedCells === this.cellsToWin) {
+    if (cellsNumber === this.cellsToWin) {
       this.end();
       const message = `Hooray! You found all mines in ${this.time} seconds and ${this.moves} moves!`;
       this.showResult(message);
@@ -161,6 +159,29 @@ export default class Game extends BaseComponent {
     this.bombsLeft -= difference;
     this.flagsCounter += difference;
     this.renderBombs();
+    this.renderFlags();
+  }
+
+  save() {
+    return {
+      time: this.time,
+      moves: this.moves,
+      flags: this.flagsCounter,
+      field: this.field.save(),
+    };
+  }
+
+  restore(state) {
+    this.moves = state.moves;
+    this.time = state.time;
+    this.flagsCounter = state.flags;
+    this.bombsLeft -= this.flagsCounter;
+    this.field.restore(state.field);
+    this.startTimer();
+    this.togglePause();
+    this.renderBombs();
+    this.renderMoves();
+    this.renderTime();
     this.renderFlags();
   }
 }

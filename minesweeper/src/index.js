@@ -9,5 +9,4 @@ const root = new BaseComponent({
 root.append(page.header);
 const app = new App(root);
 
-window.addEventListener('DOMContentLoaded', () => console.log('load'));
-window.addEventListener('beforeunload', () => console.log('beforeunload'));
+window.addEventListener('beforeunload', () => app.saveCurrentGame());

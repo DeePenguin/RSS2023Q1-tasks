@@ -13,7 +13,7 @@ export default class Cell extends BaseComponent {
     this.isOpen = false;
     this.isFlagged = false;
     this.node.onclick = () => this.handleClick();
-    this.node.oncontextmenu = (e) => this.flag(e);
+    this.node.oncontextmenu = (e) => this.handleRightClick(e);
     this.node.onanimationend = () => this.removeClass('neighbour');
   }
 
@@ -36,12 +36,17 @@ export default class Cell extends BaseComponent {
     });
   }
 
-  flag(e) {
+  handleRightClick(e) {
     e.preventDefault();
+    this.flag();
+    this.emit('updateFlagsCounter', this.isFlagged);
+  }
+
+  flag() {
+    // e.preventDefault();
     if (this.isOpen) return;
     this.isFlagged = !this.isFlagged;
     this.toggleClass('flag', this.isFlagged);
-    this.emit('updateFlagsCounter', this.isFlagged);
   }
 
   setBombsAmount(amount) {
