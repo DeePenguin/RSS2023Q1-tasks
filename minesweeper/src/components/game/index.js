@@ -2,14 +2,8 @@ import BaseComponent from '../../utils/base-component';
 import Field from '../field';
 import './game.scss';
 
-const defaultSettings = {
-  rows: 10,
-  cols: 10,
-  bombs: 10,
-};
-
 export default class Game extends BaseComponent {
-  constructor(parentNode, settings = defaultSettings) {
+  constructor(parentNode, settings) {
     super({ parentNode, className: 'game' });
     this.settings = settings;
     this.createStatusElements();
@@ -141,6 +135,7 @@ export default class Game extends BaseComponent {
       this.end();
       const message = `Hooray! You found all mines in ${this.time} seconds and ${this.moves} moves!`;
       this.showResult(message);
+      this.emit('win', { time: this.time, moves: this.moves });
     }
   }
 

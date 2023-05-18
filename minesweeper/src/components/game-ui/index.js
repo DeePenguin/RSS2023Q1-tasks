@@ -1,7 +1,6 @@
 import BaseComponent from '../../utils/base-component';
-import levels from './default-preferences';
 
-export default class Settings extends BaseComponent {
+export default class GameUI extends BaseComponent {
   constructor(parentNode) {
     super({
       parentNode,
