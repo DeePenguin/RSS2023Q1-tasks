@@ -30,7 +30,7 @@ export default class Game extends BaseComponent {
     this.on('lose', () => this.lose());
     this.on('move', () => { this.moves += 1; this.renderMoves(); });
     this.on('updateCellsCounter', (cellsNumber) => this.checkWin(cellsNumber));
-    this.on('updateFlagsCounter', (isIncreased) => this.updateBombsLeftCounter(isIncreased));
+    this.on('updateFlagsCounter', (isIncreased) => this.updateFlags(isIncreased));
     this.on('newGame', () => this.newGame());
   }
 
@@ -38,12 +38,14 @@ export default class Game extends BaseComponent {
     this.bombsLeft = this.settings.bombs;
     this.revealedCells = 0;
     this.moves = 0;
+    this.flagsCounter = 0;
     this.time = 0;
     this.isEnded = false;
     this.isPaused = false;
     this.renderBombs();
     this.renderMoves();
     this.renderTime();
+    this.renderFlags();
   }
 
   createStatusElements() {
@@ -54,6 +56,10 @@ export default class Game extends BaseComponent {
     this.bombsEl = new BaseComponent({
       parentNode: wrapper,
       className: 'game-bombs',
+    });
+    this.flagsEl = new BaseComponent({
+      parentNode: wrapper,
+      className: 'game-flags',
     });
     this.movesEl = new BaseComponent({
       parentNode: wrapper,
@@ -82,6 +88,10 @@ export default class Game extends BaseComponent {
 
   renderBombs() {
     this.bombsEl.setContent(this.bombsLeft);
+  }
+
+  renderFlags() {
+    this.flagsEl.setContent(this.flagsCounter);
   }
 
   newGame() {
@@ -148,12 +158,14 @@ export default class Game extends BaseComponent {
   }
 
   hideResult() {
-    this.resultEl.message.remove();
+    this.resultEl.message?.remove();
   }
 
-  updateBombsLeftCounter(isIncreased) {
+  updateFlags(isIncreased) {
     const difference = isIncreased ? 1 : -1;
     this.bombsLeft -= difference;
+    this.flagsCounter += difference;
     this.renderBombs();
+    this.renderFlags();
   }
 }

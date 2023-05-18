@@ -4,7 +4,7 @@
   width: 30px;
   background-color: #cacaca;
   @include flex($jc: center);
-  font-weight: 800;
+  font-weight: 900;
   &::after {
     display: block;
     content: "";
@@ -26,7 +26,27 @@
   }
 
   &[data-bombs='3'] {
-    color: rgb(178, 12, 9);
+    color: rgb(222, 96, 12);
+  }
+
+  &[data-bombs='4'] {
+    color: rgb(161, 12, 9);
+  }
+
+  &[data-bombs='5'] {
+    color: rgb(197, 11, 197);
+  }
+
+  &[data-bombs='6'] {
+    color: rgb(201, 176, 33);
+  }
+
+  &[data-bombs='7'] {
+    color: rgb(112, 23, 160);
+  }
+
+  &[data-bombs='8'] {
+    color: rgb(9, 178, 178);
   }
 
   &.bomb {
