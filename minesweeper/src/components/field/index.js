@@ -12,7 +12,6 @@ export default class Field extends BaseComponent {
     this.cols = cols;
     this.bombsAmount = bombs;
     this.on('clickOnCell', (cell) => this.revealCell(cell));
-    this.on('flag', (isAdded) => this.handleFlag(isAdded));
     this.bombHandler = this.on('bomb', () => this.handleBomb());
     this.isBombListnerActive = true;
     this.cells = {};
@@ -83,7 +82,6 @@ export default class Field extends BaseComponent {
         this.cells[key] = cell;
       }
     }
-    console.log(this.cells);
   }
 
   countBombs() {
@@ -127,5 +125,27 @@ export default class Field extends BaseComponent {
     this.revealedCells = 0;
     Object.values(this.cells).forEach((cell) => cell.reset());
     if (!this.isBombListnerActive) this.on('bomb', this.bombHandler);
+  }
+
+  save() {
+    return {
+      bombs: Array.from(this.bombs),
+      openCells: Object.values(this.cells)
+        .filter((cell) => cell.isOpen)
+        .map((c) => `${c.row},${c.col}`),
+      flaggedCells: Object.values(this.cells)
+        .filter((cell) => cell.isFlagged)
+        .map((c) => `${c.row},${c.col}`),
+    };
+  }
+
+  restore(state) {
+    this.bombs = new Set(state.bombs);
+    this.bombs.forEach((position) => this.cells[position].setBomb());
+    this.countBombs();
+    state.flaggedCells.forEach((position) => this.cells[position].flag());
+    state.openCells.forEach((position) => this.cells[position].reveal());
+    this.revealedCells = state.openCells.length;
+    this.emit('updateCellsCounter', this.revealedCells);
   }
 }
