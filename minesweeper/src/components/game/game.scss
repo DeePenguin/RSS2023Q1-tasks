@@ -10,6 +10,35 @@
     gap: 10px;
   }
 
+  &-bombs,
+  &-flags,
+  &-moves,
+  &-time {
+    display: inline-flex;
+    gap: 5px;
+    &::before {
+      display: block;
+    }
+  }
+
+  &-bombs::before {
+    content: "bombs";
+  }
+
+  &-flags::before {
+    content: "flags";
+  }
+
+  &-moves::before {
+    content: "moves";
+  }
+
+  &-time::before {
+    content: "time";
+  }
+
+
+
   .game-blocker {
     position: absolute;
     top: 0;

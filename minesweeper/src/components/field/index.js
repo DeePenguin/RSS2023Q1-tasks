@@ -8,12 +8,17 @@ export default class Field extends BaseComponent {
       parentNode,
       className: 'field',
     });
-    this.rows = rows;
-    this.cols = cols;
-    this.bombsAmount = bombs;
+    this.init(rows, cols, bombs);
     this.on('clickOnCell', (cell) => this.revealCell(cell));
     this.bombHandler = this.on('bomb', () => this.handleBomb());
     this.isBombListnerActive = true;
+    this.on('changeBombsAmount', (newAmount) => this.changeBombsAmount(newAmount));
+  }
+
+  init(rows, cols, bombs) {
+    this.rows = rows;
+    this.cols = cols;
+    this.bombsAmount = bombs;
     this.cells = {};
     this.createCells();
     this.revealedCells = 0;
@@ -147,5 +152,16 @@ export default class Field extends BaseComponent {
     state.openCells.forEach((position) => this.cells[position].reveal());
     this.revealedCells = state.openCells.length;
     this.emit('updateCellsCounter', this.revealedCells);
+  }
+
+  changeBombsAmount(newAmount) {
+    this.bombsAmount = newAmount;
+    this.reset();
+  }
+
+  changeSize(rows, cols, bombs) {
+    this.node.innerHTML = '';
+    this.init(rows, cols, bombs);
+    if (!this.isBombListnerActive) this.on('bomb', this.bombHandler);
   }
 }
