@@ -26,7 +26,7 @@ export default class App extends EventEmitter {
     this.getLastGame();
     this.game = new Game(parentNode, this.settings.lastLevel);
     if (this.lastGame) this.game.restore(this.lastGame);
-    this.ui = new GameUI(parentNode, this.settings);
+    this.ui = new GameUI(parentNode, this.settings, this.score);
     this.on('win', (props) => this.saveResult(props));
     this.on('startGame', () => this.saveSettings()); // change event
     this.on('changeLevel', (props) => this.handleFieldChange(props));
@@ -54,6 +54,7 @@ export default class App extends EventEmitter {
     };
     if (this.score.length >= 10) this.score.length = 9;
     this.score = [lastResult, ...this.score];
+    this.emit('updateScore', this.score);
     saveToLs('score', this.score);
   }
 
