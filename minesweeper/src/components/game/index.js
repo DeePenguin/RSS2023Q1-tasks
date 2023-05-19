@@ -8,17 +8,12 @@ export default class Game extends BaseComponent {
     this.settings = settings;
     this.createStatusElements();
     this.init();
-    this.cellsToWin = this.settings.rows * this.settings.cols - this.settings.bombs;
     this.field = new Field(this, this.settings.rows, this.settings.cols, this.settings.bombs);
-    this.fieldBlocker = new BaseComponent({
-      parentNode: this.field.node,
-      className: 'game-blocker',
-    });
+    this.createFieldBlocker();
     this.resultEl = new BaseComponent({
       parentNode: this.node,
       className: 'game-result',
     });
-    this.isGameActive = false;
     this.increaseTime = () => { this.time += 1; this.renderTime(); };
     this.on('startGame', () => this.startTimer());
     this.on('lose', () => this.lose());
@@ -26,10 +21,13 @@ export default class Game extends BaseComponent {
     this.on('updateCellsCounter', (cellsNumber) => this.checkWin(cellsNumber));
     this.on('updateFlagsCounter', (isIncreased) => this.updateFlags(isIncreased));
     this.on('newGame', () => this.newGame());
+    this.on('pause', () => this.togglePause());
   }
 
   init() {
+    this.isGameActive = false;
     this.bombsLeft = this.settings.bombs;
+    this.cellsToWin = this.settings.rows * this.settings.cols - this.settings.bombs;
     this.moves = 0;
     this.flagsCounter = 0;
     this.time = 0;
@@ -39,6 +37,13 @@ export default class Game extends BaseComponent {
     this.renderMoves();
     this.renderTime();
     this.renderFlags();
+  }
+
+  createFieldBlocker() {
+    this.fieldBlocker = new BaseComponent({
+      parentNode: this.field.node,
+      className: 'game-blocker',
+    });
   }
 
   createStatusElements() {
@@ -58,17 +63,10 @@ export default class Game extends BaseComponent {
       parentNode: wrapper,
       className: 'game-moves',
     });
-    this.pauseBtn = new BaseComponent({
-      parentNode: wrapper,
-      tag: 'button',
-      className: 'game-pause',
-      content: 'Pause',
-    });
     this.timeEl = new BaseComponent({
       parentNode: wrapper,
       className: 'game-time',
     });
-    this.pauseBtn.addListener('click', () => this.togglePause());
   }
 
   renderTime() {
@@ -183,5 +181,21 @@ export default class Game extends BaseComponent {
     this.renderMoves();
     this.renderTime();
     this.renderFlags();
+  }
+
+  changeField({ rows, cols, bombs }) {
+    if (this.settings.rows === rows && this.settings.cols === cols) {
+      this.settings.bombs = bombs;
+      this.emit('changeBombsAmount', bombs);
+      return;
+    }
+    this.settings.rows = rows;
+    this.settings.cols = cols;
+    this.settings.bombs = bombs;
+    this.end();
+    this.field.changeSize(rows, cols, bombs);
+    this.createFieldBlocker();
+    this.hideResult();
+    this.init();
   }
 }
