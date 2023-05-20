@@ -8,7 +8,11 @@ export default class Game extends BaseComponent {
     this.settings = settings;
     this.createStatusElements();
     this.init();
-    this.field = new Field(this, this.settings.rows, this.settings.cols, this.settings.bombs);
+    this.fieldWrapper = new BaseComponent({
+      parentNode: this,
+      className: 'field-wrapper',
+    });
+    this.field = new Field(this.fieldWrapper, this.settings);
     this.createFieldBlocker();
     this.resultEl = new BaseComponent({
       parentNode: this.node,
@@ -22,6 +26,7 @@ export default class Game extends BaseComponent {
     this.on('updateFlagsCounter', (isIncreased) => this.updateFlags(isIncreased));
     this.on('newGame', () => this.newGame());
     this.on('pause', () => this.togglePause());
+    this.on('openModal', () => { if (this.isGameActive && !this.isPaused) this.togglePause(); });
   }
 
   init() {
@@ -70,7 +75,7 @@ export default class Game extends BaseComponent {
   }
 
   renderTime() {
-    this.timeEl.setContent(this.time.toString().padStart(3, '0'));
+    this.timeEl.setContent(Math.min(999, this.time).toString().padStart(3, '0'));
   }
 
   renderMoves() {
@@ -187,6 +192,10 @@ export default class Game extends BaseComponent {
     if (this.settings.rows === rows && this.settings.cols === cols) {
       this.settings.bombs = bombs;
       this.emit('changeBombsAmount', bombs);
+      this.end();
+      this.hideResult();
+      this.init();
+      this.fieldBlocker.toggleClass('active', this.isEnded);
       return;
     }
     this.settings.rows = rows;

@@ -38,12 +38,12 @@ export default class Cell extends BaseComponent {
 
   handleRightClick(e) {
     e.preventDefault();
+    if (this.isOpen) return;
     this.flag();
     this.emit('updateFlagsCounter', this.isFlagged);
   }
 
   flag() {
-    // e.preventDefault();
     if (this.isOpen) return;
     this.isFlagged = !this.isFlagged;
     this.toggleClass('flag', this.isFlagged);

@@ -1,0 +1,8 @@
+@import './normalize.css';
+
+.root {
+  @include flex-col;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
