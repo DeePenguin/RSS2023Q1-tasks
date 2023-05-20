@@ -7,8 +7,8 @@ export default class GameUI extends BaseComponent {
       parentNode,
       className: 'settings',
     });
-    this.settings = settings;
-    this.score = score;
+    this.settings = { ...settings };
+    this.score = [...score];
     this.customSettings = { ...this.settings.lastLevel };
     this.createModal(parentNode);
     this.createUI();
