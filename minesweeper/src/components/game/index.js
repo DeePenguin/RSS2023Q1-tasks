@@ -97,6 +97,7 @@ export default class Game extends BaseComponent {
     this.field.reset();
     this.init();
     this.fieldBlocker.toggleClass('active', this.isEnded);
+    this.fieldBlocker.toggleClass('paused', this.isPaused);
     this.hideResult();
   }
 
@@ -196,6 +197,7 @@ export default class Game extends BaseComponent {
       this.hideResult();
       this.init();
       this.fieldBlocker.toggleClass('active', this.isEnded);
+      this.fieldBlocker.toggleClass('paused', this.isPaused);
       return;
     }
     this.settings.rows = rows;
