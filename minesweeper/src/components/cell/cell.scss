@@ -12,8 +12,8 @@
 
 .cell {
   border: 1px solid black;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: #cacaca;
   @include flex($jc: center);
   font-weight: 900;

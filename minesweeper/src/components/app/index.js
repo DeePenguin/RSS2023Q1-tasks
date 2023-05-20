@@ -2,6 +2,7 @@ import EventEmitter from '../../utils/event-emitter';
 import Game from '../game';
 import GameUI from '../game-ui';
 import preferences from './default-preferences.json';
+import './app.scss';
 
 const lsPrefix = 'DeePee-MineSweeper';
 
@@ -73,7 +74,7 @@ export default class App extends EventEmitter {
   handleFieldChange(props) {
     const diff = Object.keys(props).filter((key) => props[key] !== this.settings.lastLevel[key]);
     if (diff.length) {
-      this.settings.lastLevel = props;
+      this.settings.lastLevel = { ...props };
       this.saveSettings();
       this.game.changeField(props);
     }

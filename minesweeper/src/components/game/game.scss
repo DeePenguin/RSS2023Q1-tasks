@@ -1,5 +1,6 @@
 .game {
   position: relative;
+  max-width: 100%;
   @include flex-col();
   gap: 10px;
   padding: 10px;
@@ -36,8 +37,6 @@
   &-time::before {
     content: "time";
   }
-
-
 
   .game-blocker {
     position: absolute;

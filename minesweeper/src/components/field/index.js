@@ -3,7 +3,7 @@ import Cell from '../cell';
 import './field.scss';
 
 export default class Field extends BaseComponent {
-  constructor(parentNode, rows, cols, bombs) {
+  constructor(parentNode, { rows, cols, bombs }) {
     super({
       parentNode,
       className: 'field',
