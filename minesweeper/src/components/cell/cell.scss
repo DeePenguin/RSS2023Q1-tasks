@@ -1,29 +1,28 @@
 @keyframes not-flagged {
   0% {
-    background-color: #cacaca;
+    background-color: var(--cell-bg);
   }
   50% {
-    background-color: rgb(248, 183, 241);
+    background-color: var(--cell-bg-neighbor);
   }
   100% {
-    background-color: #cacaca;
+    background-color: var(--cell-bg);
   }
 }
 
 .cell {
-  border: 1px solid black;
+  border: 1px solid var(--cell-border-color);
   height: 35px;
   width: 35px;
-  background-color: #cacaca;
+  background-color: var(--cell-bg);
   @include flex($jc: center);
-  font-weight: 900;
   &::after {
     display: block;
     content: "";
   }
 
   &.open {
-    background-color: #f7f7f7;
+    background-color: var(--cell-bg-open);
     &::after {
       content: attr(data-bombs);
     }
@@ -62,7 +61,7 @@
   }
 
   &.bomb {
-    background-color: rgb(254, 86, 120);
+    background-color: rgb(228 29 29 / 80%);
     &::after {
       content: "💣";
     }
