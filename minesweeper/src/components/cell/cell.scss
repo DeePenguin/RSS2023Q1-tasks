@@ -14,6 +14,7 @@
   border: 1px solid var(--cell-border-color);
   height: 35px;
   width: 35px;
+  background: transparent center / 80% no-repeat;
   background-color: var(--cell-bg);
   @include flex($jc: center);
   &::after {
@@ -61,16 +62,12 @@
   }
 
   &.bomb {
-    background-color: rgb(228 29 29 / 80%);
-    &::after {
-      content: "💣";
-    }
+    background-color: rgba(228, 29, 29, 0.8);
+    background-image: url("./img/bomb.png");
   }
 
   &.flag {
-    &::after {
-      content: "🚩";
-    }
+    background-image: url("./img/flag.png");
   }
 
   &.neighbour {

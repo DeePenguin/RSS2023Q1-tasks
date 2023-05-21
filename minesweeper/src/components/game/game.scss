@@ -1,6 +1,6 @@
 .game {
   position: relative;
-  max-width: 100%;
+  max-width: clamp(300px, 100%, 1200px);
   @include flex-col();
   gap: 10px;
   padding: 10px;
