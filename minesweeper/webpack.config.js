@@ -41,8 +41,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      // template: 'src/index.html',
-      // favicon: 'src/assets/favicons/favicon.ico',
+      title: 'Minesweeper',
+      favicon: 'src/assets/favicon.svg',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
@@ -65,7 +65,6 @@ module.exports = {
             loader: 'sass-resources-loader',
             options: {
               resources: [
-                'src/styles/variables.scss',
                 'src/styles/mixins.scss',
               ],
             },
@@ -91,21 +90,21 @@ module.exports = {
         test: /\.(ico|gif|png|jpg|jpeg|svg|webp)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/images/[name][ext]',
+          filename: 'assets/images/[contenthash][ext]',
         },
       },
       {
         test: /\.woff2?$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/fonts/[name][ext]',
+          filename: 'assets/fonts/[contenthash][ext]',
         },
       },
       {
         test: /\.mp3?$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/audio/[name][ext]',
+          filename: 'assets/audio/[contenthash][ext]',
         },
       },
     ],
