@@ -22,15 +22,18 @@ function removeFromLs(key) {
 export default class App extends EventEmitter {
   constructor(parentNode) {
     super();
+    this.parentNode = parentNode;
     this.getSettings();
     this.getScore();
     this.getLastGame();
+    this.changeTheme(this.settings.darkTheme);
     this.game = new Game(parentNode, this.settings.lastLevel);
     if (this.lastGame) this.game.restore(this.lastGame);
     this.ui = new GameUI(parentNode, this.settings, this.score);
     this.on('win', (props) => this.saveResult(props));
     this.on('startGame', () => this.saveSettings()); // change event
     this.on('changeLevel', (props) => this.handleFieldChange(props));
+    this.on('changeTheme', (isDark) => this.changeTheme(isDark));
   }
 
   getSettings() {
@@ -78,5 +81,12 @@ export default class App extends EventEmitter {
       this.saveSettings();
       this.game.changeField(props);
     }
+    this.game.newGame();
+  }
+
+  changeTheme(isDark) {
+    this.parentNode.toggleClass('theme-dark', isDark);
+    this.settings.darkTheme = isDark;
+    this.saveSettings();
   }
 }

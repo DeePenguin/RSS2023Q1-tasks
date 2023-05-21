@@ -1,3 +1,4 @@
+@import './fonts.scss';
 %transition-s {
   transition: all 0.3s ease;
 }
@@ -11,19 +12,10 @@
 
 @mixin primary_font ($weight: 400, $style:normal) {
   font: {
-    family: "Roboto Mono", monospace;
+    family: "Bowlby One", serif;
     weight: $weight;
     style: $style;
   }
-}
-
-@mixin header_font ($weight: 400, $style:normal) {
-  font: {
-    family: "VT323", sans-serif;
-    weight: $weight;
-    style: $style;
-  }
-  letter-spacing: 0.05em;
 }
 
 @mixin flex($direction: row, $wrap: wrap, $jc: space-between, $ali: center) {

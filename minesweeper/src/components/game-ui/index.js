@@ -7,12 +7,13 @@ export default class GameUI extends BaseComponent {
       parentNode,
       className: 'settings',
     });
+    this.parentNode = parentNode;
     this.settings = { ...settings };
     this.score = [...score];
     this.customSettings = { ...this.settings.lastLevel };
     this.createModal(parentNode);
     this.createUI();
-    this.createScoreButton();
+    this.createMainButtons();
     this.on('updateScore', (newScore) => { this.score = newScore; });
     this.on('changeLevel', () => this.closeModal());
   }
@@ -21,7 +22,7 @@ export default class GameUI extends BaseComponent {
     this.newGameButton = new BaseComponent({
       tag: 'button',
       parentNode: this.node,
-      className: 'btn-new-game-button',
+      className: 'btn btn-new-game',
       content: 'New Game',
     });
     this.newGameButton.addListener('click', () => {
@@ -31,29 +32,43 @@ export default class GameUI extends BaseComponent {
     this.pauseBtn = new BaseComponent({
       parentNode: this.node,
       tag: 'button',
-      className: 'btn-game-pause',
+      className: 'btn btn-game-pause',
       content: 'Pause',
     });
 
     this.changeLevelBtn = new BaseComponent({
       parentNode: this.node,
       tag: 'button',
-      className: 'btn-change-level',
+      className: 'btn btn-change-level',
       content: 'Change difficulty',
     });
 
     this.pauseBtn.addListener('click', () => this.emit('pause'));
     this.changeLevelBtn.addListener('click', () => this.showLevels());
+    //
+    this.themeSwitcher = new BaseComponent({
+      tag: 'button',
+      parentNode: this.node,
+      className: 'btn btn-theme',
+      content: 'Change theme',
+    });
+    this.themeSwitcher.addListener('click', () => {
+      this.settings.darkTheme = !this.settings.darkTheme;
+      this.emit('changeTheme', this.settings.darkTheme);
+    });
   }
 
-  createScoreButton() {
+  createMainButtons() {
     this.scoreButton = new BaseComponent({
-      parentNode: this.node,
-      className: 'score-button',
-      tag: 'button',
-      content: 'Score',
+      parentNode: this,
+      className: 'show-score',
+    });
+    this.settingsButton = new BaseComponent({
+      parentNode: this,
+      className: 'show-settings',
     });
     this.scoreButton.addListener('click', () => this.showScore());
+    this.settingsButton.addListener('click', () => this.showSettings());
   }
 
   createModal(parentNode) {
@@ -121,35 +136,46 @@ export default class GameUI extends BaseComponent {
       className: 'modal-content',
     });
     const levelsWrapper = new BaseComponent({
-      className: 'levels-wrapper',
+      className: 'levels',
+    });
+    const defaultLevels = new BaseComponent({
+      parentNode: levelsWrapper,
+      className: 'levels-default',
+      content: '<h2 class="levels-title">Default</h2>',
     });
     const { levels } = this.settings;
     Object.keys(levels).forEach((level) => {
       const props = levels[level];
-      const content = `${level}: ${props.rows} x ${props.cols}, ${props.bombs} bombs`;
+      const wrapper = new BaseComponent({
+        parentNode: defaultLevels,
+        className: 'level',
+        content: `<h3 class="level-title">${level}</h3>`,
+      });
       const levelButton = new BaseComponent({
+        parentNode: wrapper,
         tag: 'button',
-        className: 'level-button',
-        content,
+        className: 'btn btn-levels',
+        content: `Size: ${props.rows} x ${props.cols}
+        <br>Bombs: ${props.bombs}`,
       });
       levelButton.addListener('click', () => this.emit('changeLevel', props));
-      levelsWrapper.append(levelButton);
     });
 
     const customLevel = new BaseComponent({
-      className: 'custom-level',
-      content: 'Custom',
+      parentNode: levelsWrapper,
+      className: 'levels-custom',
+      content: '<h2 class="levels-title">Custom</h2>',
     });
 
     Object.keys(this.customSettings).forEach((prop) => {
       const label = new BaseComponent({
         tag: 'label',
-        className: 'custom-label',
+        className: 'label',
         content: `${prop}: `,
       });
       const input = new BaseComponent({
         tag: 'input',
-        className: 'input-number',
+        className: 'input',
         attributes: {
           type: 'number',
           value: this.customSettings[prop],
@@ -162,14 +188,14 @@ export default class GameUI extends BaseComponent {
 
     const customStartBtn = new BaseComponent({
       tag: 'button',
-      className: 'btn-custom-start',
+      className: 'btn btn-levels',
       content: 'Start',
     });
 
     customStartBtn.addListener('click', () => this.emit('changeLevel', this.customSettings));
 
     customLevel.append(customStartBtn);
-    this.modal.content.append(levelsWrapper, customLevel);
+    this.modal.content.append(levelsWrapper);
     this.modal.content.appendTo(this.modal);
     this.modal.addClass('open');
     this.modal.content.addListener('click', (e) => e.stopPropagation());

@@ -1,3 +1,44 @@
+.settings {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.btn {
+  padding: 5px;
+  border-radius: 5px;
+  background: var(--button-bg);
+  border: 2px solid var(--button-border);
+  color: var(--button-color);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), inset 1px 1px 5px rgba(255, 255, 255, 0.3);
+}
+
+%show {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: transparent center no-repeat;
+  background-size: 100%;
+  position: absolute;
+}
+
+.show {
+  &-score {
+    @extend %show;
+    background-image: url("./img/trophy.svg");
+    bottom: 0;
+    left: 0;
+  }
+
+  &-settings {
+    @extend %show;
+    background-image: url("./img/settings.svg");
+    bottom: 0;
+    right: 0;
+  }
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -8,6 +49,7 @@
   @include flex-col($ali: center, $jc: center);
   gap: 10px;
   background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   overflow: hidden;
 
   &.open {
@@ -19,6 +61,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--title-color);
+    color: var(--title-color);
     align-self: end;
     margin: 0 5%;
     cursor: pointer;
@@ -27,7 +72,7 @@
   &-content {
     @include flex-col();
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.927);
+    background-color: var(--bg-color);
     padding: 15px;
     gap: 15px;
     width: 80%;
@@ -36,31 +81,36 @@
 
   &-header {
     margin: 0;
+    font-weight: normal;
     font-size: 1.8em;
+    color: var(--title-color);
   }
 }
 
 .score-table {
   border-radius: 10px;
   overflow: hidden;
-  background-color: rgb(244, 234, 220);
+  background-color: var(--game-bg);
   border-collapse: collapse;
   text-align: center;
   width: 100%;
   max-width: 600px;
+  color: var(--font-color-additional);
 
   .thead {
-    background-color: rgba(103, 112, 112, 0.495);
+    background-color: var(--bg-color-additional);
+    color: var(--font-color);
     font-size: 1.2em;
   }
 
   .th {
     padding: 10px;
+    font-weight: normal;
   }
 
   .t-row {
     &:nth-child(even) {
-      background-color: rgba(156, 163, 185, 0.495);
+      background-color: rgba(254, 254, 254, 0.4);
     }
     td {
       padding: 6px 0;
@@ -69,7 +119,58 @@
 
 }
 
-.levels-wrapper {
-  @include flex-col($ali: start);
-  gap: 10px;
+.levels {
+  @include flex($jc: center, $ali: start);
+  gap: 20px;
+  padding: 15px 0;
+
+  &-title {
+    font-weight: normal;
+    margin: 0;
+    padding: 0.3em;
+    color: var(--title-color);
+  }
+
+  &-default {
+    @include flex-col();
+    gap: 10px;
+  }
+
+  .level {
+    @include flex();
+    width: 100%;
+    gap: 20px;
+
+    &-title{
+      font-weight: normal;
+      margin: 0;
+      text-transform: capitalize;
+      color: var(--font-color);
+    }
+  }
+
+  &-custom {
+    @include flex-col();
+    gap: 10px;
+
+
+    .label {
+      @include flex($wrap: nowrap);
+      gap: 10px;
+      width: 100%;
+      text-transform: capitalize;
+      color: var(--font-color);
+
+      .input {
+        display: inline-block;
+        max-width: 200px;
+        padding-left: 10px;
+        color: var(--font-color-additional);
+        background-color: rgba(255, 255, 255, 0.322);
+        border: 2px solid var(--font-color);
+        border-radius: 5px;
+      }
+    }
+  }
+
 }
