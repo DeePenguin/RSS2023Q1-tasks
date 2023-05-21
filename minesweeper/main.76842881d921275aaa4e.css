@@ -1,0 +1,364 @@
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}.header-title{color:var(--title-color);margin:0;font-weight:normal;font-size:1.8em}
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}@keyframes not-flagged{0%{background-color:var(--cell-bg)}50%{background-color:var(--cell-bg-neighbor)}100%{background-color:var(--cell-bg)}}.cell{border:1px solid var(--cell-border-color);height:35px;width:35px;background-color:var(--cell-bg);display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center}.cell::after{display:block;content:""}.cell.open{background-color:var(--cell-bg-open)}.cell.open::after{content:attr(data-bombs)}.cell[data-bombs="1"]{color:#197a19}.cell[data-bombs="2"]{color:#090ddc}.cell[data-bombs="3"]{color:#de600c}.cell[data-bombs="4"]{color:#a10c09}.cell[data-bombs="5"]{color:#c50bc5}.cell[data-bombs="6"]{color:#c9b021}.cell[data-bombs="7"]{color:#7017a0}.cell[data-bombs="8"]{color:#09b2b2}.cell.bomb{background-color:rgba(228,29,29,.8)}.cell.bomb::after{content:"💣"}.cell.flag::after{content:"🚩"}.cell.neighbour{animation-name:not-flagged;animation-duration:.5s}
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}.field{display:flex;flex-direction:column;flex-wrap:nowrap;justify-content:start;align-items:start;position:relative;width:fit-content}.field-wrapper{position:relative;display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:start;align-items:start;max-width:100%;max-height:60vh;overflow:auto;scrollbar-color:var(--scroll-bg) rgba(0,0,0,0);scrollbar-width:thin}.field-wrapper::-webkit-scrollbar{width:14px}.field-wrapper::-webkit-scrollbar-button{display:none}.field-wrapper::-webkit-scrollbar-corner{background-color:rgba(0,0,0,0)}.field-wrapper::-webkit-scrollbar-track{background-color:rgba(0,0,0,0)}.field-wrapper::-webkit-scrollbar-track-piece{background-color:rgba(0,0,0,0)}.field-wrapper::-webkit-scrollbar-thumb{border-radius:20px;background-color:var(--scroll-bg);border:2px solid rgba(0,0,0,0);background-clip:content-box}.field-wrapper::-webkit-scrollbar-thumb:hover{background-color:var(--scroll-bg);border-width:0px}.row{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:space-between;align-items:center}
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}.game{position:relative;max-width:100%;display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:10px;border-radius:10px;background-color:var(--game-bg);box-shadow:2px 2px 5px rgba(0,0,0,.3),inset 2px 2px 5px rgba(255,255,255,.5)}.game-status{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;width:100%;color:var(--font-color)}.game-result{color:var(--title-color)}.game-bombs,.game-flags,.game-moves,.game-time{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.game-bombs::before,.game-flags::before,.game-moves::before,.game-time::before{display:block;content:"";width:25px;height:25px;background:rgba(0,0,0,0) center no-repeat;background-size:100%;filter:brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%)}.theme-dark .game-bombs::before,.theme-dark .game-flags::before,.theme-dark .game-moves::before,.theme-dark .game-time::before{filter:brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%)}.game-bombs::before{background-image:url(assets/images/7e0b1dd4cca66393ee8f.svg)}.game-flags::before{background-image:url(assets/images/c994f3a3dd513c7b996b.svg)}.game-moves::before{background-image:url(assets/images/26b24edd7d0f3c38b3f9.svg)}.game-time::before{background-image:url(assets/images/a0f626deec7a7359a26d.svg)}.game .game-blocker{position:absolute;top:0;left:0;z-index:10}.game .game-blocker.active{width:100%;height:100%}.game .game-blocker.paused{backdrop-filter:blur(5px)}
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}.btn{transition:all .3s ease}.settings{flex-grow:1;width:100%;max-width:1200px;display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.settings-wrapper{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;width:100%;gap:20px}.game-buttons{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:center;align-items:center;gap:20px}.btn{padding:10px 5px;border-radius:5px;background:var(--button-bg);border:2px solid var(--button-border);color:var(--button-color);box-shadow:1px 1px 5px rgba(0,0,0,.2),inset 1px 1px 5px rgba(255,255,255,.3)}.btn:active{transform:translate(2px, 2px);box-shadow:none}.settings-icon{cursor:pointer;width:40px;height:40px;background:rgba(0,0,0,0) center no-repeat;background-size:100%;filter:brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%)}.theme-dark .settings-icon{filter:brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%)}.settings-icon-score{background-image:url(assets/images/5a5d300fedd1dd1f7c78.svg)}.settings-icon-level{background-image:url(assets/images/92c59d0b1aacfa661b3a.svg)}.settings-icon-sound{background-image:url(assets/images/a9ba78bf3719f348dc2f.svg)}.settings-icon-sound.muted{background-image:url(assets/images/9b6d3ca049f0663780b5.svg)}.settings-icon-theme{background-image:url(assets/images/46d972933d36c4ac0e4d.svg)}.settings-icon-theme.dark{background-image:url(assets/images/e8dffc9b7a6992b8f83e.svg)}.modal{position:fixed;top:0;left:0;width:0;height:0;z-index:10;display:flex;flex-direction:column;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;background-color:rgba(0,0,0,.5);backdrop-filter:blur(5px);overflow:hidden}.modal.open{width:100%;height:100%}.modal-close{width:40px;height:40px;border-radius:50%;background-color:var(--bg-color);border:1px solid var(--title-color);color:var(--title-color);align-self:end;margin:0 5%;cursor:pointer}.modal-content{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;align-items:center;border-radius:10px;background-color:var(--bg-color);padding:15px;gap:15px;width:80%;max-width:900px}.modal-header{margin:0;font-weight:normal;font-size:1.8em;color:var(--title-color)}.score-table{border-radius:10px;overflow:hidden;background-color:var(--game-bg);border-collapse:collapse;text-align:center;width:100%;max-width:600px;color:var(--font-color-additional)}.score-table .thead{background-color:var(--bg-color-additional);color:var(--font-color);font-size:1.2em}.score-table .th{padding:10px;font-weight:normal}.score-table .t-row:nth-child(even){background-color:rgba(254,254,254,.4)}.score-table .t-row td{padding:6px 0}.levels{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:start;gap:20px;padding:15px 0}.levels-title{font-weight:normal;margin:0;padding:.3em;color:var(--title-color)}.levels-default{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.levels .level{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;width:100%;gap:20px}.levels .level-title{font-weight:normal;margin:0;text-transform:capitalize;color:var(--font-color)}.levels-custom{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.levels-custom .label{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:10px;width:100%;text-transform:capitalize;color:var(--font-color)}.levels-custom .label .input{display:inline-block;max-width:200px;padding-left:10px;color:var(--font-color-additional);background-color:rgba(255,255,255,.322);border:2px solid var(--font-color);border-radius:5px}
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+ html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  height: 100%;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+@font-face{font-display:swap;font-family:"Bowlby One";font-style:normal;font-weight:400;src:url(assets/fonts/b0ce3ebb37707a5ce963.woff2) format("woff2"),url(assets/fonts/42ab557bb652296019cf.woff) format("woff")}.root{transition:all .3s ease}.root{--bg-color: rgb(255 230 221);--bg-color-additional: rgba(244, 192, 115, 0.5);--title-color: #ba274a;--game-bg: rgb(250, 201, 184);--font-color: rgb(240, 94, 133);--font-color-additional: rgb(111 83 137);--cell-bg: rgb(255 183 197 / 70%);--cell-bg-open: rgba(255, 255, 255, 0.58);--cell-bg-neighbor: rgb(255 0 125 / 50%);--cell-border-color: rgb(0 0 0 / 50%);--scroll-bg: rgba(240, 94, 133, 0.7);--button-bg: rgb(250, 201, 184);--button-color: rgb(240, 94, 133);--button-border: rgb(232, 172, 176);display:flex;flex-direction:column;flex-wrap:wrap;justify-content:start;align-items:center;font-family:"Bowlby One",serif;font-weight:400;font-style:normal;width:100%;max-width:100%;min-height:100vh;padding:15px;background:var(--bg-color);gap:1vh}.root.theme-dark{--bg-color: rgb(35, 29, 63);--bg-color-additional: rgba(116, 94, 137, 0.5);--title-color: rgb(195, 228, 255);--game-bg: rgb(44, 42, 88);--font-color: rgb(200, 198, 246);--font-color-additional: rgb(193, 229, 237);--cell-bg: rgba(67, 56, 91, 0.7);--cell-bg-open: rgba(218, 219, 243, 0.58);--cell-bg-neighbor: rgba(146, 126, 238, 0.5);--cell-border-color: rgba(0, 0, 0, 0.5);--scroll-bg: rgba(149, 179, 203, 0.67);--button-bg: rgb(44, 42, 88);--button-color: rgb(200, 198, 246);--button-border: rgb(61, 59, 98)}
