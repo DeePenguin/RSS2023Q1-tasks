@@ -3,6 +3,7 @@ import Game from '../game';
 import GameUI from '../game-ui';
 import preferences from './default-preferences.json';
 import './app.scss';
+import Sound from '../sound';
 
 const lsPrefix = 'DeePee-MineSweeper';
 
@@ -30,6 +31,7 @@ export default class App extends EventEmitter {
     this.game = new Game(parentNode, this.settings.lastLevel);
     if (this.lastGame) this.game.restore(this.lastGame);
     this.ui = new GameUI(parentNode, this.settings, this.score);
+    this.sound = new Sound(this.settings);
     this.on('win', (props) => this.saveResult(props));
     this.on('startGame', () => this.saveSettings()); // change event
     this.on('changeLevel', (props) => this.handleFieldChange(props));

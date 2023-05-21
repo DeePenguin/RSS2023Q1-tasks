@@ -101,6 +101,13 @@ module.exports = {
           filename: 'assets/fonts/[name][ext]',
         },
       },
+      {
+        test: /\.mp3?$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/audio/[name][ext]',
+        },
+      },
     ],
   },
 };
