@@ -18,13 +18,13 @@
 
   @include flex-col($jc: start);
   @include primary_font;
+  @extend %transition-s;
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
   padding: 20px;
   background: var(--bg-color);
   gap: 2vh;
-  // background: linear-gradient(to right top, #38438b, #944b94, #d75a88, #ff7e71, #ffb25f, #ffeb68);
 
   &.theme-dark {
     --bg-color: rgb(35, 29, 63);

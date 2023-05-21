@@ -25,27 +25,36 @@
   &-flags,
   &-moves,
   &-time {
-    display: inline-flex;
-    gap: 5px;
+    @include flex();
+    gap: 10px;
     &::before {
       display: block;
+      content: "";
+      width: 25px;
+      height: 25px;
+      background: transparent center no-repeat;
+      background-size: 100%;
+      filter: brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%);
+    .theme-dark & {
+      filter: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%);
+    }
     }
   }
 
   &-bombs::before {
-    content: "Bombs:";
+    background-image: url("./img/bomb.svg");
   }
 
   &-flags::before {
-    content: "Flags:";
+    background-image: url("./img/flag.svg");
   }
 
   &-moves::before {
-    content: "Moves:";
+    background-image: url("./img/click.svg");
   }
 
   &-time::before {
-    content: "Time:";
+    background-image: url("./img/time.svg");
   }
 
   .game-blocker {

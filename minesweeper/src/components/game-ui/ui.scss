@@ -3,6 +3,7 @@
   width: 100%;
   max-width: 1200px;
   @include flex-col();
+  gap: 10px;
 
   &-wrapper {
     @include flex();
