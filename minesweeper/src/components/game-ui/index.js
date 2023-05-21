@@ -12,63 +12,76 @@ export default class GameUI extends BaseComponent {
     this.score = [...score];
     this.customSettings = { ...this.settings.lastLevel };
     this.createModal(parentNode);
-    this.createUI();
-    this.createMainButtons();
+    this.createGameButtons();
+    this.createSettingsWrapper();
     this.on('updateScore', (newScore) => { this.score = newScore; });
     this.on('changeLevel', () => this.closeModal());
   }
 
-  createUI() {
+  createGameButtons() {
+    const gameButtonsWrapper = new BaseComponent({
+      parentNode: this,
+      className: 'game-buttons',
+    });
     this.newGameButton = new BaseComponent({
       tag: 'button',
-      parentNode: this.node,
+      parentNode: gameButtonsWrapper,
       className: 'btn btn-new-game',
       content: 'New Game',
     });
-    this.newGameButton.addListener('click', () => {
-      this.emit('newGame');
-    });
 
     this.pauseBtn = new BaseComponent({
-      parentNode: this.node,
+      parentNode: gameButtonsWrapper,
       tag: 'button',
       className: 'btn btn-game-pause',
       content: 'Pause',
     });
 
-    this.changeLevelBtn = new BaseComponent({
-      parentNode: this.node,
-      tag: 'button',
-      className: 'btn btn-change-level',
-      content: 'Change difficulty',
-    });
-
+    this.newGameButton.addListener('click', () => this.emit('newGame'));
     this.pauseBtn.addListener('click', () => this.emit('pause'));
-    this.changeLevelBtn.addListener('click', () => this.showLevels());
-    //
-    this.themeSwitcher = new BaseComponent({
-      tag: 'button',
-      parentNode: this.node,
-      className: 'btn btn-theme',
-      content: 'Change theme',
-    });
-    this.themeSwitcher.addListener('click', () => {
-      this.settings.darkTheme = !this.settings.darkTheme;
-      this.emit('changeTheme', this.settings.darkTheme);
-    });
   }
 
-  createMainButtons() {
+  createSettingsWrapper() {
+    this.settingsWrapper = new BaseComponent({
+      parentNode: this,
+      className: 'settings-wrapper',
+    });
+
     this.scoreButton = new BaseComponent({
-      parentNode: this,
-      className: 'show-score',
+      parentNode: this.settingsWrapper,
+      className: 'settings-icon settings-icon-score',
     });
-    this.settingsButton = new BaseComponent({
-      parentNode: this,
-      className: 'show-settings',
+
+    this.soundSwitcher = new BaseComponent({
+      parentNode: this.settingsWrapper,
+      className: 'settings-icon settings-icon-sound',
     });
+
+    this.themeSwitcher = new BaseComponent({
+      parentNode: this.settingsWrapper,
+      className: 'settings-icon settings-icon-theme',
+    });
+
+    this.changeLevelBtn = new BaseComponent({
+      parentNode: this.settingsWrapper,
+      className: 'settings-icon settings-icon-level',
+    });
+
+    this.themeSwitcher.toggleClass('dark', this.settings.darkTheme);
+    this.soundSwitcher.toggleClass('muted', !this.settings.sounds);
+
     this.scoreButton.addListener('click', () => this.showScore());
-    this.settingsButton.addListener('click', () => this.showSettings());
+    this.changeLevelBtn.addListener('click', () => this.showLevels());
+    this.themeSwitcher.addListener('click', () => {
+      this.settings.darkTheme = !this.settings.darkTheme;
+      this.themeSwitcher.toggleClass('dark', this.settings.darkTheme);
+      this.emit('changeTheme', this.settings.darkTheme);
+    });
+    this.soundSwitcher.addListener('click', () => {
+      this.settings.sounds = !this.settings.sounds;
+      this.soundSwitcher.toggleClass('muted', !this.settings.sounds);
+      this.emit('changeSounds', this.settings.sounds);
+    });
   }
 
   createModal(parentNode) {
@@ -193,8 +206,8 @@ export default class GameUI extends BaseComponent {
     });
 
     customStartBtn.addListener('click', () => this.emit('changeLevel', this.customSettings));
-
     customLevel.append(customStartBtn);
+
     this.modal.content.append(levelsWrapper);
     this.modal.content.appendTo(this.modal);
     this.modal.addClass('open');

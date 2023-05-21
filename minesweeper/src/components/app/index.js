@@ -34,6 +34,7 @@ export default class App extends EventEmitter {
     this.on('startGame', () => this.saveSettings()); // change event
     this.on('changeLevel', (props) => this.handleFieldChange(props));
     this.on('changeTheme', (isDark) => this.changeTheme(isDark));
+    this.on('changeSounds', (isSoundsOn) => this.changeSounds(isSoundsOn));
   }
 
   getSettings() {
@@ -87,6 +88,11 @@ export default class App extends EventEmitter {
   changeTheme(isDark) {
     this.parentNode.toggleClass('theme-dark', isDark);
     this.settings.darkTheme = isDark;
+    this.saveSettings();
+  }
+
+  changeSounds(isSoundsOn) {
+    this.settings.sounds = isSoundsOn;
     this.saveSettings();
   }
 }

@@ -1,41 +1,66 @@
 .settings {
-  position: relative;
   flex-grow: 1;
   width: 100%;
   max-width: 1200px;
+  @include flex-col();
+
+  &-wrapper {
+    @include flex();
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.game-buttons {
+  @include flex($wrap: nowrap, $jc: center);
+  gap: 20px;
 }
 
 .btn {
-  padding: 5px;
+  @extend %transition-s;
+  padding: 10px 5px;
   border-radius: 5px;
   background: var(--button-bg);
   border: 2px solid var(--button-border);
   color: var(--button-color);
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), inset 1px 1px 5px rgba(255, 255, 255, 0.3);
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
 }
 
-%show {
+.settings-icon {
   cursor: pointer;
   width: 40px;
   height: 40px;
   background: transparent center no-repeat;
   background-size: 100%;
-  position: absolute;
-}
-
-.show {
-  &-score {
-    @extend %show;
-    background-image: url("./img/trophy.svg");
-    bottom: 0;
-    left: 0;
+  filter: brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%);
+  .theme-dark & {
+    filter: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%);
   }
 
-  &-settings {
-    @extend %show;
+  &-score {
+    background-image: url("./img/trophy.svg");
+  }
+  &-level {
     background-image: url("./img/settings.svg");
-    bottom: 0;
-    right: 0;
+  }
+
+  &-sound {
+    background-image: url("./img/volume.svg");
+    &.muted {
+      background-image: url("./img/mute.svg");
+    }
+  }
+
+  &-theme {
+    background-image: url("./img/shine.svg");
+    &.dark {
+      background-image: url("./img/moon.svg");
+    }
   }
 }
 
