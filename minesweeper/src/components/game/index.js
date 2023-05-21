@@ -19,7 +19,7 @@ export default class Game extends BaseComponent {
       className: 'game-result',
     });
     this.increaseTime = () => { this.time += 1; this.renderTime(); };
-    this.on('startGame', () => this.startTimer());
+    this.on('startGame', () => { this.gameStarted = true; this.startTimer(); });
     this.on('lose', () => this.lose());
     this.on('move', () => { this.moves += 1; this.renderMoves(); });
     this.on('updateCellsCounter', (cellsNumber) => this.checkWin(cellsNumber));
@@ -31,6 +31,7 @@ export default class Game extends BaseComponent {
 
   init() {
     this.isGameActive = false;
+    this.gameStarted = false;
     this.bombsLeft = this.settings.bombs;
     this.cellsToWin = this.settings.rows * this.settings.cols - this.settings.bombs;
     this.moves = 0;
@@ -114,7 +115,7 @@ export default class Game extends BaseComponent {
   }
 
   togglePause() {
-    if (this.isEnded) return;
+    if (this.isEnded || !this.gameStarted) return;
     this.isPaused = !this.isPaused;
     this.fieldBlocker.toggleClass('active', this.isPaused);
     this.fieldBlocker.toggleClass('paused', this.isPaused);
@@ -181,6 +182,7 @@ export default class Game extends BaseComponent {
     this.flagsCounter = state.flags;
     this.bombsLeft -= this.flagsCounter;
     this.field.restore(state.field);
+    this.gameStarted = true;
     this.startTimer();
     this.togglePause();
     this.renderBombs();
