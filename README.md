@@ -2,3 +2,5 @@
 [Shelter](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/shelter/index.html)
 
 [Minesweeper](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/minesweeper/)
+
+[Self introduction](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/self-introduction/)
