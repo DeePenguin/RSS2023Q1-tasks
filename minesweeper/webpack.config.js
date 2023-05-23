@@ -101,7 +101,7 @@ module.exports = {
         },
       },
       {
-        test: /\.mp3?$/i,
+        test: /\.mp3$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/audio/[contenthash][ext]',
