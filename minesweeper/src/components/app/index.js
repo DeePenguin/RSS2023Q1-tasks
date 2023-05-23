@@ -41,7 +41,7 @@ export default class App extends EventEmitter {
 
   getSettings() {
     this.settings = getFromLs('settings') ?? preferences;
-    this.settings.lastLevel = this.settings.lastLevel ?? this.settings.levels.easy;
+    this.settings.lastLevel = this.settings.lastLevel ?? { ...this.settings.levels.easy };
   }
 
   saveSettings() {
