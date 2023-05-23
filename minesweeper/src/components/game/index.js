@@ -149,14 +149,11 @@ export default class Game extends BaseComponent {
   }
 
   showResult(content) {
-    this.resultEl.message = new BaseComponent({
-      content,
-    });
-    this.resultEl.append(this.resultEl.message);
+    this.resultEl.setContent(content);
   }
 
   hideResult() {
-    this.resultEl.message?.remove();
+    this.resultEl.setContent('');
   }
 
   updateFlags(isIncreased) {
