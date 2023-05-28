@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"],
+    "outDir": "./dist/",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    // Strict Checks
+    "alwaysStrict": true,
+    // "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+
+    // Linter Checks
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    // "allowUnreachableCode": false,
+    // "allowUnusedLabels": false,
+
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+
+    // temp
+    "allowJs": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*spec.ts"]
+}
