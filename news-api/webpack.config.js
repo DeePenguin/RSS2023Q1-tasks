@@ -2,7 +2,6 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 
 const resolve = (...paths) => path.resolve(__dirname, ...paths);
 
@@ -28,7 +27,6 @@ const baseConfig = {
     clean: true,
   },
   plugins: [
-    new ESLintWebpackPlugin({ extensions: ['.ts'], fix: true }),
     new HtmlWebpackPlugin({
       template:resolve('src', 'index.html'),
       filename: 'index.html',

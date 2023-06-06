@@ -1,7 +1,5 @@
-import App from './components/app/app.js';
+import App from './components/app/app';
 import './global.css';
-
-// console.log("Hello World!");
 
 const app = new App();
 app.start();
