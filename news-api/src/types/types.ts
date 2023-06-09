@@ -19,8 +19,14 @@ export interface NewsArticle {
   content: string;
 }
 
+export enum ApiResponceStatus {
+  OK = 'ok',
+  ERROR = 'error',
+}
 export interface ApiResponse {
-  status: string; // change to enum
+  status: ApiResponceStatus;
+  code?: string;
+  message?: string;
 }
 
 
