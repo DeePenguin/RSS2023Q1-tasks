@@ -7,7 +7,7 @@ interface Component {
 
 type ComponentProps<T = HTMLElement> = Component & Partial<T>;
 
-class BaseComponent <T extends HTMLElement = HTMLElement> {
+export class BaseComponent <T extends HTMLElement = HTMLElement> {
   node: T;
 
   constructor ({
@@ -74,5 +74,3 @@ class BaseComponent <T extends HTMLElement = HTMLElement> {
     return this.node.style;
   }
 }
-
-export { BaseComponent };

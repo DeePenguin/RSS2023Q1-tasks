@@ -2,7 +2,7 @@ import { Source } from '../../../types/types';
 import { BaseComponent } from '../../../utils/baseComponent';
 import './sources.css';
 
-class Sources {
+export class Sources {
   draw(data: Source[]) {
     const fragment: DocumentFragment = document.createDocumentFragment();
 
@@ -26,5 +26,3 @@ class Sources {
     }
   }
 }
-
-export { Sources };

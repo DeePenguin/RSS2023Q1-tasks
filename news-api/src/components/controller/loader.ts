@@ -1,6 +1,6 @@
 import { EndPoints, RequestsMethods, RequestOptions } from "../../types/types";
 
-class Loader {
+export class Loader {
   constructor(
     private baseLink: string,
     private options: {apiKey: string}
@@ -15,7 +15,7 @@ class Loader {
 
   errorHandler(res: Response): Response {
     if (!res.ok) {
-      if (res.status === 401 || res.status === 404)
+      if (res.status === 401 || res.status === 404) // enum
         console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
       throw Error(res.statusText);
     }
@@ -47,5 +47,3 @@ class Loader {
       .catch((err) => console.error(err));
   }
 }
-
-export { Loader };

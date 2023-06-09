@@ -2,7 +2,7 @@ import { NewsResponse, SourcesResponse } from '../../types/types';
 import { AppController } from '../controller/controller';
 import { AppView } from '../view/appView';
 
-export default class App {
+export class App {
   controller: AppController;
 
   view: AppView;

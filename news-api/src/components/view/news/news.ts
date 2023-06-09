@@ -2,7 +2,7 @@ import { NewsArticle } from '../../../types/types';
 import { BaseComponent } from '../../../utils/baseComponent';
 import './news.css';
 
-class News {
+export class News {
   draw(data: NewsArticle[]) {
     const news = data.length >= 10
       ? data.filter((_item, idx) => idx < 10)
@@ -55,5 +55,3 @@ class News {
     }
   }
 }
-
-export { News };

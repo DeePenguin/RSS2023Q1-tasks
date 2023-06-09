@@ -2,7 +2,7 @@ import { NewsResponse, SourcesResponse } from '../../types/types';
 import { News } from './news/news';
 import { Sources } from './sources/sources';
 
-class AppView {
+export class AppView {
   private news: News;
 
   private sources: Sources;
@@ -22,5 +22,3 @@ class AppView {
     this.sources.draw(values);
   }
 }
-
-export { AppView };

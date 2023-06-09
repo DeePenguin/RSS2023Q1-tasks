@@ -1,7 +1,7 @@
 import { EndPoints, NewsResponse, SourcesResponse } from '../../types/types';
 import { AppLoader } from './appLoader';
 
-class AppController extends AppLoader {
+export class AppController extends AppLoader {
   getSources(callback: (data: SourcesResponse) => void) {
     super.getResp<SourcesResponse>(
       { endpoint: EndPoints.sources },
@@ -37,5 +37,3 @@ class AppController extends AppLoader {
     }
   }
 }
-
-export { AppController };
