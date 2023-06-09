@@ -20,13 +20,9 @@ export interface NewsArticle {
 }
 
 export interface ApiResponse {
-  status: string;
+  status: string; // change to enum
 }
 
-export interface ErrorResponse extends ApiResponse {
-  message: string;
-  code: string;
-}
 
 export interface NewsResponse extends ApiResponse {
   totalResults: number;
