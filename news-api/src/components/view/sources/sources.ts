@@ -3,6 +3,15 @@ import { BaseComponent } from '../../../utils/baseComponent';
 import './sources.css';
 
 export class Sources {
+  sourcesWrapper: HTMLElement;
+
+  constructor(parent: HTMLElement) {
+    this.sourcesWrapper = new BaseComponent({
+      parent,
+      className: 'sources',
+    }).node;
+  }
+
   draw(data: Source[]) {
     const fragment: DocumentFragment = document.createDocumentFragment();
 
@@ -20,9 +29,6 @@ export class Sources {
         fragment.append(sourceContainer.node);
       });
 
-    const sourcesContainer: HTMLDivElement | null = document.querySelector('.sources');
-    if (sourcesContainer) {
-      sourcesContainer.append(fragment);
-    }
+      this.sourcesWrapper.append(fragment);
   }
 }
