@@ -3,6 +3,15 @@ import { BaseComponent } from '../../../utils/baseComponent';
 import './news.css';
 
 export class News {
+  newsWrapper: HTMLElement;
+
+  constructor(parent: HTMLElement) {
+    this.newsWrapper = new BaseComponent({
+      parent,
+      className: 'news',
+    }).node;
+  }
+
   draw(data: NewsArticle[]) {
     const news = data.length >= 10
       ? data.filter((_item, idx) => idx < 10)
@@ -15,12 +24,12 @@ export class News {
       if (idx % 2) newsItem.addClass('alt');
 
       const metaContainer = new BaseComponent({parent: newsItem, className: 'news__meta'});
-      const metaPhoto = new BaseComponent({className: 'news__meta-photo'});
+      const metaPhoto = new BaseComponent({parent: metaContainer, className: 'news__meta-photo'});
       metaPhoto.style.backgroundImage = `url(${
           item.urlToImage || 'img/news_placeholder.jpg'
       })`;
 
-      const metaDetails = new BaseComponent({tag: 'ul', className: 'news__meta-details'});
+      const metaDetails = new BaseComponent({parent: metaContainer, tag: 'ul', className: 'news__meta-details'});
       const metaAuthor = new BaseComponent({parent: metaDetails, tag: 'li', className: 'news__meta-author'});
       metaAuthor.setContent(item.author || item.source.name);
 
@@ -31,7 +40,6 @@ export class News {
         .reverse()
         .join('-')
       );
-      metaContainer.append(metaPhoto, metaDetails);
 
       const description = new BaseComponent({parent: newsItem, className: 'news__description'});
       const title = new BaseComponent({tag: 'h2', className: 'news__description-title', content: item.title});
@@ -44,14 +52,10 @@ export class News {
       });
 
       description.append(title, source, content, readMore);
-
       fragment.append(newsItem.node);
     });
 
-    const newsContainer = document.querySelector('.news');
-    if (newsContainer) {
-      newsContainer.innerHTML = '';
-      newsContainer.appendChild(fragment);
-    }
+      this.newsWrapper.innerHTML = '';
+      this.newsWrapper.appendChild(fragment);
   }
 }

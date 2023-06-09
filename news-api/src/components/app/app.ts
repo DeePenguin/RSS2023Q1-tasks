@@ -7,19 +7,17 @@ export class App {
 
   view: AppView;
 
-  constructor() {
+  constructor(private parent: HTMLElement) {
     this.controller = new AppController();
-    this.view = new AppView();
+    this.view = new AppView(this.parent);
   }
 
   start() {
-    const sourcesElement: HTMLDivElement |  null = document.querySelector('.sources');
-    if (sourcesElement) {
-      this.controller.getSources((data: SourcesResponse) => {
-        this.view.drawSources(data);
-      });
+    const sourcesElement = this.view.getSourcesElement();
+    this.controller.getSources((data: SourcesResponse) => {
+      this.view.drawSources(data);
+    });
 
-      sourcesElement.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)));
+    sourcesElement.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)));
     }
-  }
 }
