@@ -15,11 +15,11 @@ export class App {
   start() {
     const sourcesElement: HTMLDivElement |  null = document.querySelector('.sources');
     if (sourcesElement) {
-      sourcesElement.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)));
-
       this.controller.getSources((data: SourcesResponse) => {
         this.view.drawSources(data);
       });
+
+      sourcesElement.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)));
     }
   }
 }
