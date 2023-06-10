@@ -29,6 +29,7 @@
   background-size: cover;
   background-position: center;
   transition: transform 0.2s;
+  background-image: url("../../../assets/img/news_placeholder.png");
 }
 
 .news__item .news__meta-details,
