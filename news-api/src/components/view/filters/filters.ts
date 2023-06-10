@@ -3,9 +3,9 @@ import { BaseComponent } from '../../../utils/baseComponent';
 import './filters.css';
 
 export class Filters {
-  filtersWrapper: HTMLElement;
+  public filtersWrapper: HTMLElement;
 
-  dictionary: Record<string, Record<string, string>>;
+  private dictionary: Record<string, Record<string, string>>;
 
   constructor(private parent: HTMLElement) {
     const filtersEl = new BaseComponent({
@@ -49,6 +49,7 @@ export class Filters {
       tag: 'label',
       content: `<input type="checkbox" class="filters__item-checkbox" value ="${value}">${this.dictionary[key][value]}`,
     });
+    label.setAttributes({'data-filter-key': key, 'data-filter-value': value});
     return label.node;
   }
 }
