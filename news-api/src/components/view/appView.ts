@@ -7,7 +7,7 @@ export class AppView {
 
   private sources: Sources;
 
-  constructor(private parent: HTMLElement) {
+  constructor(private parent: HTMLElement, private trigger: HTMLElement) {
     this.sources = new Sources(parent);
     this.news = new News(parent);
   }
@@ -24,5 +24,10 @@ export class AppView {
 
   getSourcesElement(): HTMLElement {
     return this.sources.sourcesWrapper;
+  }
+
+  toggleSources(): void {
+    this.trigger.classList.toggle('closed');
+    this.sources.toggle();
   }
 }

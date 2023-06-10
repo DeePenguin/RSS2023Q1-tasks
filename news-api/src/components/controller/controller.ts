@@ -9,7 +9,7 @@ export class AppController extends AppLoader {
     );
   }
 
-  getNews(e: MouseEvent, callback: (data: NewsResponse) => void) {
+  getNews(e: MouseEvent, callback: (data: NewsResponse) => void): boolean {
     let {target} = e;
     const sourcesContainer = e.currentTarget;
 
@@ -31,9 +31,10 @@ export class AppController extends AppLoader {
             );
           }
         }
-        return;
+        return true;
       }
       target = target.parentNode;
     }
+    return false;
   }
 }

@@ -7,9 +7,9 @@ export class App {
 
   view: AppView;
 
-  constructor(private parent: HTMLElement) {
+  constructor(private parent: HTMLElement, private trigger: HTMLElement) {
     this.controller = new AppController();
-    this.view = new AppView(this.parent);
+    this.view = new AppView(this.parent, trigger);
   }
 
   start() {
@@ -18,6 +18,12 @@ export class App {
       this.view.drawSources(data);
     });
 
-    sourcesElement.addEventListener('click', (e: MouseEvent) => this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)));
+    sourcesElement.addEventListener('click', (e: MouseEvent) => {
+      if (this.controller.getNews(e, (data: NewsResponse) => this.view.drawNews(data)) === true) {
+        this.view.toggleSources();
+      }
+    });
+
+    this.trigger.addEventListener('click', () => this.view.toggleSources());
     }
 }
