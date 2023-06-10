@@ -48,7 +48,7 @@ export class News {
       const readMore = new BaseComponent({
         tag: 'p',
         className: 'news__read-more',
-        content: `<a href="${item.url}">Read more</a>`,
+        content: `<a href="${item.url}" target="_blank">Read more</a>`,
       });
 
       description.append(title, source, content, readMore);

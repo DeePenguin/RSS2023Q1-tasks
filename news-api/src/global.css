@@ -50,6 +50,7 @@ header h1 {
 
 footer {
   height: 100px;
+  gap: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,4 +68,21 @@ footer .copyright a:hover {
 }
 footer .copyright:before {
   content: '©';
+}
+
+.footer-link {
+  display: block;
+  height: 30px;
+  width: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.footer-link.github {
+  background-image: url("./assets/svg/github-mark-white.svg");
+}
+
+.footer-link.rs {
+  background-image: url("./assets/svg/rs_school_js.svg");
 }
