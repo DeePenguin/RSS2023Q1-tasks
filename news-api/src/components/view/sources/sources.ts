@@ -3,9 +3,9 @@ import { BaseComponent } from '../../../utils/baseComponent';
 import './sources.css';
 
 export class Sources {
-  sourcesWrapper: HTMLElement;
+  public sourcesWrapper: HTMLElement;
 
-  sourcesContainer: HTMLElement;
+  private sourcesContainer: HTMLElement;
 
   constructor(parent: HTMLElement) {
     this.sourcesWrapper = new BaseComponent({
@@ -18,7 +18,7 @@ export class Sources {
     }).node;
   }
 
-  draw(data: Source[]): void {
+  public draw(data: Source[]): void {
     this.sourcesContainer.innerHTML = '';
     const fragment: DocumentFragment = document.createDocumentFragment();
 
@@ -30,7 +30,7 @@ export class Sources {
       this.sourcesContainer.append(fragment);
   }
 
-  createSource(source: Source): HTMLElement {
+  private createSource(source: Source): HTMLElement {
     const sourceContainer = new BaseComponent({ className: 'source__item' });
     const sourceName = new BaseComponent({
       className: 'source__item-name',
@@ -43,7 +43,7 @@ export class Sources {
     return sourceContainer.node;
   }
 
-  toggle(): void {
+  public toggle(): void {
     this.sourcesWrapper.classList.toggle('closed');
   }
 }

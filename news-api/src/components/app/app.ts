@@ -3,16 +3,16 @@ import { AppController } from '../controller/controller';
 import { AppView } from '../view/appView';
 
 export class App {
-  controller: AppController;
+  private controller: AppController;
 
-  view: AppView;
+  private view: AppView;
 
   constructor(private parent: HTMLElement, private trigger: HTMLElement) {
     this.controller = new AppController();
     this.view = new AppView(this.parent, trigger);
   }
 
-  start() {
+  public start(): void {
     const sourcesElement = this.view.getSourcesElement();
     this.controller.getSources((data: SourcesResponse) => {
       this.processSources(data);
@@ -33,7 +33,7 @@ export class App {
     this.trigger.addEventListener('click', () => this.view.toggleSources());
     }
 
-    processSources(data: SourcesResponse) {
+    private processSources(data: SourcesResponse): void {
       const filters = this.controller.createFilters(data);
       this.view.drawFilters(filters);
       this.view.drawSources(data);

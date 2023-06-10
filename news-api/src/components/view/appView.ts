@@ -16,34 +16,34 @@ export class AppView {
     this.news = new News(parent);
   }
 
-  drawNews(data: NewsResponse): void {
+  public drawNews(data: NewsResponse): void {
     const values = data?.articles ?? [];
     this.news.draw(values);
   }
 
   drawSources(data: SourcesResponse): void;
   drawSources(data: Source[]): void;
-  drawSources(data: SourcesResponse| Source[]): void {
+  public drawSources(data: SourcesResponse| Source[]): void {
     const values = Array.isArray(data)
     ? data
     : data?.sources ?? [];
     this.sources.draw(values);
   }
 
-  getSourcesElement(): HTMLElement {
+  public getSourcesElement(): HTMLElement {
     return this.sources.sourcesWrapper;
   }
 
-  getFiltersElement(): HTMLElement {
+  public getFiltersElement(): HTMLElement {
     return this.filters.filtersWrapper;
   }
 
-  toggleSources(): void {
+  public toggleSources(): void {
     this.trigger.classList.toggle('closed');
     this.sources.toggle();
   }
 
-  drawFilters(data: SourcesFilter): void {
+  public drawFilters(data: SourcesFilter): void {
     this.filters.draw(data);
   }
 }

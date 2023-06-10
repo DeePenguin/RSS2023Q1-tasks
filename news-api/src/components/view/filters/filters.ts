@@ -26,7 +26,7 @@ export class Filters {
     }
   }
 
-  draw(data: SourcesFilter): void {
+  public draw(data: SourcesFilter): void {
     Object.keys(data).forEach((key) => {
       const container = new BaseComponent({
         parent: this.filtersWrapper,
@@ -44,7 +44,7 @@ export class Filters {
     });
   }
 
-  createLabel(key: string,value: string): HTMLElement {
+  private createLabel(key: string,value: string): HTMLElement {
     const label = new BaseComponent({
       className: 'filters__item-label',
       tag: 'label',

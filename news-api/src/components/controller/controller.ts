@@ -13,14 +13,14 @@ export class AppController extends AppLoader {
   };
 
 
-  getSources(callback: (data: SourcesResponse) => void) {
+  public getSources(callback: (data: SourcesResponse) => void): void {
     super.getResp<SourcesResponse>(
       { endpoint: EndPoints.sources },
       callback,
     );
   }
 
-  createFilters(data: SourcesResponse): SourcesFilter {
+  public createFilters(data: SourcesResponse): SourcesFilter {
     const { sources } = data;
     const filters: SourcesFilter = {};
     const keys: ValidFilters[] = ['country', 'category', 'language'];
@@ -31,7 +31,7 @@ export class AppController extends AppLoader {
     return filters;
   }
 
-  filterByKey(data: Source[], filter: ValidFilters): Record<string, Source[]> {
+  private filterByKey(data: Source[], filter: ValidFilters): Record<string, Source[]> {
     return data.reduce((acc: {[key: string]: Source[]}, item) => {
       const key = item[filter];
       acc[key] = (acc[key] || []).concat(item);
@@ -39,7 +39,7 @@ export class AppController extends AppLoader {
     }, {});
   }
 
-  filterSources(e: MouseEvent): Source[] {
+  public filterSources(e: MouseEvent): Source[] {
     let {target} = e;
     const filtersContainer = e.currentTarget;
 
@@ -77,7 +77,7 @@ export class AppController extends AppLoader {
     return [];
   }
 
-  getNews(e: MouseEvent, callback: (data: NewsResponse) => void): boolean {
+  public getNews(e: MouseEvent, callback: (data: NewsResponse) => void): boolean {
     let {target} = e;
     const sourcesContainer = e.currentTarget;
 
