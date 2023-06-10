@@ -1,4 +1,4 @@
-import { NewsResponse, SourcesResponse } from '../../types/types';
+import { NewsResponse, SourcesResponse } from '../../types/interfaces';
 import { AppController } from '../controller/controller';
 import { AppView } from '../view/appView';
 

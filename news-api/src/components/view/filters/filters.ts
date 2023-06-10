@@ -1,4 +1,5 @@
-import { SourcesCategories, SourcesCountries, SourcesFilter, SourcesLanguages } from '../../../types/types';
+import { SourcesCategories, SourcesCountries, SourcesLanguages } from '../../../types/enums';
+import { SourcesFilter } from '../../../types/interfaces';
 import { BaseComponent } from '../../../utils/baseComponent';
 import './filters.css';
 
@@ -25,7 +26,7 @@ export class Filters {
     }
   }
 
-  draw(data: SourcesFilter) {
+  draw(data: SourcesFilter): void {
     Object.keys(data).forEach((key) => {
       const container = new BaseComponent({
         parent: this.filtersWrapper,
