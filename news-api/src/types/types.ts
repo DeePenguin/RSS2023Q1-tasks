@@ -1,5 +1,5 @@
 export type RequestOptions = {
-  sources?: string;
+  sources?: string
 }
 
-export type ValidFilters = 'country' | 'category' | 'language';
+export type ValidFilters = 'country' | 'category' | 'language'

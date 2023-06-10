@@ -1,9 +1,9 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const { merge } = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const resolve = (...paths) => path.resolve(__dirname, ...paths);
+const resolve = (...paths) => path.resolve(__dirname, ...paths)
 
 const baseConfig = {
   context: resolve('src'),
@@ -28,16 +28,16 @@ const baseConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template:resolve('src', 'index.html'),
+      template: resolve('src', 'index.html'),
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({ filename: '[contenthash].css' }),
   ],
-};
+}
 
 module.exports = ({ mode }) => {
-  const isProductionMode = mode === 'prod';
-  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+  const isProductionMode = mode === 'prod'
+  const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config')
 
-  return merge(baseConfig, envConfig);
-};
+  return merge(baseConfig, envConfig)
+}
