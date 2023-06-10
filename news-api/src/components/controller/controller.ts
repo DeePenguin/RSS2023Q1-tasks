@@ -1,4 +1,6 @@
-import { EndPoints, NewsResponse, Source, SourcesFilter, SourcesResponse, ValidFilters } from '../../types/types';
+import { EndPoints } from '../../types/enums';
+import { NewsResponse, Source, SourcesFilter, SourcesResponse } from '../../types/interfaces';
+import { ValidFilters } from '../../types/types';
 import { AppLoader } from './appLoader';
 
 export class AppController extends AppLoader {
@@ -18,7 +20,7 @@ export class AppController extends AppLoader {
     );
   }
 
-  createFilters(data: SourcesResponse) {
+  createFilters(data: SourcesResponse): SourcesFilter {
     const { sources } = data;
     const filters: SourcesFilter = {};
     const keys: ValidFilters[] = ['country', 'category', 'language'];

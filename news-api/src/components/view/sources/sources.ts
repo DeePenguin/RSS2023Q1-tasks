@@ -1,4 +1,4 @@
-import { Source } from '../../../types/types';
+import { Source } from '../../../types/interfaces';
 import { BaseComponent } from '../../../utils/baseComponent';
 import './sources.css';
 
@@ -18,7 +18,7 @@ export class Sources {
     }).node;
   }
 
-  draw(data: Source[]) {
+  draw(data: Source[]): void {
     this.sourcesContainer.innerHTML = '';
     const fragment: DocumentFragment = document.createDocumentFragment();
 

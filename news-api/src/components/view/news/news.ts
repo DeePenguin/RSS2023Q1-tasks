@@ -1,4 +1,4 @@
-import { NewsArticle } from '../../../types/types';
+import { NewsArticle } from '../../../types/interfaces';
 import { BaseComponent } from '../../../utils/baseComponent';
 import './news.css';
 

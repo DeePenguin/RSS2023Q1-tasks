@@ -1,4 +1,6 @@
-import { EndPoints, RequestsMethods, RequestOptions, ApiResponse, ApiResponceStatus } from "../../types/types";
+import { ApiResponceStatus, EndPoints, RequestsMethods } from "../../types/enums";
+import { ApiResponse } from "../../types/interfaces";
+import { RequestOptions } from "../../types/types";
 
 export class Loader {
   constructor(

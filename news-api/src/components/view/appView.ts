@@ -1,4 +1,4 @@
-import { NewsResponse, SourcesFilter, SourcesResponse, Source } from '../../types/types';
+import { NewsResponse, Source, SourcesFilter, SourcesResponse } from '../../types/interfaces';
 import { Filters } from './filters/filters';
 import { News } from './news/news';
 import { Sources } from './sources/sources';
