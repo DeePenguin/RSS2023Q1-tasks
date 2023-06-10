@@ -25,9 +25,9 @@ export class News {
 
       const metaContainer = new BaseComponent({parent: newsItem, className: 'news__meta'});
       const metaPhoto = new BaseComponent({parent: metaContainer, className: 'news__meta-photo'});
-      metaPhoto.style.backgroundImage = `url(${
-          item.urlToImage || 'img/news_placeholder.jpg'
-      })`;
+      if (item.urlToImage) {
+        metaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
+      }
 
       const metaDetails = new BaseComponent({parent: metaContainer, tag: 'ul', className: 'news__meta-details'});
       const metaAuthor = new BaseComponent({parent: metaDetails, tag: 'li', className: 'news__meta-author'});
