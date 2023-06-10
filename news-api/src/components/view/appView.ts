@@ -1,4 +1,4 @@
-import { NewsResponse, SourcesFilter, SourcesResponse } from '../../types/types';
+import { NewsResponse, SourcesFilter, SourcesResponse, Source } from '../../types/types';
 import { Filters } from './filters/filters';
 import { News } from './news/news';
 import { Sources } from './sources/sources';
@@ -21,13 +21,21 @@ export class AppView {
     this.news.draw(values);
   }
 
-  drawSources(data: SourcesResponse): void {
-    const values = data?.sources ?? [];
+  drawSources(data: SourcesResponse): void;
+  drawSources(data: Source[]): void;
+  drawSources(data: SourcesResponse| Source[]): void {
+    const values = Array.isArray(data)
+    ? data
+    : data?.sources ?? [];
     this.sources.draw(values);
   }
 
   getSourcesElement(): HTMLElement {
     return this.sources.sourcesWrapper;
+  }
+
+  getFiltersElement(): HTMLElement {
+    return this.filters.filtersWrapper;
   }
 
   toggleSources(): void {

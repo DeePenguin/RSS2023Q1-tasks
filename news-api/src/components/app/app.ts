@@ -24,6 +24,12 @@ export class App {
       }
     });
 
+    const filtersElement = this.view.getFiltersElement();
+    filtersElement.addEventListener('click', (e: MouseEvent) => {
+      const filteredSources = this.controller.filterSources(e);
+      this.view.drawSources(filteredSources);
+    })
+
     this.trigger.addEventListener('click', () => this.view.toggleSources());
     }
 

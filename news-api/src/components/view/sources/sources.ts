@@ -19,6 +19,7 @@ export class Sources {
   }
 
   draw(data: Source[]) {
+    this.sourcesContainer.innerHTML = '';
     const fragment: DocumentFragment = document.createDocumentFragment();
 
       data.forEach((source) => {
