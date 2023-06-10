@@ -4,7 +4,7 @@ import { ValidFilters } from '../../types/types';
 import { AppLoader } from './appLoader';
 
 export class AppController extends AppLoader {
-  private filteredSources!: SourcesFilter;
+  private filteredSources!: Readonly<SourcesFilter>;
 
   private currentFilters: Record<string, string[]> = {
     country: [],
