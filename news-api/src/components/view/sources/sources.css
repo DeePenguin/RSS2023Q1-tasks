@@ -1,11 +1,17 @@
 .sources {
+  transition: 0.4s ease-in-out;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  overflow: auto;
+  max-height: 550vh;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
   font: 300 1em 'Fira Sans', sans-serif;
+}
+
+.sources.closed {
+  max-height: 0;
 }
 
 .source__item {
