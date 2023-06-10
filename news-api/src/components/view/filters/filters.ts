@@ -1,12 +1,12 @@
-import { SourcesCategories, SourcesCountries, SourcesLanguages } from '../../../types/enums';
-import { SourcesFilter } from '../../../types/interfaces';
-import { BaseComponent } from '../../../utils/baseComponent';
-import './filters.css';
+import { SourcesCategories, SourcesCountries, SourcesLanguages } from '../../../types/enums'
+import { SourcesFilter } from '../../../types/interfaces'
+import { BaseComponent } from '../../../utils/baseComponent'
+import './filters.css'
 
 export class Filters {
-  public filtersWrapper: HTMLElement;
+  public filtersWrapper: HTMLElement
 
-  private dictionary: Record<string, Record<string, string>>;
+  private dictionary: Record<string, Record<string, string>>
 
   constructor(private parent: HTMLElement) {
     const filtersEl = new BaseComponent({
@@ -17,10 +17,10 @@ export class Filters {
     this.filtersWrapper = new BaseComponent({
       parent: filtersEl,
       className: 'filters__wrapper',
-    }).node;
+    }).node
 
     this.dictionary = {
-      language : SourcesLanguages,
+      language: SourcesLanguages,
       country: SourcesCountries,
       category: SourcesCategories,
     }
@@ -32,25 +32,25 @@ export class Filters {
         parent: this.filtersWrapper,
         className: 'filters__item',
         content: `<div class="filters__item-name">${key}</div>`,
-      });
+      })
       const values = new BaseComponent({
         parent: container,
         className: 'filters__item-values',
-      });
+      })
 
       Object.keys(data[key]).forEach((value) => {
-        values.append(this.createLabel(key, value));
+        values.append(this.createLabel(key, value))
       })
-    });
+    })
   }
 
-  private createLabel(key: string,value: string): HTMLElement {
+  private createLabel(key: string, value: string): HTMLElement {
     const label = new BaseComponent({
       className: 'filters__item-label',
       tag: 'label',
       content: `<input type="checkbox" class="filters__item-checkbox" value ="${value}">${this.dictionary[key][value]}`,
-    });
-    label.setAttributes({'data-filter-key': key, 'data-filter-value': value});
-    return label.node;
+    })
+    label.setAttributes({ 'data-filter-key': key, 'data-filter-value': value })
+    return label.node
   }
 }
