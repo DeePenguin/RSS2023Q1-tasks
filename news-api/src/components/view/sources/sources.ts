@@ -5,12 +5,16 @@ import './sources.css';
 export class Sources {
   sourcesWrapper: HTMLElement;
 
-  data: Source[] = [];
+  sourcesContainer: HTMLElement;
 
   constructor(parent: HTMLElement) {
     this.sourcesWrapper = new BaseComponent({
       parent,
       className: 'sources',
+    }).node;
+    this.sourcesContainer = new BaseComponent({
+      parent: this.sourcesWrapper,
+      className: 'sources__container',
     }).node;
   }
 
@@ -22,7 +26,7 @@ export class Sources {
         fragment.append(sourceElement);
       });
 
-      this.sourcesWrapper.append(fragment);
+      this.sourcesContainer.append(fragment);
   }
 
   createSource(source: Source): HTMLElement {

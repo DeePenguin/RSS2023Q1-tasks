@@ -15,7 +15,7 @@ export class App {
   start() {
     const sourcesElement = this.view.getSourcesElement();
     this.controller.getSources((data: SourcesResponse) => {
-      this.view.drawSources(data);
+      this.processSources(data);
     });
 
     sourcesElement.addEventListener('click', (e: MouseEvent) => {
@@ -25,5 +25,11 @@ export class App {
     });
 
     this.trigger.addEventListener('click', () => this.view.toggleSources());
+    }
+
+    processSources(data: SourcesResponse) {
+      const filters = this.controller.createFilters(data);
+      this.view.drawFilters(filters);
+      this.view.drawSources(data);
     }
 }
