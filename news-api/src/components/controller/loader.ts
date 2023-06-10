@@ -8,7 +8,7 @@ export class Loader {
     private options: {apiKey: string}
     ) {}
 
-   getResp<T>(
+   public getResp<T>(
     { endpoint, options = {} }: {endpoint: EndPoints, options?: RequestOptions},
     callback: (data: T) => void,
   ) {
@@ -16,7 +16,7 @@ export class Loader {
     .catch(() => {});
   }
 
-  makeUrl(options: RequestOptions, endpoint: EndPoints) {
+  private makeUrl(options: RequestOptions, endpoint: EndPoints) {
     const urlOptions: Record<string, string> = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 
@@ -27,7 +27,7 @@ export class Loader {
     return url.slice(0, -1);
   }
 
-  async load<T>(method: RequestsMethods, endpoint: EndPoints, callback: (data: T) => void, options = {}): Promise<void> {
+  private async load<T>(method: RequestsMethods, endpoint: EndPoints, callback: (data: T) => void, options = {}): Promise<void> {
     try {
       const res = await fetch(this.makeUrl(options, endpoint), { method });
       if (!res.ok || res.status !== 200) {

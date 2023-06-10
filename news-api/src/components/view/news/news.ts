@@ -12,7 +12,7 @@ export class News {
     }).node;
   }
 
-  draw(data: NewsArticle[]) {
+  public draw(data: NewsArticle[]) {
     const news = data.length >= 10
       ? data.filter((_item, idx) => idx < 10)
       : data;
