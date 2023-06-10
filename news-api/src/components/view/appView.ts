@@ -1,14 +1,18 @@
-import { NewsResponse, SourcesResponse } from '../../types/types';
+import { NewsResponse, SourcesFilter, SourcesResponse } from '../../types/types';
+import { Filters } from './filters/filters';
 import { News } from './news/news';
 import { Sources } from './sources/sources';
 
 export class AppView {
   private news: News;
 
+  private filters: Filters;
+
   private sources: Sources;
 
   constructor(private parent: HTMLElement, private trigger: HTMLElement) {
     this.sources = new Sources(parent);
+    this.filters = new Filters(this.getSourcesElement());
     this.news = new News(parent);
   }
 
@@ -29,5 +33,9 @@ export class AppView {
   toggleSources(): void {
     this.trigger.classList.toggle('closed');
     this.sources.toggle();
+  }
+
+  drawFilters(data: SourcesFilter): void {
+    this.filters.draw(data);
   }
 }

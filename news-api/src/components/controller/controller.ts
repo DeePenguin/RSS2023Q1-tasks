@@ -1,4 +1,4 @@
-import { EndPoints, NewsResponse, SourcesResponse } from '../../types/types';
+import { EndPoints, NewsResponse, Source, SourcesFilter, SourcesResponse, ValidFilters } from '../../types/types';
 import { AppLoader } from './appLoader';
 
 export class AppController extends AppLoader {
@@ -7,6 +7,25 @@ export class AppController extends AppLoader {
       { endpoint: EndPoints.sources },
       callback,
     );
+  }
+
+  createFilters(data: SourcesResponse) {
+    const { sources } = data;
+    const filters: SourcesFilter = {};
+    const keys: ValidFilters[] = ['country', 'category', 'language'];
+    keys.forEach((key) => {
+      filters[key] = this.filterSources(sources, key);
+    })
+
+    return filters;
+  }
+
+  filterSources(data: Source[], filter: ValidFilters): Record<string, Source[]> {
+    return data.reduce((acc: {[key: string]: Source[]}, item) => {
+      const key = item[filter];
+      acc[key] = (acc[key] || []).concat(item);
+      return acc;
+    }, {});
   }
 
   getNews(e: MouseEvent, callback: (data: NewsResponse) => void): boolean {
