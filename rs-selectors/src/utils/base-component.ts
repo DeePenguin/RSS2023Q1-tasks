@@ -20,11 +20,11 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> {
     this.node.remove()
   }
 
-  public appendTo(parent: HTMLElement | BaseComponent): void {
+  public appendTo<K extends keyof HTMLElementTagNameMap>(parent: HTMLElement | BaseComponent<K>): void {
     parent.append(this.node)
   }
 
-  public append(...components: (HTMLElement | BaseComponent)[]): void {
+  public append<K extends keyof HTMLElementTagNameMap>(...components: (HTMLElement | BaseComponent<K>)[]): void {
     const nodes = components.map((component) => (component instanceof HTMLElement ? component : component.node))
     this.node.append(...nodes)
   }
