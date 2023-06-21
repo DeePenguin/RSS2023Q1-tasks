@@ -1,14 +1,12 @@
+import { BaseComponent } from '../utils/base-component'
 import { Layout } from './components/layout/layout'
 
 class App {
-  public init(): Layout | boolean {
-    const root = document.getElementById('root')
-    if (root instanceof HTMLElement) {
-      const layout = new Layout()
-      layout.create(root)
-      return layout
-    }
-    return false
+  private root: BaseComponent = new BaseComponent({ parent: document.body, className: 'root' })
+  private layout: Layout = new Layout()
+
+  public init(): void {
+    this.layout.create(this.root)
   }
 }
 
