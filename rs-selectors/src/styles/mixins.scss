@@ -1,0 +1,50 @@
+%transition-s {
+  transition: all 0.3s ease;
+}
+
+%list {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+  list-style: none;
+}
+
+@mixin flex($direction: row, $wrap: nowrap, $jc: space-between, $ali: center) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  align-items: $ali;
+  justify-content: $jc;
+}
+
+@mixin flex-col($wrap: nowrap, $jc: space-between, $ali: center) {
+  @include flex(column, $wrap, $jc, $ali);
+}
+
+@mixin visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  border: 0;
+}
+
+@mixin m-hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin m-custom($width) {
+  @media (max-width: $width) { @content; }
+}

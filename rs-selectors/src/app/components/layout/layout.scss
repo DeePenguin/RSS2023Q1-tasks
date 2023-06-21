@@ -1,0 +1,11 @@
+.root {
+  display: grid;
+  grid-template: "header panel" min-content "game-field panel" auto "footer panel" min-content / 2fr 300px;
+
+  min-height: 100vh;
+
+  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: $font-color;
+
+  background-color: $bg-light;
+}

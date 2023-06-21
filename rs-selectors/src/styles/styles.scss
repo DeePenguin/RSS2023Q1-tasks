@@ -1,1 +1,5 @@
-@import 'base';
+@import 'normalize.css';
+
+html {
+  scroll-behavior: smooth;
+}

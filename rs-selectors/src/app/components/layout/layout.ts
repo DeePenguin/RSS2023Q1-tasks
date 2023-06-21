@@ -1,12 +1,17 @@
-import { Footer } from './footer'
-import { Header } from './header'
-import { Main } from './main'
+import { BaseComponent } from '../../../utils/base-component'
+import { header } from './header/header'
+import { panel } from './panel/panel'
+import { footer } from './footer/footer'
+import { gameField } from './game-field/game-field'
+import './layout.scss'
 
 export class Layout {
-  public create(root: HTMLElement): [Header, Main, Footer] {
-    const header = new Header(root)
-    const main = new Main(root)
-    const footer = new Footer(root)
-    return [header, main, footer]
+  public header: BaseComponent<'header'> = header
+  public footer: BaseComponent<'footer'> = footer
+  public panel: BaseComponent<'section'> = panel
+  public gameField: BaseComponent<'section'> = gameField
+
+  public create(root: BaseComponent): void {
+    root.append(header, gameField, panel, footer)
   }
 }
