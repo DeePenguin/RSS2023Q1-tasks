@@ -53,7 +53,7 @@ module.exports = {
       fix: true,
     }),
     new ESLintPlugin({
-      extensions: ['ts']
+      extensions: ['ts'],
     }),
     new HtmlWebpackPlugin({
       templateContent: getTemplate(),
@@ -63,33 +63,37 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: filename(this.mode, 'css'),
     }),
-    new FaviconsWebpackPlugin(path.resolve(__dirname, 'src/assets/favicon.png'))
+    new FaviconsWebpackPlugin(path.resolve(__dirname, 'src/assets/favicon.png')),
   ],
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.ts?$/i,
-        use: ['ts-loader']
+        use: ['ts-loader'],
       },
       {
         test: /\.(c|sa|sc)ss$/i,
-        use: [this.mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',
+        use: [
+          this.mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
           {
             loader: 'sass-resources-loader',
             options: {
               resources: ['src/styles/variables.scss', 'src/styles/mixins.scss'],
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|webp|mp3)$/i,
-        type: 'asset'
+        type: 'asset',
       },
     ],
   },
 
   resolve: {
-    extensions: ['.ts', '.js', '...']
+    extensions: ['.ts', '.js', '...'],
   },
 }

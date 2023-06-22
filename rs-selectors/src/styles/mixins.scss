@@ -3,9 +3,9 @@
 }
 
 %list {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
   list-style: none;
 }
 
@@ -46,5 +46,7 @@
 }
 
 @mixin m-custom($width) {
-  @media (max-width: $width) { @content; }
+  @media (max-width: $width) {
+    @content;
+  }
 }
