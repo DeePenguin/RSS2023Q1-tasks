@@ -14,7 +14,7 @@
 
     "alwaysStrict": true,
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": true
   },
   "include": ["./src/**/*", "./src/modules.d.ts"],
   "exclude": ["node_modules", "dist"]

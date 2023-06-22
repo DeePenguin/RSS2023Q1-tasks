@@ -1,0 +1,11 @@
+.editor-html {
+  .editor {
+    &__content {
+      padding-left: 0;
+
+      .markup {
+        padding-left: 2ch;
+      }
+    }
+  }
+}

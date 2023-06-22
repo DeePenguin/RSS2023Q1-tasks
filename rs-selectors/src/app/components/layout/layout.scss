@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template: "header panel" min-content "game-field panel" auto "footer panel" min-content / 2fr 300px;
+  grid-template: 'header panel' min-content 'game-field panel' auto 'footer panel' min-content / 2fr 300px;
 
   min-height: 100vh;
 

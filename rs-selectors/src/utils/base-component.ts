@@ -1,11 +1,7 @@
-type ComponentProps<T> = {
-  parent: HTMLElement | BaseComponent | null
-  tag: T
-  className: string
-  content: string
-}
+import { BaseComponentInterface } from '../types/interfaces/baseComponentInterface'
+import { ComponentProps } from '../types/types'
 
-export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> {
+export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implements BaseComponentInterface {
   public node: HTMLElementTagNameMap[T]
   constructor({ parent = null, tag = 'div' as T, className = '', content = '' }: Partial<ComponentProps<T>>) {
     this.node = document.createElement(tag)
