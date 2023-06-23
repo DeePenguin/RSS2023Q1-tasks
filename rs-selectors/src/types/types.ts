@@ -5,4 +5,5 @@ export type ComponentProps<T> = {
   tag: T
   className: string
   content: string
+  attr: Record<string, string>
 }

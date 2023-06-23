@@ -1,7 +1,7 @@
 .game-field {
-  @include flex-col($jc: space-around);
+  @include flex-col($jc: center);
 
   grid-area: game-field;
-  gap: 15px;
+  gap: 10px;
   padding: 20px;
 }
