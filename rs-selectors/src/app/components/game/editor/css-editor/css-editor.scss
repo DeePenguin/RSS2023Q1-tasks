@@ -1,0 +1,41 @@
+.editor-css {
+  .editor {
+    &__content {
+      @include flex;
+
+      padding: 0;
+    }
+
+    &__counter {
+      justify-content: center;
+      padding: 0 0.6em;
+    }
+
+    &__input,
+    &__button {
+      height: 100%;
+      border: none;
+      outline: none;
+    }
+
+    &__input {
+      flex-grow: 1;
+      padding-left: 2ch;
+      color: $font-color-light;
+      background-color: transparent;
+    }
+
+    &__button {
+      @extend %transition-s;
+
+      @include m-hover {
+        background-color: $editor-additional-hover;
+      }
+
+      cursor: pointer;
+      padding: 10px 15px;
+      color: $font-color-light;
+      background-color: $editor-additional;
+    }
+  }
+}

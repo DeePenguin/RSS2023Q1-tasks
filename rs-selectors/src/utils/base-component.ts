@@ -3,10 +3,13 @@ import { ComponentProps } from '../types/types'
 
 export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implements BaseComponentInterface {
   public node: HTMLElementTagNameMap[T]
-  constructor({ parent = null, tag = 'div' as T, className = '', content = '' }: Partial<ComponentProps<T>>) {
+  constructor({ parent = null, tag = 'div' as T, className = '', content = '', attr }: Partial<ComponentProps<T>>) {
     this.node = document.createElement(tag)
     this.node.className = className
     this.node.innerHTML = content
+    if (attr) {
+      this.setAttributes(attr)
+    }
     if (parent) {
       parent.append(this.node)
     }

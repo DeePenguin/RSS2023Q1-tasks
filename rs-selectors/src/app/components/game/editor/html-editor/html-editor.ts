@@ -1,4 +1,4 @@
-import { HtmlEditorParams } from '../../../../../types/enums/editor'
+import { HtmlEditorParams } from '../../../../../utils/constants'
 import { Editor } from '../editor'
 
 import './html-editor.scss'
