@@ -8,6 +8,9 @@ export type ComponentProps<T> = {
   attr: Record<string, string>
 }
 
+export type EventKey = string & keyof EventMap
+export type Listener<M extends EventKey> = (args: EventMap[M]) => void
+
 export type GameData = {
   currentLevel: number
   finishedLevels: number[]
@@ -28,4 +31,9 @@ export type customElementDescription = {
   class?: string
   attr?: Record<string, string>
   children?: customElementDescription[]
+}
+
+export type EventMap = {
+  selectLevel: number
+  resetProgress: undefined
 }

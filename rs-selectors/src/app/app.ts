@@ -16,14 +16,26 @@ class App {
   private gameData!: GameData
   private game!: Game
   private levelsList!: LevelsList
+  private currentLevel: number = 0
 
   public init(): void {
     this.layout.create(this.root)
     this.gameData = this.storage.getData()
     this.levelsList = new LevelsList(this.layout.levels, this.emitter, this.levels, this.gameData)
     console.log(this.gameData)
-    this.game = new Game(this.gameData, this.layout.gameField)
+    this.game = new Game(this.emitter, this.layout.gameField)
     this.game.showLevel(this.levels[this.gameData.currentLevel])
+    this.emitter.on('selectLevel', (index: number) => {
+      this.changeLevel(index)
+    })
+  }
+
+  private changeLevel(index: number): void {
+    if (index !== this.gameData.currentLevel) {
+      this.gameData.currentLevel = index
+      this.game.showLevel(this.levels[index])
+      this.levelsList.checkCurrent(index)
+    }
   }
 }
 
