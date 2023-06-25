@@ -29,7 +29,7 @@ export const levels: Level[] = [
   },
   {
     answer: 'pot',
-    description: 'Select all the pots',
+    description: 'Select something',
     title: 'Type selector 2',
     elementsToSelectAmount: 3,
     elements: [
@@ -55,7 +55,7 @@ export const levels: Level[] = [
   },
   {
     answer: 'pot',
-    description: 'Select all the pots',
+    description: 'Select nothing',
     title: 'Test long level title',
     elementsToSelectAmount: 3,
     elements: [
