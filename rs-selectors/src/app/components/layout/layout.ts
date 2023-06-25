@@ -1,6 +1,6 @@
 import { BaseComponentInterface } from '../../../types/interfaces/baseComponentInterface'
 import { header } from './header/header'
-import { panel } from './panel/panel'
+import { levels } from './levels/levels'
 import { footer } from './footer/footer'
 import { gameField } from './game-field/game-field'
 import './layout.scss'
@@ -8,10 +8,10 @@ import './layout.scss'
 export class Layout {
   public header = header
   public footer = footer
-  public panel = panel
+  public levels = levels
   public gameField = gameField
 
   public create(root: BaseComponentInterface): void {
-    root.append(header, gameField, panel, footer)
+    root.append(header, gameField, levels, footer)
   }
 }

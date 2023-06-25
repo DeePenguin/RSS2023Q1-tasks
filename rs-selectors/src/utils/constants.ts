@@ -1,3 +1,5 @@
+import { GameData } from '../types/types'
+
 export const CssEditorParams = {
   fileName: 'styles.css',
   title: 'CSS Editor',
@@ -10,4 +12,10 @@ export const HtmlEditorParams = {
   fileName: 'table.html',
   title: 'HTML Viewer',
   minLinesAmount: 15,
+}
+
+export const defaultGameData: GameData = {
+  currentLevel: 1,
+  finishedLevels: [],
+  finishedWithHint: [],
 }

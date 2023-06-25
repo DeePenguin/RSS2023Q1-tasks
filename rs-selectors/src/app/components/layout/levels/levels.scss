@@ -1,0 +1,19 @@
+.levels {
+  @include flex-col($jc: start, $ali: stretch);
+
+  grid-area: levels;
+  gap: 10px;
+
+  padding: 10px;
+
+  color: $font-color-light;
+
+  background-color: $bg-dark;
+
+  &__header {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-size: 1.6em;
+    font-weight: 600;
+  }
+}
