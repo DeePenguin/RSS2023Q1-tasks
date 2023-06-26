@@ -5,7 +5,7 @@ import { customElementDescription } from '../../../../types/types'
 import { customElementsContent } from '../../../../utils/constants'
 
 export class Viewer extends BaseComponent {
-  private elements: HTMLElement[] = []
+  public elements: HTMLElement[] = []
   constructor() {
     super({ className: 'game__viewer' })
   }
@@ -32,6 +32,7 @@ export class Viewer extends BaseComponent {
       if (element.children) {
         this.createElements(element.children, node)
       }
+      node.setAttribute('data-tooltip', `<${element.tag}></${element.tag}>`)
       root.append(node)
       this.elements.push(node)
     })
