@@ -1,4 +1,4 @@
-import { GameData } from '../types/types'
+import { CustomTags, GameData } from '../types/types'
 
 export const CssEditorParams = {
   fileName: 'styles.css',
@@ -18,4 +18,10 @@ export const defaultGameData: GameData = {
   currentLevel: 1,
   finishedLevels: [],
   finishedWithHint: [],
+}
+
+export const customElementsContent: Record<CustomTags, string> = {
+  pot: '<div class="border"></div><div class="bottom"></div>',
+  seedling: '<div class="stem"></div>',
+  camomile: '<div class="head"></div><div class="stem"></div>',
 }

@@ -25,8 +25,10 @@ export type Level = {
   elements: customElementDescription[]
 }
 
+export type CustomTags = 'pot' | 'seedling' | 'camomile'
+
 export type customElementDescription = {
-  tag: string
+  tag: CustomTags
   toSelect?: boolean
   class?: string
   attr?: Record<string, string>

@@ -1,0 +1,9 @@
+.game {
+  &__viewer {
+    @include flex($jc: center, $ali: end);
+
+    gap: 15px;
+    width: 100%;
+    min-height: 200px;
+  }
+}
