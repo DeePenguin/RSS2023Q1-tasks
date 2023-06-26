@@ -5,6 +5,14 @@
 
       .markup {
         padding-left: 2ch;
+
+        &.hovered {
+          background-color: $editor-additional-hover;
+
+          &:has(.hovered) {
+            background-color: transparent;
+          }
+        }
       }
     }
   }
