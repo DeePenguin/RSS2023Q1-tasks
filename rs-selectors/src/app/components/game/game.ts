@@ -18,5 +18,39 @@ export class Game {
   public showLevel(level: Level): void {
     this.title.setContent(level.description)
     this.viewer.showLevel(level.elements)
+    this.htmlEditor.showLevel(level.elements)
+    this.connectElements(this.viewer.elements, this.htmlEditor.elements)
+  }
+
+  private connectElements(viewerElements: HTMLElement[], markupElements: HTMLElement[]): void {
+    const mouseOver = (elements: HTMLElement[]): void => {
+      elements.forEach((element) => {
+        element.addEventListener('mouseover', (): void => {
+          elements.forEach((el) => {
+            el.classList.add('hovered')
+          })
+        })
+      })
+    }
+
+    const mouseOut = (elements: HTMLElement[]): void => {
+      elements.forEach((element) => {
+        element.addEventListener('mouseout', (): void => {
+          elements.forEach((el) => {
+            el.classList.remove('hovered')
+          })
+        })
+      })
+    }
+
+    const addListeners = (...elementsArrays: HTMLElement[][]): void => {
+      elementsArrays[0].forEach((_, i) => {
+        const elements = elementsArrays.map((array) => array[i])
+        mouseOver(elements)
+        mouseOut(elements)
+      })
+    }
+
+    addListeners(viewerElements, markupElements)
   }
 }

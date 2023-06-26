@@ -5,7 +5,7 @@
   }
 
   40% {
-    transform: skew(0deg, 0deg) scaleY(.9);
+    transform: skew(0deg, 0deg) scaleY(0.9);
     animation-timing-function: ease-out;
   }
 
@@ -16,11 +16,11 @@
 
 @keyframes strobe {
   0% {
-  transform: skew(3deg, 0deg) scaleX(1);
+    transform: skew(3deg, 0deg) scaleX(1);
   }
 
   10% {
-    transform: skew(1deg, 0deg) scaleY(.9);
+    transform: skew(1deg, 0deg) scaleY(0.9);
   }
 
   50% {
@@ -28,7 +28,7 @@
   }
 
   60% {
-    transform: skew(-1deg, 0deg) scaleY(.9);
+    transform: skew(-1deg, 0deg) scaleY(0.9);
   }
 
   100% {
@@ -38,8 +38,19 @@
 
 .animated {
   transform-origin: bottom;
-  animation: strobe-start .5s ease-out, strobe 1s infinite;
-  animation-delay: 0s, .5s;
+  animation: strobe-start 0.5s ease-out, strobe 1s infinite;
+  animation-delay: 0s, 0.5s;
+}
+
+pot, seedling, camomile {
+  &.hovered {
+    filter: drop-shadow(2px 0 2px $outline-color) drop-shadow(-2px 0 2px $outline-color);
+
+    &:has(.hovered) {
+      filter: none;
+    }
+  }
+
 }
 
 /* POT */
@@ -79,7 +90,7 @@ pot .bottom {
 }
 
 pot .bottom::before {
-  content: "";
+  content: '';
 
   position: absolute;
   top: 0;
@@ -135,7 +146,7 @@ pot.bowl .bottom {
 }
 
 .stem::after {
-  content: "";
+  content: '';
 
   position: absolute;
 
