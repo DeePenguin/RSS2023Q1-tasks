@@ -1,3 +1,4 @@
+import xml from 'highlight.js/lib/languages/xml'
 import { BaseComponentInterface } from '../../../../../types/interfaces/baseComponentInterface'
 import { customElementDescription } from '../../../../../types/types'
 import { BaseComponent } from '../../../../../utils/base-component'
@@ -13,6 +14,8 @@ export class HtmlEditor extends Editor {
     this.addClass('editor-html')
     this.title.setContent(HtmlEditorParams.title)
     this.fileName.setContent(HtmlEditorParams.fileName)
+    this.hljs.registerLanguage('xml', xml)
+    this.hljs.configure({ languages: ['xml'] })
   }
 
   public showLevel(elements: customElementDescription[]): void {
@@ -35,13 +38,13 @@ export class HtmlEditor extends Editor {
       }
       if (!element.children) {
         content += ` />`
-        markup.append(content)
+        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(content, { language: 'xml' }).value)
       } else {
         content += `>`
         const ending = `</${element.tag}>`
-        markup.append(content)
+        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(content, { language: 'xml' }).value)
         this.createMarkup(element.children, markup)
-        markup.append(ending)
+        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(ending, { language: 'xml' }).value)
       }
       root.append(markup)
       this.elements.push(markup.node)

@@ -40,7 +40,7 @@ export const levels: Level[] = [
       {
         tag: 'pot',
         toSelect: true,
-        attr: { id: 'zebra' },
+        attr: { id: 'zebra', for: 'plant' },
         children: [
           {
             tag: 'seedling',
