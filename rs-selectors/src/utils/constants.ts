@@ -15,7 +15,7 @@ export const HtmlEditorParams = {
 }
 
 export const defaultGameData: GameData = {
-  currentLevel: 1,
+  currentLevel: 0,
   finishedLevels: new Set(),
   finishedWithHint: new Set(),
 }

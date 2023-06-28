@@ -65,9 +65,7 @@ export class LevelsList extends BaseComponent<'ul'> {
 
   public completeLevel(level: number, hintWasUsed: boolean): void {
     this.checkAsCompleted(level)
-    if (hintWasUsed) {
-      this.checkAsHinted(level)
-    } else {
+    if (!hintWasUsed) {
       this.removeHint(level)
     }
   }
