@@ -19,7 +19,7 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implem
     this.node.remove()
   }
 
-  public appendTo<K extends keyof HTMLElementTagNameMap>(parent: HTMLElement | BaseComponent<K>): void {
+  public appendTo(parent: HTMLElement | BaseComponentInterface): void {
     parent.append(this.node)
   }
 
@@ -30,8 +30,11 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implem
     this.node.append(...nodes)
   }
 
-  public addListener(eventName: keyof GlobalEventHandlersEventMap, callback: () => void): void {
-    this.node.addEventListener(eventName, callback)
+  public addListener<E extends keyof HTMLElementEventMap>(
+    eventName: E,
+    callback: (ev: HTMLElementEventMap[E]) => void,
+  ): void {
+    this.node.addEventListener(eventName, callback as EventListenerOrEventListenerObject)
   }
 
   public setAttributes(attributes: Record<string, string>): void {
