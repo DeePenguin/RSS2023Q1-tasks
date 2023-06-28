@@ -42,7 +42,9 @@
   animation-delay: 0s, 0.5s;
 }
 
-pot, seedling, camomile {
+pot,
+seedling,
+camomile {
   &.hovered {
     filter: drop-shadow(2px 0 2px $outline-color) drop-shadow(-2px 0 2px $outline-color);
 

@@ -11,18 +11,65 @@
       padding: 0 0.6em;
     }
 
-    &__input,
-    &__button {
-      height: 100%;
-      border: none;
-      outline: none;
-    }
+    &__answer {
+      $padding: 2ch;
 
-    &__input {
+      position: relative;
       flex-grow: 1;
-      padding-left: 2ch;
-      color: $font-color-light;
-      background-color: transparent;
+      height: 100%;
+
+      .answer {
+        &__markup,
+        &__input {
+          overflow: hidden;
+          width: 100%;
+          max-width: 100%;
+          padding-left: $padding;
+        }
+
+        &__input {
+          resize: none;
+
+          position: absolute;
+          z-index: 2;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+
+          display: block;
+          flex-grow: 1;
+
+          color: $font-color-light;
+          color: transparent;
+          white-space: nowrap;
+
+          background-color: transparent;
+          border: none;
+          outline: none;
+          caret-color: $font-color-light;
+        }
+
+        &__markup {
+          @include flex($jc: start);
+
+          height: 100%;
+          color: #ea51b2;
+          white-space: pre;
+          background-color: transparent;
+
+          .hljs-selector-class {
+            color: #b45bcf;
+          }
+
+          .hljs-selector-pseudo {
+            color: #ffc37b;
+          }
+
+          .hljs-selector-id {
+            color: #62d6e8;
+          }
+        }
+      }
     }
 
     &__button {
@@ -33,9 +80,19 @@
       }
 
       cursor: pointer;
+
+      height: 100%;
       padding: 10px 15px;
+
       color: $font-color-light;
+
       background-color: $editor-additional;
+      border: none;
+      outline: none;
     }
+  }
+
+  &.shake {
+    animation: shake 0.2s 5;
   }
 }
