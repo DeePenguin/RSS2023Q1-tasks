@@ -39,6 +39,9 @@ export class CssEditor extends Editor {
     this.input.addListener('keydown', (e: KeyboardEvent): void => this.handleKeydown(e))
     this.input.addListener('input', (): void => this.handleInput())
     this.button.addListener('click', (): void => this.emitCheck())
+    this.emitter.on('shakeEditor', (): void => {
+      this.shake()
+    })
   }
 
   private handleKeydown(e: KeyboardEvent): void {
@@ -58,7 +61,6 @@ export class CssEditor extends Editor {
   }
 
   private emitCheck(): void {
-    console.log('emit answer check', this.input.node.value)
     this.emitter.emit('checkAnswer', this.input.node.value)
   }
 
@@ -68,8 +70,12 @@ export class CssEditor extends Editor {
   }
 
   public shake(): void {
+    const listener = (): void => {
+      this.removeClass('shake')
+      this.node.removeEventListener('animationend', listener)
+    }
     this.addClass('shake')
-    this.addListener('animationend', () => this.removeClass('shake'))
+    this.addListener('animationend', listener)
   }
 
   public typeAnswer(answer: string): void {

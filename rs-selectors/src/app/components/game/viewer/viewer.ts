@@ -40,10 +40,14 @@ export class Viewer extends BaseComponent {
     })
   }
 
-  public applySelector(selector: string): number {
-    this.selectedElements = Array.from(this.node.querySelectorAll(selector))
-    const matchedElements = this.selectedElements.filter((el) => el.classList.contains('animated'))
-    return matchedElements.length
+  public applySelector(selector: string, correctAmount: number): boolean {
+    this.selectedElements = Array.from(this.node.querySelectorAll<HTMLElement>(selector)).filter(
+      (el) => el.nodeName !== 'DIV',
+    )
+    const isCorrect =
+      this.selectedElements.length === correctAmount &&
+      this.selectedElements.every((el) => el.classList.contains('animated'))
+    return isCorrect
   }
 
   public completeLevel(): void {
@@ -54,5 +58,19 @@ export class Viewer extends BaseComponent {
       this.emitter.emit('completeAnimationEnds', null)
     }
     this.addListener('animationend', finishListener)
+  }
+
+  public showWrongAnswer(): void {
+    const stopShaking = (): void => {
+      this.node.removeEventListener('animationend', stopShaking)
+      this.selectedElements.forEach((el) => el.classList.remove('shake'))
+    }
+
+    if (this.selectedElements.length) {
+      this.addListener('animationend', stopShaking)
+      this.selectedElements.forEach((el) => el.classList.add('shake'))
+    } else {
+      this.emitter.emit('shakeEditor', null)
+    }
   }
 }

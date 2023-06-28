@@ -42,4 +42,5 @@ export type EventMap = {
   hint: null
   completeLevel: null
   completeAnimationEnds: null
+  shakeEditor: null
 }
