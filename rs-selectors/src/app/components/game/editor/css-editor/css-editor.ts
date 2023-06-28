@@ -4,6 +4,7 @@ import { BaseComponent } from '../../../../../utils/base-component'
 import { CssEditorParams } from '../../../../../utils/constants'
 
 import './css-editor.scss'
+import { EventEmitter } from '../../../../../utils/event-emitter'
 
 export class CssEditor extends Editor {
   private answer = new BaseComponent({
@@ -28,7 +29,7 @@ export class CssEditor extends Editor {
     attr: { type: 'button' },
   })
 
-  constructor() {
+  constructor(private emitter: EventEmitter) {
     super(CssEditorParams.minLinesAmount)
     this.addClass('editor-css')
     this.title.setContent(CssEditorParams.title)
@@ -58,27 +59,35 @@ export class CssEditor extends Editor {
 
   private emitCheck(): void {
     console.log('emit answer check', this.input.node.value)
+    this.emitter.emit('checkAnswer', this.input.node.value)
   }
 
-  public shake() :void {
+  public clear(): void {
+    this.input.node.value = ''
+    this.markup.node.innerHTML = ''
+  }
+
+  public shake(): void {
     this.addClass('shake')
     this.addListener('animationend', () => this.removeClass('shake'))
   }
-  public type(answer: string): void {
-      this.input.node.value = ''
-      this.input.node.disabled = true
-      let i = 0
-      setTimeout(() => {
-        const typeChar = (): void => {
-          if (i === answer.length) {
-            this.input.node.disabled = false
-            return
-          }
-          this.input.node.value += answer[i]
-          i += 1
-          setTimeout(typeChar, 200)
+
+  public typeAnswer(answer: string): void {
+    this.input.node.disabled = true
+    this.clear()
+    let i = 0
+    setTimeout(() => {
+      const typeChar = (): void => {
+        if (i === answer.length) {
+          this.input.node.disabled = false
+          return
         }
-        typeChar()
-      }, 500)
+        this.input.node.value += answer[i]
+        i += 1
+        this.highlight()
+        setTimeout(typeChar, 200)
+      }
+      typeChar()
+    }, 300)
   }
 }

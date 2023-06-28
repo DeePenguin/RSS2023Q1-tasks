@@ -2,7 +2,7 @@ import { BaseComponentInterface } from '../../../types/interfaces/baseComponentI
 import { header } from './header/header'
 import { levels } from './levels/levels'
 import { footer } from './footer/footer'
-import { gameField } from './game-field/game-field'
+import { gameField } from './game-field/game'
 import './layout.scss'
 
 export class Layout {
