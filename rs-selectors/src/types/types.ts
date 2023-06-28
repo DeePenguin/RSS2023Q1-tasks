@@ -13,8 +13,8 @@ export type Listener<M extends EventKey> = (args: EventMap[M]) => void
 
 export type GameData = {
   currentLevel: number
-  finishedLevels: number[]
-  finishedWithHint: number[]
+  finishedLevels: Set<number>
+  finishedWithHint: Set<number>
 }
 
 export type Level = {

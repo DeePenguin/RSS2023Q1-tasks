@@ -42,20 +42,33 @@ export class LevelsList extends BaseComponent<'ul'> {
     })
   }
 
-  public checkAsCompleted(number: number): void {
-    this.listItems[number].addClass('completed')
+  public checkAsCompleted(level: number): void {
+    this.listItems[level].addClass('completed')
   }
 
-  public checkAsHinted(number: number): void {
-    this.listItems[number].addClass('hinted')
+  public checkAsHinted(level: number): void {
+    this.listItems[level].addClass('hinted')
   }
 
-  public checkCurrent(number: number): void {
+  public removeHint(level: number): void {
+    this.listItems[level].removeClass('hinted')
+  }
+
+  public checkCurrent(level: number): void {
     this.listItems.forEach((item) => item.removeClass('current'))
-    this.listItems[number].addClass('current')
+    this.listItems[level].addClass('current')
   }
 
   public reset(): void {
     this.listItems.forEach((item) => item.removeClass('completed', 'hinted'))
+  }
+
+  public completeLevel(level: number, hintWasUsed: boolean): void {
+    this.checkAsCompleted(level)
+    if (hintWasUsed) {
+      this.checkAsHinted(level)
+    } else {
+      this.removeHint(level)
+    }
   }
 }
