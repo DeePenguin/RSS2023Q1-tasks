@@ -48,12 +48,15 @@ export class Game {
   }
 
   private checkAnswer(answer: string): void {
-    const selector = answer.trim()
-    if (selector.length) {
-      const matchedElementsAmount = this.viewer.applySelector(answer)
-      if (matchedElementsAmount === this.level.elementsToSelectAmount) {
+    try {
+      const isAmountCorrect = this.viewer.applySelector(answer, this.level.elementsToSelectAmount)
+      if (isAmountCorrect) {
         this.viewer.completeLevel()
+      } else {
+        this.viewer.showWrongAnswer()
       }
+    } catch (e) {
+      this.emitter.emit('shakeEditor', null)
     }
   }
 
