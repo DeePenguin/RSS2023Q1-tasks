@@ -25,6 +25,12 @@ export class Game {
     this.cssEditor = new CssEditor(this.emitter)
     this.gameField.append(this.header, this.viewer, this.cssEditor, this.htmlEditor)
     this.hintButton.addListener('click', (): void => this.emitHint())
+    this.emitter.on('checkAnswer', (answer: string) => {
+      this.checkAnswer(answer)
+    })
+    this.emitter.on('completeAnimationEnds', (): void => {
+      this.emitter.emit('completeLevel', null)
+    })
   }
 
   private emitHint(): void {
@@ -39,6 +45,16 @@ export class Game {
     this.viewer.showLevel(level.elements)
     this.htmlEditor.showLevel(level.elements)
     this.connectElements(this.viewer.elements, this.htmlEditor.elements)
+  }
+
+  private checkAnswer(answer: string): void {
+    const selector = answer.trim()
+    if (selector.length) {
+      const matchedElementsAmount = this.viewer.applySelector(answer)
+      if (matchedElementsAmount === this.level.elementsToSelectAmount) {
+        this.viewer.completeLevel()
+      }
+    }
   }
 
   private connectElements(viewerElements: HTMLElement[], markupElements: HTMLElement[]): void {

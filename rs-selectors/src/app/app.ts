@@ -27,7 +27,12 @@ class App {
     this.emitter.on('selectLevel', (index: number) => {
       this.changeLevel(index)
     })
-    this.emitter.on('hint', () => { this.handleHint() })
+    this.emitter.on('hint', () => {
+      this.handleHint()
+    })
+    this.emitter.on('completeLevel', () => {
+      this.completeLevel()
+    })
   }
 
   private changeLevel(index: number): void {
@@ -38,12 +43,26 @@ class App {
     }
   }
 
+  private completeLevel(): void {
+    this.gameData.finishedLevels.push(this.gameData.currentLevel)
+    this.levelsList.checkAsCompleted(this.gameData.currentLevel)
+    if (this.gameData.currentLevel === this.levels.length - 1) {
+      this.finishGame()
+    } else {
+      this.changeLevel(this.gameData.currentLevel + 1)
+    }
+  }
+
   private handleHint(): void {
     const level = this.gameData.currentLevel
-    if (!(this.gameData.finishedWithHint.includes(level))) {
+    if (!this.gameData.finishedWithHint.includes(level)) {
       this.gameData.finishedWithHint.push(level)
       this.levelsList.checkAsHinted(level)
     }
+  }
+
+  private finishGame(): void {
+    console.log('finish')
   }
 }
 
