@@ -3,8 +3,8 @@ import { GameData } from '../types/types'
 
 const fakeGameData: GameData = {
   currentLevel: 0,
-  finishedLevels: [1, 2],
-  finishedWithHint: [1, 2],
+  finishedLevels: new Set([1, 2]),
+  finishedWithHint: new Set([1, 2]),
 }
 
 export class Storage {

@@ -16,8 +16,8 @@ export const HtmlEditorParams = {
 
 export const defaultGameData: GameData = {
   currentLevel: 1,
-  finishedLevels: [],
-  finishedWithHint: [],
+  finishedLevels: new Set(),
+  finishedWithHint: new Set(),
 }
 
 export const customElementsContent: Record<CustomTags, string> = {
