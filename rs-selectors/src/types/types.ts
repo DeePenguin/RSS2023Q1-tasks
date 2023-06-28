@@ -40,4 +40,6 @@ export type EventMap = {
   resetProgress: undefined
   checkAnswer: string
   hint: null
+  completeLevel: null
+  completeAnimationEnds: null
 }
