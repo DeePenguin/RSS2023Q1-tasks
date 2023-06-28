@@ -16,7 +16,6 @@ class App {
   private gameData!: GameData
   private game!: Game
   private levelsList!: LevelsList
-  private currentLevel: number = 0
 
   public init(): void {
     this.layout.create(this.root)
@@ -28,6 +27,7 @@ class App {
     this.emitter.on('selectLevel', (index: number) => {
       this.changeLevel(index)
     })
+    this.emitter.on('hint', () => { this.handleHint() })
   }
 
   private changeLevel(index: number): void {
@@ -35,6 +35,14 @@ class App {
       this.gameData.currentLevel = index
       this.game.showLevel(this.levels[index])
       this.levelsList.checkCurrent(index)
+    }
+  }
+
+  private handleHint(): void {
+    const level = this.gameData.currentLevel
+    if (!(this.gameData.finishedWithHint.includes(level))) {
+      this.gameData.finishedWithHint.push(level)
+      this.levelsList.checkAsHinted(level)
     }
   }
 }

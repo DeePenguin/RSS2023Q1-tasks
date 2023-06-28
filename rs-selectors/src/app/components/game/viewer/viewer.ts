@@ -3,10 +3,11 @@ import './viewer.scss'
 import './custom-elements.scss'
 import { customElementDescription } from '../../../../types/types'
 import { customElementsContent } from '../../../../utils/constants'
+import { EventEmitter } from '../../../../utils/event-emitter'
 
 export class Viewer extends BaseComponent {
   public elements: HTMLElement[] = []
-  constructor() {
+  constructor(private emitter: EventEmitter) {
     super({ className: 'game__viewer' })
   }
 

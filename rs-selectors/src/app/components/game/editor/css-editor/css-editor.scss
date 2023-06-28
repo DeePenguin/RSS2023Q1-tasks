@@ -47,6 +47,14 @@
           border: none;
           outline: none;
           caret-color: $font-color-light;
+
+          &::placeholder {
+            color: $font-color-light;
+          }
+
+          &:disabled::placeholder {
+            color: transparent;
+          }
         }
 
         &__markup {
@@ -90,9 +98,5 @@
       border: none;
       outline: none;
     }
-  }
-
-  &.shake {
-    animation: shake 0.2s 5;
   }
 }

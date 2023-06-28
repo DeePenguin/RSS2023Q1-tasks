@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template: 'header levels' min-content 'game-field levels' auto 'footer levels' min-content / 2fr 300px;
+  grid-template: 'header levels' min-content 'game levels' auto 'footer levels' min-content / 2fr 300px;
 
   min-height: 100vh;
 

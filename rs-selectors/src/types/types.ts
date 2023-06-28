@@ -38,4 +38,6 @@ export type customElementDescription = {
 export type EventMap = {
   selectLevel: number
   resetProgress: undefined
+  checkAnswer: string
+  hint: null
 }
