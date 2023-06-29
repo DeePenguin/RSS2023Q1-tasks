@@ -4,6 +4,7 @@
   @include flex-col($jc: start, $ali: stretch);
 
   flex-grow: 1;
+  width: 100%;
 
   .level {
     &__item {

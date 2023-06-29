@@ -1,0 +1,28 @@
+.levels {
+  &__reset {
+    @extend %transition-s;
+
+    @include m-hover {
+      opacity: 1;
+
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+
+    cursor: pointer;
+
+    width: 100%;
+    max-width: 200px;
+    min-height: 50px;
+
+    font-size: 1.1em;
+    font-weight: 600;
+    color: $font-color-light;
+
+    opacity: 0.6;
+    background-color: transparent;
+    border: 2px solid;
+    outline: none;
+  }
+}

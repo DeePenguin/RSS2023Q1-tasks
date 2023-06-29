@@ -5,6 +5,7 @@ import { levels } from '../utils/levels'
 import { Game } from './components/game/game'
 import { Layout } from './components/layout/layout'
 import { LevelsList } from './components/levelsList/levels-list'
+import { ResetBtn } from './reset-btn/reset-btn'
 import { Storage } from './storage'
 
 class App {
@@ -12,6 +13,7 @@ class App {
   private layout: Layout = new Layout()
   private storage: Storage = new Storage()
   private emitter = new EventEmitter()
+  private resetBtn = new ResetBtn(this.emitter)
   private levels = levels
   private gameData!: GameData
   private game!: Game
@@ -22,7 +24,7 @@ class App {
     this.layout.create(this.root)
     this.gameData = this.storage.getData()
     this.levelsList = new LevelsList(this.layout.levels, this.emitter, this.levels, this.gameData)
-    console.log(this.gameData)
+    this.layout.levels.append(this.resetBtn)
     this.game = new Game(this.emitter, this.layout.gameField)
     this.game.showLevel(this.levels[this.gameData.currentLevel])
     this.emitter.on('selectLevel', (index: number) => {
@@ -33,6 +35,9 @@ class App {
     })
     this.emitter.on('completeLevel', () => {
       this.completeLevel()
+    })
+    this.emitter.on('resetProgress', () => {
+      this.resetProgress()
     })
   }
 
@@ -76,8 +81,14 @@ class App {
     console.log('finish')
   }
 
-  saveData(): void {
+  private saveData(): void {
     this.storage.saveData(this.gameData)
+  }
+
+  private resetProgress(): void {
+    this.gameData.finishedLevels.clear()
+    this.gameData.finishedWithHint.clear()
+    this.changeLevel(0)
   }
 }
 
