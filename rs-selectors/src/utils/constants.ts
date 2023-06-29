@@ -12,6 +12,8 @@ export const HtmlEditorParams = {
   fileName: 'table.html',
   title: 'HTML Viewer',
   minLinesAmount: 13,
+  baseTagOpening: '<shelf>',
+  baseTagEnding: '</shelf>',
 }
 
 export const defaultGameData: GameData = {

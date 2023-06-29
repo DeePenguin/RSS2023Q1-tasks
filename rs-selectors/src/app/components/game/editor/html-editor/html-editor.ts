@@ -9,19 +9,29 @@ import './html-editor.scss'
 
 export class HtmlEditor extends Editor {
   public elements: HTMLElement[] = []
+  private markupContainer = new BaseComponent({
+    className: 'editor__markup',
+    attr: { 'data-opening': HtmlEditorParams.baseTagOpening, 'data-ending': HtmlEditorParams.baseTagEnding },
+  })
   constructor() {
     super(HtmlEditorParams.minLinesAmount)
     this.addClass('editor-html')
     this.title.setContent(HtmlEditorParams.title)
     this.fileName.setContent(HtmlEditorParams.fileName)
+    this.content.append(this.markupContainer)
     this.hljs.registerLanguage('xml', xml)
     this.hljs.configure({ languages: ['xml'] })
   }
 
   public showLevel(elements: customElementDescription[]): void {
     this.elements = []
-    this.content.node.innerHTML = ''
-    this.createMarkup(elements, this.content)
+    this.markupContainer.node.innerHTML = ''
+    this.createMarkup(elements, this.markupContainer)
+  }
+
+  private highlight(str: string): string {
+    const content = this.hljs.highlight(str, { language: 'xml' }).value
+    return content
   }
 
   private createMarkup(elements: customElementDescription[], root: BaseComponentInterface): void {
@@ -38,13 +48,13 @@ export class HtmlEditor extends Editor {
       }
       if (!element.children) {
         content += ` />`
-        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(content, { language: 'xml' }).value)
+        markup.node.insertAdjacentHTML('beforeend', this.highlight(content))
       } else {
         content += `>`
         const ending = `</${element.tag}>`
-        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(content, { language: 'xml' }).value)
+        markup.node.insertAdjacentHTML('beforeend', this.highlight(content))
         this.createMarkup(element.children, markup)
-        markup.node.insertAdjacentHTML('beforeend', this.hljs.highlight(ending, { language: 'xml' }).value)
+        markup.node.insertAdjacentHTML('beforeend', this.highlight(ending))
       }
       root.append(markup)
       this.elements.push(markup.node)
