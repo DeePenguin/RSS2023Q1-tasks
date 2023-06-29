@@ -49,6 +49,9 @@ export class Game {
 
   private checkAnswer(answer: string): void {
     try {
+      if (answer.includes('animated')) {
+        throw new Error()
+      }
       const isAmountCorrect = this.viewer.applySelector(answer, this.level.elementsToSelectAmount)
       if (isAmountCorrect) {
         this.viewer.completeLevel()
