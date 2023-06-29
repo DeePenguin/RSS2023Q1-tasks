@@ -18,7 +18,7 @@
     flex-basis: 100%;
     gap: 15px;
     padding: 10px;
-    background-color: $lighter-s;
+    background-color: $accent-color;
   }
 
   &__title {
@@ -28,26 +28,23 @@
     color: $font-color-light;
   }
 
+  &__counter,
+  &__content {
+    line-height: 1.4;
+  }
+
   &__counter {
     @include flex-col($ali: end);
 
     min-width: 30px;
-    padding: 0.4em 0.6em;
-
-    line-height: 1.3;
+    padding: 0 0.6em;
     text-align: right;
-
-    background-color: $editor-additional;
+    background-color: $editor-counter;
   }
 
   &__content {
     position: relative;
-
     flex-grow: 1;
-
-    padding: 0.4em 0.6em;
-
-    line-height: 1.3;
     color: $font-color-light;
   }
 }
