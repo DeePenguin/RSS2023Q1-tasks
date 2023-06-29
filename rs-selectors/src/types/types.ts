@@ -37,7 +37,7 @@ export type customElementDescription = {
 
 export type EventMap = {
   selectLevel: number
-  resetProgress: undefined
+  resetProgress: null
   checkAnswer: string
   hint: null
   completeLevel: null
