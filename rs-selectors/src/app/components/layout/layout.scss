@@ -1,6 +1,10 @@
 .root {
+  @include m-custom(800px) {
+    grid-template: 'header' min-content 'game' auto 'footer' min-content / 1fr;
+  }
+
   display: grid;
-  grid-template: 'header levels' min-content 'game levels' auto 'footer levels' min-content / 2fr 300px;
+  grid-template: 'header levels' min-content 'game levels' auto 'footer levels' min-content / 1fr min-content;
 
   min-height: 100vh;
 

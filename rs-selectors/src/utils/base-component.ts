@@ -57,8 +57,12 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implem
     this.node.classList.remove(...classNames)
   }
 
-  public toggleClass(className: string, state: boolean): void {
-    this.node.classList.toggle(className, state)
+  public toggleClass(className: string, state?: boolean): void {
+    if (state === undefined) {
+      this.node.classList.toggle(className)
+    } else {
+      this.node.classList.toggle(className, state)
+    }
   }
 
   public get style(): CSSStyleDeclaration {

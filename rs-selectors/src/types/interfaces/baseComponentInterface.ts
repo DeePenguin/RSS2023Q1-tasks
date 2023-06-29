@@ -10,5 +10,5 @@ export interface BaseComponentInterface {
   setContent(content: string): void
   addClass(...classNames: string[]): void
   removeClass(...classNames: string[]): void
-  toggleClass(className: string, state: boolean): void
+  toggleClass(className: string, state?: boolean): void
 }
