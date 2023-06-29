@@ -27,11 +27,14 @@
   &__title {
     flex-grow: 1;
     margin: 0;
+    color: $font-color-light;
     text-align: center;
   }
 
   &__hint-button {
     @extend %transition-s;
+
+    @include flex($jc: center);
 
     @include m-hover {
       opacity: 1;
@@ -42,6 +45,10 @@
     }
 
     cursor: pointer;
+
+    aspect-ratio: 1 / 1;
+    height: 1.6em;
+    padding: 0;
 
     color: $font-color-light;
 

@@ -13,12 +13,12 @@ export class CssEditor extends Editor {
   private input = new BaseComponent({
     parent: this.answer,
     tag: 'textarea',
-    className: 'answer__input',
-    attr: { rows: '1', placeholder: CssEditorParams.placeholder },
+    className: 'editor__input',
+    attr: { rows: '1', placeholder: CssEditorParams.placeholder, spellcheck: 'false' },
   })
   private markup = new BaseComponent({
     parent: this.answer,
-    className: 'answer__markup language-css',
+    className: 'editor__markup language-css',
     attr: { 'data-placeholder': CssEditorParams.placeholder },
   })
 

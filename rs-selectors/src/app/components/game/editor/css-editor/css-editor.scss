@@ -1,102 +1,117 @@
-.editor-css {
-  .editor {
-    &__content {
-      @include flex;
+@keyframes blink {
+  0% {
+    background-color: transparent;
+  }
 
-      padding: 0;
-    }
+  50% {
+    background-color: $blink-color;
+  }
 
-    &__counter {
-      justify-content: center;
-      padding: 0 0.6em;
-    }
+  100% {
+    background-color: transparent;
+  }
+}
 
-    &__answer {
-      $padding: 2ch;
+.editor {
+  &-css &__content {
+    @include flex;
+  }
 
-      position: relative;
-      flex-grow: 1;
-      height: 100%;
+  &-css &__counter {
+    justify-content: center;
+    padding: 0 0.6em;
+  }
 
-      .answer {
-        &__markup,
-        &__input {
-          overflow: hidden;
-          width: 100%;
-          max-width: 100%;
-          padding-left: $padding;
-        }
+  &-css &__answer {
+    $padding: 2ch;
 
-        &__input {
-          resize: none;
+    position: relative;
+    flex-grow: 1;
+    height: 100%;
+  }
 
-          position: absolute;
-          z-index: 2;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
+  &-css &__markup,
+  &-css &__input {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 2ch;
+  }
 
-          display: block;
-          flex-grow: 1;
+  &-css &__input {
+    resize: none;
 
-          color: $font-color-light;
-          color: transparent;
-          white-space: nowrap;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 
-          background-color: transparent;
-          border: none;
-          outline: none;
-          caret-color: $font-color-light;
+    display: block;
 
-          &::placeholder {
-            color: $font-color-light;
-          }
+    color: transparent;
+    white-space: nowrap;
 
-          &:disabled::placeholder {
-            color: transparent;
-          }
-        }
+    background-color: transparent;
+    border: none;
+    outline: none;
+    caret-color: $font-color-light;
 
-        &__markup {
-          @include flex($jc: start);
-
-          height: 100%;
-          color: #ea51b2;
-          white-space: pre;
-          background-color: transparent;
-
-          .hljs-selector-class {
-            color: #b45bcf;
-          }
-
-          .hljs-selector-pseudo {
-            color: #ffc37b;
-          }
-
-          .hljs-selector-id {
-            color: #62d6e8;
-          }
-        }
-      }
-    }
-
-    &__button {
-      @extend %transition-s;
-
-      @include m-hover {
-        background-color: $editor-additional-hover;
-      }
-
-      cursor: pointer;
-
-      height: 100%;
-      padding: 10px 15px;
-
+    &::placeholder {
       color: $font-color-light;
-
-      background-color: $editor-additional;
-      border: none;
-      outline: none;
     }
+
+    &:disabled::placeholder {
+      color: transparent;
+    }
+  }
+
+  &-css &__markup {
+    @include flex($jc: start);
+
+    height: 100%;
+    color: #ea51b2;
+    white-space: pre;
+    background-color: transparent;
+
+    .hljs-selector-class {
+      color: #b45bcf;
+    }
+
+    .hljs-selector-pseudo {
+      color: #ffc37b;
+    }
+
+    .hljs-selector-id {
+      color: #62d6e8;
+    }
+  }
+
+  &-css:not(:focus-within) &__markup:empty {
+    animation: blink 1s ease infinite;
+  }
+
+
+  &-css &__button {
+    @extend %transition-s;
+
+    @include m-hover {
+      background-color: $editor-btn-hover;
+    }
+
+    cursor: pointer;
+
+    height: 100%;
+    padding: 10px 15px;
+
+    font-size: 1.1em;
+    font-weight: 600;
+    color: $font-color-light-xl;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 20%);
+    letter-spacing: 0.08em;
+
+    background-color: $editor-btn;
+    border: none;
+    outline: none;
   }
 }

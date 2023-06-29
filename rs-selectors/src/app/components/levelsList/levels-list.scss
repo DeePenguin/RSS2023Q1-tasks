@@ -19,6 +19,7 @@
       cursor: pointer;
       gap: 10px;
       padding: 5px;
+      padding-left: 15px;
 
       &::before,
       &::after {
@@ -29,7 +30,7 @@
       }
 
       &.current {
-        background-color: $editor-additional;
+        background-color: $accent-color;
       }
 
       &.completed::before {

@@ -1,17 +1,13 @@
-.editor-html {
-  .editor {
-    &__content {
-      padding-left: 0;
+.editor {
+  &-html &__content {
+    .markup {
+      padding-left: 2ch;
 
-      .markup {
-        padding-left: 2ch;
+      &.hovered {
+        background-color: $lighter-s;
 
-        &.hovered {
-          background-color: $editor-additional-hover;
-
-          &:has(.hovered) {
-            background-color: transparent;
-          }
+        &:has(.hovered) {
+          background-color: transparent;
         }
       }
     }
