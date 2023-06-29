@@ -3,7 +3,7 @@
 
   @include flex-col($jc: start, $ali: center);
 
-  @include m-custom(800px) {
+  @include m-custom(900px) {
     position: fixed;
     z-index: 10;
     top: 0;
@@ -42,7 +42,7 @@
 
     @include flex-col($jc: space-between, $ali: stretch);
 
-    @include m-custom(800px) {
+    @include m-custom(900px) {
       pointer-events: all;
       opacity: 0.5;
     }

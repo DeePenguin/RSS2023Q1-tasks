@@ -6,16 +6,18 @@ import { customElementsContent } from '../../../../utils/constants'
 import { EventEmitter } from '../../../../utils/event-emitter'
 
 export class Viewer extends BaseComponent {
+  private container = new BaseComponent({ tag: 'div', className: 'shelf' }).node
   public elements: HTMLElement[] = []
   private selectedElements: HTMLElement[] = []
   constructor(private emitter: EventEmitter) {
     super({ className: 'game__viewer' })
+    this.append(this.container)
   }
 
   public showLevel(elements: customElementDescription[]): void {
     this.elements = []
-    this.node.innerHTML = ''
-    this.createElements(elements, this.node)
+    this.container.innerHTML = ''
+    this.createElements(elements, this.container)
   }
 
   private createElements(elements: customElementDescription[], root: HTMLElement): void {
@@ -41,7 +43,7 @@ export class Viewer extends BaseComponent {
   }
 
   public applySelector(selector: string, correctAmount: number): boolean {
-    this.selectedElements = Array.from(this.node.querySelectorAll<HTMLElement>(selector)).filter(
+    this.selectedElements = Array.from(this.container.querySelectorAll<HTMLElement>(selector)).filter(
       (el) => el.nodeName !== 'DIV',
     )
     const isCorrect =

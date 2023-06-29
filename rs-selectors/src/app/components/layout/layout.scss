@@ -1,5 +1,5 @@
 .root {
-  @include m-custom(800px) {
+  @include m-custom(900px) {
     grid-template: 'header' min-content 'game' auto 'footer' min-content / 1fr;
   }
 
