@@ -11,7 +11,7 @@ export const CssEditorParams = {
 export const HtmlEditorParams = {
   fileName: 'table.html',
   title: 'HTML Viewer',
-  minLinesAmount: 17,
+  minLinesAmount: 19,
   baseTagOpening: '<shelf>',
   baseTagEnding: '</shelf>',
 }
