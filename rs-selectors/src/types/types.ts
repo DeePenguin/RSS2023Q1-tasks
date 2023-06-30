@@ -19,20 +19,21 @@ export type GameData = {
 
 export type Level = {
   answer: string
+  maxLength?: number
   description: string
   title: string
   elementsToSelectAmount: number
-  elements: customElementDescription[]
+  elements: CustomElementDescription[]
 }
 
-export type CustomTags = 'pot' | 'seedling' | 'camomile' | 'cactus'
+export type CustomTags = 'pot' | 'seedling' | 'camomile' | 'cactus' | 'flower'
 
-export type customElementDescription = {
+export type CustomElementDescription = {
   tag: CustomTags
   toSelect?: boolean
   class?: string
   attr?: Record<string, string>
-  children?: customElementDescription[]
+  children?: CustomElementDescription[]
 }
 
 export type EventMap = {
