@@ -11,7 +11,7 @@ export const CssEditorParams = {
 export const HtmlEditorParams = {
   fileName: 'table.html',
   title: 'HTML Viewer',
-  minLinesAmount: 13,
+  minLinesAmount: 17,
   baseTagOpening: '<shelf>',
   baseTagEnding: '</shelf>',
 }
@@ -26,4 +26,5 @@ export const customElementsContent: Partial<Record<CustomTags, string>> = {
   pot: '<div class="border"></div><div class="bottom"></div>',
   seedling: '<div class="stem"></div>',
   camomile: '<div class="head"><div class="center"></div></div><div class="stem"></div>',
+  flower: '<div class="head"><div class="center"></div></div><div class="stem"></div>',
 }
