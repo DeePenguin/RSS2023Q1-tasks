@@ -2,21 +2,32 @@ import { BaseComponent } from '../../../../utils/base-component'
 import './viewer.scss'
 import './custom-elements.scss'
 import { CustomElementDescription } from '../../../../types/types'
-import { customElementsContent } from '../../../../utils/constants'
+import { customElementsContent, winMessage } from '../../../../utils/constants'
 import { EventEmitter } from '../../../../utils/event-emitter'
 
 export class Viewer extends BaseComponent {
-  private container = new BaseComponent({ tag: 'div', className: 'shelf' }).node
+  private container = new BaseComponent({ className: 'shelf' }).node
+  private winBlock = new BaseComponent({ className: 'win__container', content: winMessage })
   public elements: HTMLElement[] = []
   private selectedElements: HTMLElement[] = []
   constructor(private emitter: EventEmitter) {
     super({ className: 'game__viewer' })
     this.append(this.container)
+    this.winBlock.addListener('animationend', (): void => {
+      this.winBlock.removeClass('active')
+    })
+    this.emitter.on('finishGame', (): void => {
+      this.showWinBlock()
+    })
+  }
+
+  private clearContent(): void {
+    this.elements = []
+    this.container.innerHTML = ''
   }
 
   public showLevel(elements: CustomElementDescription[]): void {
-    this.elements = []
-    this.container.innerHTML = ''
+    this.clearContent()
     this.createElements(elements, this.container)
   }
 
@@ -81,5 +92,11 @@ export class Viewer extends BaseComponent {
     } else {
       this.emitter.emit('shakeEditor', null)
     }
+  }
+
+  private showWinBlock(): void {
+    this.clearContent()
+    this.container.append(this.winBlock.node)
+    this.winBlock.addClass('active')
   }
 }

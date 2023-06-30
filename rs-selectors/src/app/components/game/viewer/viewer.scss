@@ -14,6 +14,16 @@
   }
 }
 
+@keyframes win {
+  0% {
+    transform: rotateX(120deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
 .game {
   &__viewer {
     width: 100%;
@@ -97,5 +107,34 @@
         display: block;
       }
     }
+  }
+}
+
+.win {
+  &__container {
+    display: block;
+    perspective: 10em;
+  }
+
+  &__message {
+    @extend %transition-s;
+
+    transform-origin: bottom;
+
+    padding: 10px 15px;
+
+    font-size: 1.8em;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $accent-color-m;
+    text-align: center;
+
+    background-color: $outline-color;
+    border-radius: 5px;
+
+  }
+
+  &__container.active &__message {
+    animation: win 1s ease-in-out both;
   }
 }

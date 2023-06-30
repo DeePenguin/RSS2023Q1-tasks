@@ -19,6 +19,7 @@ class App {
   private game!: Game
   private levelsList!: LevelsList
   private hintWasUsed = false
+  private isFinished = false
 
   public init(): void {
     this.layout.create(this.root)
@@ -42,7 +43,8 @@ class App {
   }
 
   private changeLevel(index: number): void {
-    if (index !== this.gameData.currentLevel) {
+    if (index !== this.gameData.currentLevel || this.isFinished) {
+      this.isFinished = false
       this.hintWasUsed = false
       this.gameData.currentLevel = index
       this.game.showLevel(this.levels[index])
@@ -56,7 +58,8 @@ class App {
     this.levelsList.completeLevel(this.gameData.currentLevel, this.hintWasUsed)
     if (this.gameData.currentLevel === this.levels.length - 1) {
       this.saveData()
-      this.finishGame()
+      this.isFinished = true
+      this.emitter.emit('finishGame', null)
     } else {
       this.changeLevel(this.gameData.currentLevel + 1)
     }
@@ -75,10 +78,6 @@ class App {
     if (!this.hintWasUsed && isLevelAlreadyHinted !== this.hintWasUsed) {
       this.gameData.finishedWithHint.delete(this.gameData.currentLevel)
     }
-  }
-
-  private finishGame(): void {
-    console.log('finish')
   }
 
   private saveData(): void {
