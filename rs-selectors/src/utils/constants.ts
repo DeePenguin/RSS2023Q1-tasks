@@ -28,3 +28,5 @@ export const customElementsContent: Partial<Record<CustomTags, string>> = {
   camomile: '<div class="head"><div class="center"></div></div><div class="stem"></div>',
   flower: '<div class="head"><div class="center"></div></div><div class="stem"></div>',
 }
+
+export const winMessage = '<div class="win__message">Hooray!<br>You did it!</div>'

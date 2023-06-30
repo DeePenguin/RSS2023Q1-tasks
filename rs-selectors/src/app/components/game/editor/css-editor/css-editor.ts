@@ -42,6 +42,9 @@ export class CssEditor extends Editor {
     this.emitter.on('shakeEditor', (): void => {
       this.shake()
     })
+    this.emitter.on('finishGame', (): void => {
+      this.clear()
+    })
   }
 
   private handleKeydown(e: KeyboardEvent): void {

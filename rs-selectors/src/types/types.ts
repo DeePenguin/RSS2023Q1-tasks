@@ -44,4 +44,5 @@ export type EventMap = {
   completeLevel: null
   completeAnimationEnds: null
   shakeEditor: null
+  finishGame: null
 }
