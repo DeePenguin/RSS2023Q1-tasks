@@ -56,7 +56,8 @@ export class CssEditor extends Editor {
   }
 
   private highlight(): void {
-    this.markup.node.innerHTML = this.input.node.value
+    const content = this.input.node.value.replaceAll(' ', '&nbsp;')
+    this.markup.node.innerHTML = content
     this.hljs.highlightElement(this.markup.node)
   }
 
