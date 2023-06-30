@@ -36,8 +36,7 @@
 
 .animated {
   transform-origin: bottom;
-
-  // animation: choose-start 0.5s ease-out 0s, choose 1s infinite ease-out 0.5s;
+  animation: choose-start 0.5s ease-out 0s, choose 1s infinite ease-out 0.5s;
 }
 
 pot {
@@ -64,6 +63,7 @@ pot {
 
     background: var(--pot-color);
     border-radius: var(--border-edge);
+    box-shadow: inset -4px 0 rgb(0 0 0 / 20%);
   }
 
   .bottom {
@@ -75,6 +75,7 @@ pot {
 
     background-color: var(--pot-color);
     clip-path: polygon(0 0, 100% 0, 87% 100%, 13% 100%);
+    box-shadow: inset -4px 0 rgb(0 0 0 / 20%);
 
     &::before {
       content: '';
@@ -90,7 +91,8 @@ pot {
     }
   }
 
-  &.bowl {
+  &.bowl,
+  &#teacup {
     --pot-height: 40px;
 
     top: 3px;
@@ -107,13 +109,39 @@ pot {
       background-size: cover;
     }
   }
+
+  &#teacup {
+    --pot-color: #976650;
+
+    .border {
+      border-radius: var(--border-edge) var(--border-edge) 0 0;
+    }
+
+    .bottom {
+      left: 0;
+      width: 100%;
+
+      &::after {
+        content: "";
+
+        position: absolute;
+        top: -10%;
+        right: -18%;
+        transform: rotate(-30deg);
+
+        width: 60%;
+        height: 75%;
+
+        border: 6px solid var(--pot-color);
+        border-top: none;
+        border-left: none;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 
 .stem {
-  --color: #299513;
-  --height: 50px;
-  --width: 8px;
-
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -122,10 +150,10 @@ pot {
 
   display: block;
 
-  width: var(--width);
-  height: var(--height);
+  width: var(--stem-width);
+  height: var(--stem-height);
 
-  background: var(--color);
+  background: var(--stem-color);
   border-radius: 10px 10px 0 0;
   box-shadow: inset -2px 0 rgb(0 0 0 / 20%);
 
@@ -136,7 +164,7 @@ pot {
 
     display: block;
 
-    background-color: var(--color);
+    background-color: var(--stem-color);
     box-shadow: inset -2px -2px rgb(0 0 0 / 20%);
   }
 }
@@ -144,6 +172,9 @@ pot {
 seedling {
   --height: 50px;
   --width: 8px;
+  --stem-color: #299513;
+  --stem-height: var(--height);
+  --stem-width: var(--width);
 
   left: 50%;
   translate: -50%;
@@ -167,6 +198,11 @@ seedling {
 
 camomile {
   --color: rgb(255 255 255);
+  --height: 50px;
+  --width: 8px;
+  --stem-color: #299513;
+  --stem-height: var(--height);
+  --stem-width: var(--width);
 
   left: 50%;
   translate: -50%;
@@ -175,6 +211,22 @@ camomile {
 
   width: 40px;
   height: 50px;
+
+  &[color = "violet"] {
+    --color: #cc90e5;
+  }
+
+  &[color = "aquamarine"] {
+    --color: #52b895;
+  }
+
+  &[color = "pink"] {
+    --color: #e5909f;
+  }
+
+  &[color = "blue"] {
+    --color: #80c9d8;
+  }
 
   .stem::after {
     top: 65%;
@@ -265,5 +317,55 @@ cactus {
     border: 5px solid #1b551b;
     border-bottom: 0;
     border-radius: inherit;
+  }
+
+  &.tall {
+    left: 23%;
+    width: 54%;
+    height: 75px;
+  }
+}
+
+flower {
+  --height: 60px;
+  --width: 0px;
+  --stem-color: #299513;
+  --stem-height: 30px;
+  --stem-width: 8px;
+  --head-height: 30px;
+  --head-width: 30px;
+
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--width);
+  height: var(--height);
+
+  .head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: var(--head-width);
+    height: var(--head-height);
+
+    background-color: #ce5b79;
+    clip-path: polygon(0 10%, 0 100%, 100% 100%, 100% 10%, 75% 30%, 50% 0, 25% 30%);
+    border-radius: 0 0 50% 50%;
+    box-shadow: inset -4px 0 rgb(0 0 0 / 20%);
+  }
+
+  .stem {
+    border-radius: 0;
+  }
+
+  cactus & {
+    --height: 30px;
+    --stem-height: 0px;
+    --head-height: 25px;
+    --head-width: 25px;
+
+    position: absolute;
+    bottom: 100%;
   }
 }
