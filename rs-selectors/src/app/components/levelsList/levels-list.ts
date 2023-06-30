@@ -25,7 +25,8 @@ export class LevelsList extends BaseComponent<'ul'> {
         parent: this,
         tag: 'li',
         className: 'level__item',
-        content: `<span class="level__number">${ind + 1}</span> ${level.title}`,
+        content: `<span class="level__number">${ind + 1}</span>
+        <span class="level__title">${level.title}</span>`,
       })
       item.addListener('click', () => {
         this.emitter.emit('selectLevel', this.listItems.indexOf(item))
