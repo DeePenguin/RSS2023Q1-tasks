@@ -48,12 +48,13 @@ export class Game {
   }
 
   private checkAnswer(answer: string): void {
+    const isLengthCorrect = this.level.maxLength ? answer.length <= this.level.maxLength : true
     try {
       if (answer.includes('animated')) {
         throw new Error()
       }
       const isAmountCorrect = this.viewer.applySelector(answer, this.level.elementsToSelectAmount)
-      if (isAmountCorrect) {
+      if (isAmountCorrect && isLengthCorrect) {
         this.viewer.completeLevel()
       } else {
         this.viewer.showWrongAnswer()
