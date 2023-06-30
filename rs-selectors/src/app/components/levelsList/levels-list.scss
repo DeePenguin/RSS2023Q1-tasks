@@ -24,8 +24,12 @@
       &::before,
       &::after {
         content: '';
+
+        flex-shrink: 0;
+
         width: 20px;
         height: 20px;
+
         font-weight: 600;
       }
 
@@ -49,6 +53,10 @@
 
     &__number {
       font-weight: 600;
+    }
+
+    &__title {
+      flex-grow: 1;
     }
   }
 }
