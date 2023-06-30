@@ -10,11 +10,21 @@ export const levels: Level[] = [
       {
         tag: 'pot',
         toSelect: true,
+        children: [
+          {
+            tag: 'cactus',
+          },
+        ],
       },
       {
         tag: 'pot',
         toSelect: true,
         class: 'bowl',
+        children: [
+          {
+            tag: 'camomile',
+          },
+        ],
       },
       {
         tag: 'pot',

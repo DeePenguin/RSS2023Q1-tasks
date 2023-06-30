@@ -66,7 +66,8 @@ export class Game {
   private connectElements(viewerElements: HTMLElement[], markupElements: HTMLElement[]): void {
     const mouseOver = (elements: HTMLElement[]): void => {
       elements.forEach((element) => {
-        element.addEventListener('mouseover', (): void => {
+        element.addEventListener('mouseover', (ev: MouseEvent): void => {
+          ev.stopPropagation()
           elements.forEach((el) => {
             el.classList.add('hovered')
           })
@@ -76,7 +77,8 @@ export class Game {
 
     const mouseOut = (elements: HTMLElement[]): void => {
       elements.forEach((element) => {
-        element.addEventListener('mouseout', (): void => {
+        element.addEventListener('mouseout', (ev: MouseEvent): void => {
+          ev.stopPropagation()
           elements.forEach((el) => {
             el.classList.remove('hovered')
           })

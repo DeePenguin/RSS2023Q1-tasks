@@ -36,10 +36,17 @@ export class Viewer extends BaseComponent {
       if (element.children) {
         this.createElements(element.children, node)
       }
-      node.setAttribute('data-tooltip', `<${element.tag}></${element.tag}>`)
+      node.append(this.createTooltip(element.tag))
       root.append(node)
       this.elements.push(node)
     })
+  }
+
+  private createTooltip(tag: string): HTMLDivElement {
+    const content = `<${tag}></${tag}>`
+    const tooltip = new BaseComponent({ className: 'tooltip' })
+    tooltip.setContent(content)
+    return tooltip.node
   }
 
   public applySelector(selector: string, correctAmount: number): boolean {

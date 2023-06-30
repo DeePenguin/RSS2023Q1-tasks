@@ -67,5 +67,35 @@
     &.finish-level .animated {
       animation: slide-out-blurred-top 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
     }
+
+    .tooltip {
+      pointer-events: none;
+
+      position: absolute;
+      z-index: 30;
+      right: 100%;
+      bottom: 50%;
+
+      display: none;
+
+      margin: 5px;
+      padding: 5px;
+
+      font-size: 0.75em;
+      font-weight: 600;
+      color: $bg-dark;
+      text-align: center;
+
+      background-color: $outline-color;
+      border-radius: 3px;
+    }
+
+    .hovered {
+      filter: drop-shadow(2px 0 2px $outline-color) drop-shadow(-2px 0 2px $outline-color);
+
+      > .tooltip {
+        display: block;
+      }
+    }
   }
 }
