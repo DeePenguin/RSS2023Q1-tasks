@@ -1,6 +1,6 @@
 import xml from 'highlight.js/lib/languages/xml'
 import { BaseComponentInterface } from '../../../../../types/interfaces/baseComponentInterface'
-import { customElementDescription } from '../../../../../types/types'
+import { CustomElementDescription } from '../../../../../types/types'
 import { BaseComponent } from '../../../../../utils/base-component'
 import { HtmlEditorParams } from '../../../../../utils/constants'
 import { Editor } from '../editor'
@@ -23,7 +23,7 @@ export class HtmlEditor extends Editor {
     this.hljs.configure({ languages: ['xml'] })
   }
 
-  public showLevel(elements: customElementDescription[]): void {
+  public showLevel(elements: CustomElementDescription[]): void {
     this.elements = []
     this.markupContainer.node.innerHTML = ''
     this.createMarkup(elements, this.markupContainer)
@@ -31,13 +31,15 @@ export class HtmlEditor extends Editor {
 
   private highlight(str: string): string {
     const content = this.hljs.highlight(str, { language: 'xml' }).value
+
     return content
   }
 
-  private createMarkup(elements: customElementDescription[], root: BaseComponentInterface): void {
+  private createMarkup(elements: CustomElementDescription[], root: BaseComponentInterface): void {
     elements.forEach((element) => {
       const markup = new BaseComponent({ className: 'markup' })
       let content = `<${element.tag}`
+
       if (element.class) {
         content += ` class="${element.class}"`
       }

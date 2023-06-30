@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../../../utils/base-component'
 import './viewer.scss'
 import './custom-elements.scss'
-import { customElementDescription } from '../../../../types/types'
+import { CustomElementDescription } from '../../../../types/types'
 import { customElementsContent } from '../../../../utils/constants'
 import { EventEmitter } from '../../../../utils/event-emitter'
 
@@ -14,13 +14,13 @@ export class Viewer extends BaseComponent {
     this.append(this.container)
   }
 
-  public showLevel(elements: customElementDescription[]): void {
+  public showLevel(elements: CustomElementDescription[]): void {
     this.elements = []
     this.container.innerHTML = ''
     this.createElements(elements, this.container)
   }
 
-  private createElements(elements: customElementDescription[], root: HTMLElement): void {
+  private createElements(elements: CustomElementDescription[], root: HTMLElement): void {
     elements.forEach((element) => {
       const node = document.createElement(element.tag)
       node.innerHTML = customElementsContent[element.tag] || ''
