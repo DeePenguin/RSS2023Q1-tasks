@@ -25,7 +25,7 @@ export type Level = {
   elements: customElementDescription[]
 }
 
-export type CustomTags = 'pot' | 'seedling' | 'camomile'
+export type CustomTags = 'pot' | 'seedling' | 'camomile' | 'cactus'
 
 export type customElementDescription = {
   tag: CustomTags

@@ -22,8 +22,8 @@ export const defaultGameData: GameData = {
   finishedWithHint: new Set(),
 }
 
-export const customElementsContent: Record<CustomTags, string> = {
+export const customElementsContent: Partial<Record<CustomTags, string>> = {
   pot: '<div class="border"></div><div class="bottom"></div>',
   seedling: '<div class="stem"></div>',
-  camomile: '<div class="head"></div><div class="stem"></div>',
+  camomile: '<div class="head"><div class="center"></div></div><div class="stem"></div>',
 }
