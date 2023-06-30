@@ -5,7 +5,7 @@ import { levels } from '../utils/levels'
 import { Game } from './components/game/game'
 import { Layout } from './components/layout/layout'
 import { LevelsList } from './components/levelsList/levels-list'
-import { ResetBtn } from './reset-btn/reset-btn'
+import { ResetBtn } from './components/reset-btn/reset-btn'
 import { Storage } from './storage'
 
 class App {

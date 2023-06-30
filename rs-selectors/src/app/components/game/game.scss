@@ -1,21 +1,28 @@
-.game {
-  @keyframes shake {
-    0% {
-      transform: translateX(0);
-    }
-
-    25% {
-      transform: translateX(-5px);
-    }
-
-    50% {
-      transform: translateX(0);
-    }
-
-    75% {
-      transform: translateX(5px);
-    }
+@keyframes shake {
+  0% {
+    transform: translateX(0);
   }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.game {
+
+  @include flex-col($jc: end);
+
+  grid-area: game;
+  gap: 10px;
+  padding: 10px 20px;
 
   &__header {
     @include flex;
@@ -26,7 +33,10 @@
 
   &__title {
     flex-grow: 1;
+
     margin: 0;
+
+    font-size: 1.3em;
     color: $font-color-light;
     text-align: center;
   }

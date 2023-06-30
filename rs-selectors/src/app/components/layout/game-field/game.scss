@@ -1,7 +1,0 @@
-.game {
-  @include flex-col($jc: center);
-
-  grid-area: game;
-  gap: 10px;
-  padding: 20px;
-}
