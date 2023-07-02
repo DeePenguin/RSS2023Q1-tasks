@@ -5,12 +5,12 @@ import { EventEmitter } from '../../utils/event-emitter/event-emitter'
 import './levels-list.scss'
 
 export class LevelsList extends BaseComponent<'ul'> {
+  private listItems: BaseComponentInterface[] = []
   constructor(
     root: HTMLElement | BaseComponentInterface,
     private emitter: EventEmitter,
     levels: Level[],
     gameData: GameData,
-    private listItems: BaseComponentInterface[] = [],
   ) {
     super({ parent: root, tag: 'ul', className: 'levels-list' })
     this.createList(levels, gameData)
