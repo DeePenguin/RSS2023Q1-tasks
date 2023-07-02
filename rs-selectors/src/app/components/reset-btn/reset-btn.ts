@@ -1,5 +1,5 @@
-import { BaseComponent } from '../../../utils/base-component'
-import { EventEmitter } from '../../../utils/event-emitter'
+import { BaseComponent } from '../../utils/base-component/base-component'
+import { EventEmitter } from '../../utils/event-emitter/event-emitter'
 import './reset-btn.scss'
 
 export class ResetBtn extends BaseComponent<'button'> {

@@ -1,4 +1,4 @@
-import { EventKey, EventMap, Listener } from '../types/types'
+import { EventKey, EventMap, Listener } from '../../types/types'
 
 export class EventEmitter {
   private listeners: { [K in keyof EventMap]?: Listener<K>[] } = {}

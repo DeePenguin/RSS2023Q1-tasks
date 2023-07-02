@@ -1,4 +1,4 @@
-import { BaseComponentInterface } from '../../../types/interfaces/baseComponentInterface'
+import { BaseComponentInterface } from '../../models/base-component.model'
 import { header } from './header/header'
 import { levels } from './levels/levels'
 import { footer } from './footer/footer'

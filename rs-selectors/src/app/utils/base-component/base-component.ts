@@ -1,5 +1,5 @@
-import { BaseComponentInterface } from '../types/interfaces/baseComponentInterface'
-import { ComponentProps } from '../types/types'
+import { BaseComponentInterface } from '../../models/base-component.model'
+import { ComponentProps } from '../../types/types'
 
 export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implements BaseComponentInterface {
   public node: HTMLElementTagNameMap[T]

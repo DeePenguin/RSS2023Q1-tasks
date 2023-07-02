@@ -1,4 +1,4 @@
-import { BaseComponentInterface } from './interfaces/baseComponentInterface'
+import { BaseComponentInterface } from '../models/base-component.model'
 
 export type ComponentProps<T> = {
   parent: HTMLElement | BaseComponentInterface | null

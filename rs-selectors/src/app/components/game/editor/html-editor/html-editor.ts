@@ -1,8 +1,8 @@
 import xml from 'highlight.js/lib/languages/xml'
-import { BaseComponentInterface } from '../../../../../types/interfaces/baseComponentInterface'
-import { CustomElementDescription } from '../../../../../types/types'
-import { BaseComponent } from '../../../../../utils/base-component'
-import { HtmlEditorParams } from '../../../../../utils/constants'
+import { BaseComponentInterface } from '../../../../models/base-component.model'
+import { CustomElementDescription } from '../../../../types/types'
+import { BaseComponent } from '../../../../utils/base-component/base-component'
+import { HtmlEditorParams } from '../../../../shared/constants'
 import { Editor } from '../editor'
 
 import './html-editor.scss'
