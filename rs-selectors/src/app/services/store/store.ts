@@ -1,5 +1,5 @@
-import { GameData } from '../../../types/types'
-import { defaultGameData } from '../../../utils/constants'
+import { GameData } from '../../types/types'
+import { defaultGameData } from '../../shared/constants'
 
 export class Store {
   private lsPrefix = 'deepee-selectors'

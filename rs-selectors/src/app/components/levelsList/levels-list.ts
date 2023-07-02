@@ -1,7 +1,7 @@
-import { BaseComponentInterface } from '../../../types/interfaces/baseComponentInterface'
-import { GameData, Level } from '../../../types/types'
-import { BaseComponent } from '../../../utils/base-component'
-import { EventEmitter } from '../../../utils/event-emitter'
+import { BaseComponentInterface } from '../../models/base-component.model'
+import { GameData, Level } from '../../types/types'
+import { BaseComponent } from '../../utils/base-component/base-component'
+import { EventEmitter } from '../../utils/event-emitter/event-emitter'
 import './levels-list.scss'
 
 export class LevelsList extends BaseComponent<'ul'> {

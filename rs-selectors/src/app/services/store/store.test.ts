@@ -1,5 +1,5 @@
 import { Store } from './store'
-import { defaultGameData } from '../../../utils/constants'
+import { defaultGameData } from '../../shared/constants'
 
 const store = new Store()
 const prefix = 'deepee-selectors'

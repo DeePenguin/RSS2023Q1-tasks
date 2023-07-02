@@ -1,10 +1,10 @@
 import css from 'highlight.js/lib/languages/css'
 import { Editor } from '../editor'
-import { BaseComponent } from '../../../../../utils/base-component'
-import { CssEditorParams } from '../../../../../utils/constants'
+import { BaseComponent } from '../../../../utils/base-component/base-component'
+import { CssEditorParams } from '../../../../shared/constants'
 
 import './css-editor.scss'
-import { EventEmitter } from '../../../../../utils/event-emitter'
+import { EventEmitter } from '../../../../utils/event-emitter/event-emitter'
 
 export class CssEditor extends Editor {
   private answer = new BaseComponent({

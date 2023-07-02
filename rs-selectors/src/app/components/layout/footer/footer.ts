@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../../../utils/base-component'
+import { BaseComponent } from '../../../utils/base-component/base-component'
 import './footer.scss'
 import githubLogo from '../../../../assets/icons/github-logo.svg'
 import rsLogo from '../../../../assets/icons/rss-logo.svg'

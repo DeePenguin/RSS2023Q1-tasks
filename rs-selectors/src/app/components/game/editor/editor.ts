@@ -1,5 +1,5 @@
 import hljs from 'highlight.js'
-import { BaseComponent } from '../../../../utils/base-component'
+import { BaseComponent } from '../../../utils/base-component/base-component'
 import 'highlight.js/styles/base16/dracula.css'
 
 export class Editor extends BaseComponent {

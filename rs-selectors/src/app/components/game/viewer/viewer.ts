@@ -1,9 +1,9 @@
-import { BaseComponent } from '../../../../utils/base-component'
+import { BaseComponent } from '../../../utils/base-component/base-component'
 import './viewer.scss'
 import './custom-elements.scss'
-import { CustomElementDescription } from '../../../../types/types'
-import { customElementsContent, winMessage } from '../../../../utils/constants'
-import { EventEmitter } from '../../../../utils/event-emitter'
+import { CustomElementDescription } from '../../../types/types'
+import { customElementsContent, winMessage } from '../../../shared/constants'
+import { EventEmitter } from '../../../utils/event-emitter/event-emitter'
 
 export class Viewer extends BaseComponent {
   private container = new BaseComponent({ className: 'shelf' }).node
