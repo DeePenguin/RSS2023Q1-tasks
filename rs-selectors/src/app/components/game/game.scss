@@ -17,7 +17,6 @@
 }
 
 .game {
-
   @include flex-col($jc: end);
 
   grid-area: game;
