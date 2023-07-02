@@ -3,13 +3,14 @@
     grid-template: 'header' min-content 'game' auto 'footer' min-content / 1fr;
   }
 
+  @include primary-font;
+
   display: grid;
   grid-template: 'header levels' min-content 'game levels' auto 'footer levels' min-content / 1fr min-content;
 
+  max-width: 1500px;
   min-height: 100vh;
+  margin-left: auto;
 
-  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: $font-color;
-
-  background-color: $bg-light;
 }
