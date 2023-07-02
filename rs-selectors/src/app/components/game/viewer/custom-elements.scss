@@ -122,7 +122,7 @@ pot {
       width: 100%;
 
       &::after {
-        content: "";
+        content: '';
 
         position: absolute;
         top: -10%;
@@ -212,19 +212,19 @@ camomile {
   width: 40px;
   height: 50px;
 
-  &[color = "violet"] {
+  &[color='violet'] {
     --color: #cc90e5;
   }
 
-  &[color = "aquamarine"] {
+  &[color='aquamarine'] {
     --color: #52b895;
   }
 
-  &[color = "pink"] {
+  &[color='pink'] {
     --color: #e5909f;
   }
 
-  &[color = "blue"] {
+  &[color='blue'] {
     --color: #80c9d8;
   }
 

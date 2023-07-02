@@ -6,12 +6,12 @@ import { Game } from './components/game/game'
 import { Layout } from './components/layout/layout'
 import { LevelsList } from './components/levelsList/levels-list'
 import { ResetBtn } from './components/reset-btn/reset-btn'
-import { Storage } from './storage'
+import { Store } from './services/store/store'
 
 class App {
   private root: BaseComponent = new BaseComponent({ parent: document.body, className: 'root' })
   private layout: Layout = new Layout()
-  private storage: Storage = new Storage()
+  private storage: Store = new Store()
   private emitter = new EventEmitter()
   private resetBtn = new ResetBtn(this.emitter)
   private levels = levels
