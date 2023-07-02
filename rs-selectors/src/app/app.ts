@@ -10,7 +10,7 @@ import { Store } from './services/store/store'
 
 class App {
   private root: BaseComponent = new BaseComponent({ parent: document.body, className: 'root' })
-  private layout: Layout = new Layout()
+  private layout: Layout = new Layout(this.root)
   private storage: Store = new Store()
   private emitter = new EventEmitter()
   private resetBtn = new ResetBtn(this.emitter)
@@ -22,7 +22,6 @@ class App {
   private isFinished = false
 
   public init(): void {
-    this.layout.create(this.root)
     this.gameData = this.storage.getData()
     this.levelsList = new LevelsList(this.layout.levels, this.emitter, this.levels, this.gameData)
     this.layout.levels.append(this.resetBtn)
