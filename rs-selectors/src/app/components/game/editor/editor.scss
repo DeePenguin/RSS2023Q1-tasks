@@ -36,7 +36,7 @@
   &__counter {
     @include flex-col($ali: end);
 
-    min-width: 30px;
+    width: 30px;
     padding: 0 0.6em;
     text-align: right;
     background-color: $editor-counter;

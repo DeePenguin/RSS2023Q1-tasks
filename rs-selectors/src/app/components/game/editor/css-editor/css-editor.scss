@@ -15,6 +15,8 @@
 .editor {
   &-css &__content {
     @include flex;
+
+    max-width: calc(100% - 30px);
   }
 
   &-css &__counter {
@@ -27,6 +29,7 @@
 
     position: relative;
     flex-grow: 1;
+    max-width: calc(100% - 70px);
     height: 100%;
   }
 
@@ -100,6 +103,7 @@
 
     cursor: pointer;
 
+    width: 70px;
     height: 100%;
     padding: 10px 15px;
 
