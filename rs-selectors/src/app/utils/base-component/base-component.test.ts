@@ -25,3 +25,23 @@ describe('Create Html element', () => {
     expect(testComponent.node).toHaveTextContent('span content')
   })
 })
+
+test('Removes node', () => {
+  const testComponent = new BaseComponent({
+    parent: document.body,
+    content: 'content',
+  })
+
+  testComponent.remove()
+  expect(testComponent.node).not.toBeInTheDocument()
+})
+
+test('Change node content', () => {
+  const testComponent = new BaseComponent({
+    parent: document.body,
+    attr: { id: 'remove' },
+  })
+
+  testComponent.setContent('new content')
+  expect(testComponent.node).toHaveTextContent('new content')
+})
