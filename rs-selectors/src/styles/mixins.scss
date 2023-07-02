@@ -1,3 +1,5 @@
+@import 'fonts';
+
 %transition-s {
   transition: all 0.3s ease;
 }
@@ -48,5 +50,21 @@
 @mixin m-custom($width) {
   @media (max-width: $width) {
     @content;
+  }
+}
+
+@mixin primary-font($weight: 400, $style:normal) {
+  font: {
+    family: roboto, sans-serif;
+    style: $style;
+    weight: $weight;
+  }
+}
+
+@mixin mono-font($weight: 400, $style:normal) {
+  font: {
+    family: 'Roboto Mono', monospace;
+    style: $style;
+    weight: $weight;
   }
 }

@@ -17,7 +17,7 @@
 }
 
 .game {
-  @include flex-col($jc: end);
+  @include flex-col($jc: start);
 
   grid-area: game;
   gap: 10px;
@@ -28,6 +28,7 @@
 
     gap: 20px;
     width: 100%;
+    max-width: 1000px;
   }
 
   &__title {
