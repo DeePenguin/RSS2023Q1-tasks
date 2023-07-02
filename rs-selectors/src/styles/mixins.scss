@@ -53,7 +53,7 @@
   }
 }
 
-@mixin primary-font($weight: 400, $style:normal) {
+@mixin primary-font($weight: 400, $style: normal) {
   font: {
     family: roboto, sans-serif;
     style: $style;
@@ -61,7 +61,7 @@
   }
 }
 
-@mixin mono-font($weight: 400, $style:normal) {
+@mixin mono-font($weight: 400, $style: normal) {
   font: {
     family: 'Roboto Mono', monospace;
     style: $style;
