@@ -18,7 +18,7 @@ class App {
   private gameData!: GameData
   private game!: Game
   private levelsList!: LevelsList
-  private hintWasUsed = false
+  private isHintUsed = false
   private isFinished = false
 
   public init(): void {
@@ -44,7 +44,7 @@ class App {
   private changeLevel(index: number): void {
     if (index !== this.gameData.currentLevel || this.isFinished) {
       this.isFinished = false
-      this.hintWasUsed = false
+      this.isHintUsed = false
       this.gameData.currentLevel = index
       this.game.showLevel(this.levels[index])
       this.levelsList.checkCurrent(index)
@@ -54,7 +54,7 @@ class App {
 
   private completeLevel(): void {
     this.updateGameData()
-    this.levelsList.completeLevel(this.gameData.currentLevel, this.hintWasUsed)
+    this.levelsList.completeLevel(this.gameData.currentLevel, this.isHintUsed)
     if (this.gameData.currentLevel === this.levels.length - 1) {
       this.saveData()
       this.isFinished = true
@@ -65,7 +65,7 @@ class App {
   }
 
   private handleHint(): void {
-    this.hintWasUsed = true
+    this.isHintUsed = true
     this.gameData.finishedWithHint.add(this.gameData.currentLevel)
     this.levelsList.checkAsHinted(this.gameData.currentLevel)
     this.saveData()
@@ -74,7 +74,7 @@ class App {
   private updateGameData(): void {
     const isLevelAlreadyHinted = this.gameData.finishedWithHint.has(this.gameData.currentLevel)
     this.gameData.finishedLevels.add(this.gameData.currentLevel)
-    if (!this.hintWasUsed && isLevelAlreadyHinted !== this.hintWasUsed) {
+    if (!this.isHintUsed && isLevelAlreadyHinted !== this.isHintUsed) {
       this.gameData.finishedWithHint.delete(this.gameData.currentLevel)
     }
   }

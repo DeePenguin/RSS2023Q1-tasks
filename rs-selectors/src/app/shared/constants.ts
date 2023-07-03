@@ -16,7 +16,7 @@ export const HtmlEditorParams = {
   baseTagEnding: '</shelf>',
 }
 
-export const defaultGameData: GameData = {
+export const initialGameData: GameData = {
   currentLevel: 0,
   finishedLevels: new Set(),
   finishedWithHint: new Set(),
