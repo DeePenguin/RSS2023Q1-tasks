@@ -1,5 +1,5 @@
 import { Store } from './store'
-import { defaultGameData } from '../../shared/constants'
+import { initialGameData } from '../../shared/constants'
 
 const store = new Store()
 const prefix = 'deepee-selectors'
@@ -34,7 +34,7 @@ describe('Store transform data correctly', () => {
 
 test('Store returns default data if localStorage has no data', () => {
   jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(null)
-  expect(store.getData()).toEqual(defaultGameData)
+  expect(store.getData()).toEqual(initialGameData)
 })
 
 test('Store returns data from localStorage if any', () => {

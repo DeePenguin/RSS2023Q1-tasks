@@ -1,5 +1,5 @@
 import { GameData } from '../../types/types'
-import { defaultGameData } from '../../shared/constants'
+import { initialGameData } from '../../shared/constants'
 
 export class Store {
   private lsPrefix = 'deepee-selectors'
@@ -7,25 +7,25 @@ export class Store {
   public getData(): GameData {
     const data = localStorage.getItem(this.lsPrefix)
     if (!data) {
-      return defaultGameData
+      return initialGameData
     }
-    const storedData = JSON.parse(data, (_, value: unknown) => {
+    const gameData = JSON.parse(data, (_, value: unknown) => {
       if (Array.isArray(value)) {
         return new Set(value)
       }
       return value
     }) as GameData
 
-    return storedData
+    return gameData
   }
 
   public saveData(data: GameData): void {
-    const storedData = JSON.stringify(data, (_, value: unknown) => {
+    const gameData = JSON.stringify(data, (_, value: unknown) => {
       if (value instanceof Set) {
         return Array.from(value) as []
       }
       return value
     })
-    localStorage.setItem(this.lsPrefix, storedData)
+    localStorage.setItem(this.lsPrefix, gameData)
   }
 }
