@@ -17,8 +17,9 @@ export class Editor extends BaseComponent {
 
   protected createLinesCounter(): void {
     if (this.linesAmount > 0) {
-      const linesCounter = new Array(this.linesAmount).fill(0).map((_, i) => i + 1)
-      linesCounter.forEach((line) => this.counter.append(new BaseComponent({ tag: 'span', content: line.toString() })))
+      Array.from({ length: this.linesAmount }, (_, index) =>
+        this.counter.append(new BaseComponent({ tag: 'span', content: (1 + index).toString() })),
+      )
     }
   }
 }
