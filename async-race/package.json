@@ -3,17 +3,25 @@
   "version": "1.0.0",
   "description": "tractor race",
   "main": "index.ts",
+  "author": "DeePenguin",
   "scripts": {
     "deploy": "npm run build && gh-pages -d dist -e rs-selectors -m \"feat: update deploy\"",
-    "stylelint": "stylelint **/*.scss --fix",
+    "stylelint": "stylelint **/*.scss",
+    "stylelint:fix": "stylelint **/*.scss --fix",
     "lint": "eslint . --color",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack serve --config webpack.dev.js"
+    "start": "webpack serve --config webpack.dev.js",
+    "prepare": "cd .. && husky install async-race/.husky"
   },
-  "author": "DeePenguin",
+  "lint-staged": {
+    "**/*.{js,ts}": "npm run lint",
+    "**/*.{css, scss}": "npm run stylelint"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "css-loader": "^6.7.3",
@@ -27,6 +35,8 @@
     "favicons-webpack-plugin": "^6.0.0",
     "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "mini-css-extract-plugin": "^2.7.6",
     "normalize.css": "^8.0.1",
     "prettier": "^2.8.1",
