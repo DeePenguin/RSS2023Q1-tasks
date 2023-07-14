@@ -1,0 +1,16 @@
+@import 'normalize.css';
+
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.page {
+  overflow-x: hidden;
+  background-color: $bg-light;
+}
