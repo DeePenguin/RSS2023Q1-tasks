@@ -2,6 +2,7 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 *,
@@ -11,6 +12,31 @@ html {
 }
 
 .page {
+  @include flex-col($ali: stretch, $jc: start);
+
   overflow-x: hidden;
-  background-color: $bg-light;
+
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100%;
+  margin: 0;
+
+  background-color: $bg-color;
+}
+
+.root {
+  @include primary-font;
+  @include flex-col($ali: stretch, $jc: start);
+
+  flex-grow: 1;
+
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  color: $font-color;
+}
+
+.main {
+  flex-grow: 1;
 }

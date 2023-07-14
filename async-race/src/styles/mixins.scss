@@ -1,3 +1,5 @@
+@import './fonts';
+
 %transition-s {
   transition: all 0.3s ease;
 }
@@ -36,15 +38,16 @@
 
 @mixin primary-font($weight: 400, $style: normal) {
   font: {
-    family: roboto, sans-serif;
+    family: 'Racing Sans One', sans-serif;
     style: $style;
     weight: $weight;
   }
 }
 
-@mixin mono-font($weight: 400, $style: normal) {
+@mixin header-font($weight: 400, $style: normal) {
+  letter-spacing: 0.08em;
   font: {
-    family: 'Roboto Mono', monospace;
+    family: 'Faster One', sans-serif;
     style: $style;
     weight: $weight;
   }

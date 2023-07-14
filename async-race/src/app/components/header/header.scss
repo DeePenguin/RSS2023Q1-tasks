@@ -1,0 +1,11 @@
+.header {
+  padding: 10px 15px;
+
+  &__title {
+    @include header-font;
+
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 400;
+  }
+}

@@ -1,0 +1,27 @@
+.footer {
+  @include flex($jc: space-evenly);
+
+  gap: 10px;
+  padding: 10px;
+
+  &__link {
+    display: block;
+  }
+
+  &__logo {
+    @extend %transition-s;
+
+    @include m-hover {
+      opacity: 1;
+    }
+
+    height: 20px;
+    opacity: 0.6;
+  }
+
+  &__copy {
+    @include header-font;
+
+    margin: 0;
+  }
+}
