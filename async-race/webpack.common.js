@@ -67,8 +67,7 @@ module.exports = {
   ],
 
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.ts?$/i,
         use: ['ts-loader'],
       },
@@ -95,5 +94,12 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.js', '...'],
+    alias: {
+      "@": path.resolve(__dirname, "src/"),
+      "@assets": path.resolve(__dirname, "src/assets/"),
+      "@core": path.resolve(__dirname, "src/app/core/"),
+      "@shared": path.resolve(__dirname, "src/app/shared/"),
+      "@utils": path.resolve(__dirname, "src/app/utils/"),
+    }
   },
 }
