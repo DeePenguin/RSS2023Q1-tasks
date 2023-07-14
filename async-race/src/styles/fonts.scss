@@ -1,0 +1,21 @@
+/* racing-sans-one-regular - latin-ext */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Racing Sans One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/assets/fonts/racing-sans-one-v13-latin-ext-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* faster-one-regular - latin-ext */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Faster One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/assets/fonts/faster-one-v19-latin-ext-regular.woff2') format('woff2');
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}

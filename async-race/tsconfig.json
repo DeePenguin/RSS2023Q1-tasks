@@ -25,6 +25,6 @@
       "@utils/*": ["app/utils/*"]
     }
   },
-  "include": ["./src/**/*", "./*.ts"],
+  "include": ["./src/**/*", "./src/modules.d.ts", "./*.ts"],
   "exclude": ["node_modules", "dist"]
 }
