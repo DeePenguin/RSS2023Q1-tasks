@@ -3,7 +3,7 @@ import { Router } from '@utils/router'
 import { Header } from '@components/header/header'
 import { footer } from '@components/footer/footer'
 import { pages } from '@core/constants/pages'
-import type { Component } from '@shared/models/component.model'
+import type { Component } from '@core/models/component.model'
 import { NotFound } from '@core/components/not-found/not-found'
 import type { RoutesMap } from '@core/types/types'
 
