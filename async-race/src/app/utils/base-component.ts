@@ -1,4 +1,4 @@
-import type { Component } from '@/app/shared/models/component.model'
+import type { Component } from '@core/models/component.model'
 
 type ComponentProps<T> = {
   parent?: HTMLElement | Component
