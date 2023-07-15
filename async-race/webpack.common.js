@@ -100,6 +100,7 @@ module.exports = {
       "@core": path.resolve(__dirname, "src/app/core/"),
       "@shared": path.resolve(__dirname, "src/app/shared/"),
       "@utils": path.resolve(__dirname, "src/app/utils/"),
+      "@components": path.resolve(__dirname, "src/app/components/"),
     }
   },
 }
