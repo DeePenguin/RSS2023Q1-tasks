@@ -11,6 +11,12 @@ html {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+p {
+  margin: 0;
+}
+
 .page {
   @include flex-col($ali: stretch, $jc: start);
 
@@ -39,4 +45,5 @@ html {
 
 .main {
   flex-grow: 1;
+  padding: 10px 15px;
 }
