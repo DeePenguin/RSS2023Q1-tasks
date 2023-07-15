@@ -10,4 +10,5 @@ export interface Component {
   addClass(...classNames: string[]): void
   removeClass(...classNames: string[]): void
   toggleClass(className: string, state?: boolean): void
+  setStyle(props: { [keys: string]: string }): void
 }

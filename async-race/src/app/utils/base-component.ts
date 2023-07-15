@@ -34,11 +34,11 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implem
     parent.append(this.node)
   }
 
-  public append<K extends keyof HTMLElementTagNameMap>(
-    ...components: (HTMLElement | BaseComponent<K> | string)[]
-  ): void {
+  public append(...components: (HTMLElement | Component | string)[]): void {
     this.node.append(
-      ...components.map((component) => (component instanceof BaseComponent ? component.node : component)),
+      ...components.map((component) =>
+        component instanceof HTMLElement || typeof component === 'string' ? component : component.getNode(),
+      ),
     )
   }
 
