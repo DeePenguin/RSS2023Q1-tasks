@@ -1,6 +1,6 @@
 import { BaseComponent } from '@utils/base-component'
 import { Router } from '@utils/router'
-import { header } from '@components/header/header'
+import { Header } from '@components/header/header'
 import { footer } from '@components/footer/footer'
 import { pages } from '@core/constants/pages'
 import type { Component } from '@shared/models/component.model'
@@ -8,14 +8,14 @@ import { NotFound } from '@core/components/not-found/not-found'
 import type { RoutesMap } from '@core/types/types'
 
 export class App extends BaseComponent {
-  private header = header
+  private pages = pages
+  private header = new Header(pages)
   private footer = footer
   private main = new BaseComponent({ tag: 'main', className: 'main' })
   private router?: Router
   private currentPage?: Component
 
   private errorPage = new NotFound()
-  private pages = pages
   constructor() {
     super({ className: 'root', parent: document.body })
     this.append(this.header, this.main, this.footer)
