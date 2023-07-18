@@ -1,8 +1,12 @@
 import type { PagesRecord } from '@core/types/types'
-import { Garage } from '@garage/garage'
-import { Winners } from '@winners/winners'
 
 export const pages: PagesRecord = {
-  garage: new Garage(),
-  winners: new Winners(),
+  garage: async () => {
+    const { Garage } = await import('@garage/garage')
+    return new Garage()
+  },
+  winners: async () => {
+    const { Winners } = await import('@winners/winners')
+    return new Winners()
+  },
 }

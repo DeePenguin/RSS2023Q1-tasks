@@ -1,6 +1,6 @@
 import type { Component } from '@core/models/component.model'
 
-export type PagesRecord = Record<string, Component>
+export type PagesRecord = Record<string, () => Promise<Component>>
 export type RoutesMap = Map<string, () => void>
 export type RequestOptions = { body?: string; headers?: Record<string, string> }
 export type RequestProps = {

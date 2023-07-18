@@ -4,7 +4,7 @@ export class Router {
   private currentHash?: string
 
   constructor(private readonly routes: RoutesMap, private errorPage: () => void) {
-    window.addEventListener('hashchange', this.onHashChangeHandler)
+    this.run()
     this.onHashChangeHandler()
   }
 
@@ -20,5 +20,9 @@ export class Router {
 
   public destroy(): void {
     window.removeEventListener('hashchange', this.onHashChangeHandler)
+  }
+
+  public run(): void {
+    window.addEventListener('hashchange', this.onHashChangeHandler)
   }
 }
