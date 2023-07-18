@@ -23,21 +23,27 @@ export class App extends BaseComponent {
 
   public run(): void {
     const routes: RoutesMap = new Map()
-    const definedPages: [string, Component][] = Object.entries(this.pages)
+    const definedPages = Object.entries(this.pages)
 
-    routes.set('', () => this.renderPage(this.pages.garage))
+    routes.set('', () => this.renderPage(this.pages.garage()))
 
     definedPages.forEach((page) => {
       const [hash, component] = page
-      routes.set(`#${hash}`, () => this.renderPage(component))
+      routes.set(`#${hash}`, () => this.renderPage(component()))
     })
 
-    this.router = new Router(routes, () => this.renderPage(this.errorPage))
+    this.router = new Router(routes, () => this.renderPage(Promise.resolve(this.errorPage)))
   }
 
-  private renderPage(page: Component): void {
-    this.currentPage?.remove()
-    this.currentPage = page
-    this.main.append(this.currentPage)
+  private renderPage(newPage: Promise<Component>): void {
+    newPage
+      .then((page) => {
+        this.currentPage?.remove()
+        this.currentPage = page
+        this.main.append(this.currentPage)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 }
