@@ -95,7 +95,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '...'],
     alias: {
-      "@": path.resolve(__dirname, "src/"),
+      "@garage": path.resolve(__dirname, "src/app/garage/"),
+      "@winners": path.resolve(__dirname, "src/app/winners/"),
       "@assets": path.resolve(__dirname, "src/assets/"),
       "@core": path.resolve(__dirname, "src/app/core/"),
       "@shared": path.resolve(__dirname, "src/app/shared/"),

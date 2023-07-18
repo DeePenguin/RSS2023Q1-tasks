@@ -18,11 +18,11 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"],
+      "@garage/*": ["app/garage/*"],
+      "@winners/*": ["app/winners/*"],
       "@assets/*": ["assets/*"],
       "@core/*": ["app/core/*"],
       "@shared/*": ["app/shared/*"],
-      "@components/*": ["app/components/*"],
       "@utils/*": ["app/utils/*"]
     }
   },
