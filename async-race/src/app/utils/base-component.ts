@@ -1,12 +1,5 @@
 import type { Component } from '@core/models/component.model'
-
-type ComponentProps<T> = {
-  parent?: HTMLElement | Component
-  tag: T
-  className: string
-  content: string
-  attr: Record<string, string>
-}
+import type { ComponentProps } from '@core/types/types'
 
 export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implements Component {
   protected node: HTMLElementTagNameMap[T]
