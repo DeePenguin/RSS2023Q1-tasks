@@ -1,0 +1,10 @@
+.page-header {
+  @include flex($jc: start, $ali: baseline);
+
+  gap: 1em;
+  color: $font-color-light-xl;
+
+  &__counter {
+    font-size: 2em;
+  }
+}
