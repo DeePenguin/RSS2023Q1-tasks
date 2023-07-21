@@ -67,6 +67,6 @@ export class BaseComponent<T extends keyof HTMLElementTagNameMap = 'div'> implem
   }
 
   public setStyle(props: { [keys: string]: string }): void {
-    Object.assign(this.node.style, props)
+    Object.entries(props).forEach(([prop, value]) => this.node.style.setProperty(prop, value))
   }
 }
