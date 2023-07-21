@@ -1,13 +1,60 @@
 import { BaseComponent } from '@utils/base-component'
+import { CarItem } from '@garage/components/car-item/car-item'
+import type { CarResponse } from '@core/models/car-response.model'
+import { Button } from '@shared/components/button/button'
+import type { Component } from '@core/models/component.model'
 import './car.scss'
 
 export class Car extends BaseComponent {
-  constructor(color: string) {
-    super({ className: 'car__item' })
-    this.setStyle({ backgroundColor: color })
+  private carItem: CarItem
+  private title = new BaseComponent({ tag: 'h3', className: 'car__title' })
+  private id: number
+  private name: string
+  private color: string
+
+  constructor(
+    { id, name, color }: CarResponse,
+    handlers: Record<'update' | 'delete' | 'start' | 'stop', (id: number) => void>,
+  ) {
+    super({ className: 'car__container' })
+    this.id = id
+    this.name = name
+    this.color = color
+    const header = new BaseComponent({ tag: 'header', className: 'car__header' })
+    const controls = this.createControls(handlers)
+    header.append(controls, this.title)
+    const carTrack = new BaseComponent({ className: 'car__track' })
+    this.carItem = new CarItem(this.color)
+    this.title.setContent(this.name)
+    carTrack.append(this.carItem)
+    this.append(header, carTrack)
+  }
+
+  private createControls(handlers: Record<'update' | 'delete' | 'start' | 'stop', (id: number) => void>): Component {
+    const controlsContainer = new BaseComponent({ className: 'car__controls' })
+    const updateBtn = new Button({ className: 'car__controls-btn', content: 'Update' }, () => {
+      handlers.update(this.id)
+    })
+    const deleteBtn = new Button({ className: 'car__controls-btn', content: 'Delete' }, () => {
+      handlers.delete(this.id)
+    })
+    const startBtn = new Button({ className: 'car__controls-btn', content: 'Start' }, () => {
+      handlers.start(this.id)
+    })
+    const stopBtn = new Button({ className: 'car__controls-btn', content: 'Stop' }, () => {
+      handlers.stop(this.id)
+    })
+    controlsContainer.append(updateBtn, deleteBtn, startBtn, stopBtn)
+    return controlsContainer
   }
 
   public changeColor(color: string): void {
-    this.setStyle({ backgroundColor: color })
+    this.color = color
+    this.carItem.changeColor(color)
+  }
+
+  public changeName(name: string): void {
+    this.name = name
+    this.title.setContent(this.name)
   }
 }
