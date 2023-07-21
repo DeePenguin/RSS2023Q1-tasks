@@ -1,15 +1,11 @@
 import { Endpoints } from '@core/enums/endpoints'
-import type { CarResponse } from '@core/models/carResponse.model'
-import { pageLimits } from '@core/constants/page-limits'
-import { Observable } from '@utils/observable'
-import { httpService } from './http.service'
+import type { CarResponse } from '@core/models/car-response.model'
+import type { CarsResponse } from '@core/models/cars-response.model'
+import { httpService } from '@core/services/http.service'
 
-const carsInitialCount = 0
-
-class GarageService {
+class GarageApiService {
   private readonly endPoint = Endpoints.Garage
   private readonly http = httpService
-  private carsCount = new Observable<number>(carsInitialCount)
 
   public async getCar(id: number): Promise<CarResponse> {
     const response = await this.http.get(this.endPoint, { url: id })
@@ -17,11 +13,11 @@ class GarageService {
     return data
   }
 
-  public async getCars(page: number, carsPerPage: number = pageLimits.garage): Promise<CarResponse[]> {
+  public async getCars(page: number, carsPerPage: number): Promise<CarsResponse> {
     const response = await this.http.get(this.endPoint, { query: { _page: page, _limit: carsPerPage } })
-    const data = (await response.json()) as CarResponse[]
-    this.carsCount.setValue(Number(response.headers.get('X-Total-Count')) ?? 0)
-    return data
+    const cars = (await response.json()) as CarResponse[]
+    const totalCount = Number(response.headers.get('X-Total-Count')) ?? 0
+    return { cars, totalCount }
   }
 
   public async createCar({ name, color }: Record<string, string>): Promise<CarResponse> {
@@ -30,14 +26,12 @@ class GarageService {
       headers: { 'Content-Type': 'application/json' },
     })
     const data = (await response.json()) as CarResponse
-    this.carsCount.setValue(this.carsCount.getValue() + 1)
     return data
   }
 
   public async deleteCar(id: number): Promise<Record<string, never>> {
     const response = await this.http.delete(this.endPoint, { url: id })
     const data = (await response.json()) as Record<string, never>
-    this.carsCount.setValue(this.carsCount.getValue() - 1)
     return data
   }
 
@@ -52,4 +46,4 @@ class GarageService {
   }
 }
 
-export const garageService = new GarageService()
+export const garageApiService = new GarageApiService()
