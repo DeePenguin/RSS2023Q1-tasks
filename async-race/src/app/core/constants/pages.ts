@@ -1,12 +1,12 @@
-import type { PagesRecord } from '@core/types/types'
+import type { PagesRecord, PageState } from '@core/types/types'
 
 export const pages: PagesRecord = {
-  garage: async () => {
+  garage: async (pageState: PageState) => {
     const { Garage } = await import('@garage/garage')
-    return new Garage()
+    return new Garage(pageState)
   },
-  winners: async () => {
+  winners: async (pageState: PageState) => {
     const { Winners } = await import('@winners/winners')
-    return new Winners()
+    return new Winners(pageState)
   },
 }

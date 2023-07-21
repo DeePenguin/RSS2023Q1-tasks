@@ -1,3 +1,4 @@
+import type { PageState } from '@core/types/types'
 import { BaseComponent } from '@utils/base-component'
 
 const content = `
@@ -5,7 +6,7 @@ const content = `
   <p class="not-found__subtitle">Definitely Winners!</p>`
 
 export class Winners extends BaseComponent<'section'> {
-  constructor() {
+  constructor(private state: PageState) {
     super({ tag: 'section', className: 'winners', content })
   }
 }
