@@ -1,0 +1,7 @@
+.garage {
+  &__list {
+    @include flex-col($jc: start, $ali: stretch);
+
+    gap: 1em;
+  }
+}
