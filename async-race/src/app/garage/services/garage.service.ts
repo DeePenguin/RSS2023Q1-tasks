@@ -1,11 +1,15 @@
 import type { CarResponse } from '@core/models/car-response.model'
+import { engineApiService } from '@core/services/engine.api.service'
 import { garageApiService } from '@core/services/garage.api.service'
+import { winnersApiService } from '@core/services/winners.service'
 import { Observable } from '@utils/observable'
 
 const carsInitialCount = 0
 
 export class GarageService {
   private readonly garageApi = garageApiService
+  private readonly winnersApi = winnersApiService
+  private readonly engineApi = engineApiService
   public carsCount = new Observable<number>(carsInitialCount)
 
   constructor(private readonly itemsPerPage: number) {}
@@ -28,6 +32,7 @@ export class GarageService {
 
   public async deleteCar(id: number): Promise<Record<string, never>> {
     const response = await this.garageApi.deleteCar(id)
+    await this.winnersApi.deleteWinner(id)
     this.carsCount.setValue(this.carsCount.getValue() - 1)
     return response
   }

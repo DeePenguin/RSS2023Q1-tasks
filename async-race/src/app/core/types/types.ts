@@ -14,6 +14,6 @@ export type RequestOptions = { body?: string; headers?: Record<string, string> }
 export type RequestProps = {
   url?: number | string
   query?: Record<string, string | number>
-  body?: Record<string, string>
+  body?: Record<string, string | number>
   headers?: Record<string, string>
 }
