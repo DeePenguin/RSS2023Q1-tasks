@@ -32,7 +32,7 @@ export class GarageService {
     return response
   }
 
-  public async updateCar(id: number, { name, color }: Record<string, string>): Promise<CarResponse> {
+  public async updateCar({ id, name, color }: CarResponse): Promise<CarResponse> {
     const response = await this.garageApi.updateCar(id, { name, color })
     return response
   }

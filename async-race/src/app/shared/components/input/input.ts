@@ -53,4 +53,8 @@ export class Input extends BaseComponent<'input'> {
   public reset(): void {
     this.node.value = ''
   }
+
+  public focus(): void {
+    this.node.focus()
+  }
 }

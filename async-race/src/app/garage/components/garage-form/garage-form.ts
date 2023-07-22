@@ -1,3 +1,4 @@
+import type { CarResponse } from '@core/models/car-response.model'
 import { Button } from '@shared/components/button/button'
 import { Input } from '@shared/components/input/input'
 import { BaseComponent } from '@utils/base-component'
@@ -50,5 +51,22 @@ export class GarageForm extends BaseComponent {
   private checkValidity(): void {
     const isInvalid = this.carNameInput.value.length === 0
     this.submitBtn.toggleDisable(isInvalid)
+  }
+
+  public hide(): void {
+    this.setStyle({ display: 'none' })
+  }
+
+  public show(isFocused?: boolean): void {
+    this.setStyle({ display: 'block' })
+    if (isFocused) {
+      this.carNameInput.focus()
+    }
+  }
+
+  public setValue(carProps: CarResponse): void {
+    this.carColorInput.value = carProps.color
+    this.carNameInput.value = carProps.name
+    this.checkValidity()
   }
 }

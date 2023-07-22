@@ -3,6 +3,7 @@ import { CarItem } from '@garage/components/car-item/car-item'
 import type { CarResponse } from '@core/models/car-response.model'
 import { Button } from '@shared/components/button/button'
 import type { Component } from '@core/models/component.model'
+import type { CarHandlers } from '@garage/models/carHandlers.model'
 import './car.scss'
 
 export class Car extends BaseComponent {
@@ -12,10 +13,7 @@ export class Car extends BaseComponent {
   private name: string
   private color: string
 
-  constructor(
-    { id, name, color }: CarResponse,
-    handlers: Record<'update' | 'delete' | 'start' | 'stop', (id: number) => void>,
-  ) {
+  constructor({ id, name, color }: CarResponse, handlers: CarHandlers) {
     super({ className: 'car__container' })
     this.id = id
     this.name = name
@@ -30,10 +28,10 @@ export class Car extends BaseComponent {
     this.append(header, carTrack)
   }
 
-  private createControls(handlers: Record<'update' | 'delete' | 'start' | 'stop', (id: number) => void>): Component {
+  private createControls(handlers: CarHandlers): Component {
     const controlsContainer = new BaseComponent({ className: 'car__controls' })
     const updateBtn = new Button({ className: 'car__controls-btn', content: 'Update' }, () => {
-      handlers.update(this.id)
+      handlers.update({ id: this.id, name: this.name, color: this.color })
     })
     const deleteBtn = new Button({ className: 'car__controls-btn', content: 'Delete' }, () => {
       handlers.delete(this.id)
