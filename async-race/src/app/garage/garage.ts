@@ -41,6 +41,9 @@ export class Garage extends BaseComponent<'section'> {
     this.emitter.on('request-update-car', (carProps: CarResponse) => {
       this.updateCar(carProps)
     })
+    this.emitter.on('delete-car', (id: number) => {
+      this.deleteCar(id)
+    })
   }
 
   private renderPage(): void {
@@ -73,6 +76,12 @@ export class Garage extends BaseComponent<'section'> {
   private updateCar(carProps: CarResponse): void {
     this.list.updateCar(carProps)
     this.garageService.updateCar(carProps).catch((err) => {
+      console.error(err)
+    })
+  }
+
+  private deleteCar(id: number): void {
+    this.garageService.deleteCar(id).catch((err) => {
       console.error(err)
     })
   }
