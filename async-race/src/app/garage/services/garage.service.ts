@@ -3,8 +3,10 @@ import { engineApiService } from '@core/services/engine.api.service'
 import { garageApiService } from '@core/services/garage.api.service'
 import { winnersApiService } from '@core/services/winners.service'
 import { Observable } from '@utils/observable'
+import { randomizer } from '@utils/randomizer'
 
 const carsInitialCount = 0
+const randomCarsAmount = 100
 
 export class GarageService {
   private readonly garageApi = garageApiService
@@ -40,5 +42,15 @@ export class GarageService {
   public async updateCar({ id, name, color }: CarResponse): Promise<CarResponse> {
     const response = await this.garageApi.updateCar(id, { name, color })
     return response
+  }
+
+  public generateRandomCars(): void {
+    const randomCars = Array.from({ length: randomCarsAmount }, () => ({
+      name: randomizer.getName(),
+      color: randomizer.getColor(),
+    }))
+    randomCars.map(async (car) => {
+      await this.createCar(car)
+    })
   }
 }

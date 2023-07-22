@@ -44,6 +44,9 @@ export class Garage extends BaseComponent<'section'> {
     this.emitter.on('delete-car', (id: number) => {
       this.deleteCar(id)
     })
+    this.emitter.on('request-random-cars-generation', () => {
+      this.garageService.generateRandomCars()
+    })
   }
 
   private renderPage(): void {
