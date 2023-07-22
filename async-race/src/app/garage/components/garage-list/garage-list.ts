@@ -45,4 +45,10 @@ export class GarageList extends BaseComponent {
       this.append(car)
     })
   }
+
+  public addCar(carProps: CarResponse): void {
+    const car = new Car(carProps, this.carHandlers)
+    this.cars[carProps.id] = car
+    this.append(car)
+  }
 }
