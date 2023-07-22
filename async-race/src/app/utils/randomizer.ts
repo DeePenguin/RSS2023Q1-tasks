@@ -68,7 +68,13 @@ const models = [
 
 const getRandomInInterval = (interval: number): number => Math.floor(Math.random() * interval)
 
-const getColor = (): string => getRandomInInterval(HEX_COMBINATIONS_COUNT).toString(HEX_BASE)
+const getColor = (): string => {
+  let color = getRandomInInterval(HEX_COMBINATIONS_COUNT).toString(HEX_BASE)
+  while (color.length !== 6) {
+    color = getRandomInInterval(HEX_COMBINATIONS_COUNT).toString(HEX_BASE)
+  }
+  return `#${color}`
+}
 
 const getName = (): string =>
   `${brands[getRandomInInterval(brands.length)]} ${models[getRandomInInterval(models.length)]}`
