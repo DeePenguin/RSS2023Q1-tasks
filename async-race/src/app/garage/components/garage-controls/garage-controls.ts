@@ -8,10 +8,13 @@ import { GarageForm } from '@garage/components/garage-form/garage-form'
 export class GarageControls extends BaseComponent {
   private startRaceBtn = new Button({ className: 'btn', content: 'Start Race' })
   private stopRaceBtn = new Button({ className: 'btn', content: 'Reset' })
-  private generateRandomCarsBtn = new Button({
-    className: 'btn',
-    content: 'Generate 100 random cars',
-  })
+  private generateRandomCarsBtn = new Button(
+    {
+      className: 'btn',
+      content: 'Generate random cars',
+    },
+    () => this.emitter.emit('request-random-cars-generation'),
+  )
   private createCarForm: GarageForm
   private updateCarForm: GarageForm
   private selectedCarId: number | null = null
