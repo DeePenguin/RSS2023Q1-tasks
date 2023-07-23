@@ -13,22 +13,19 @@ export class Pagination extends ObserverComponent<number, 'div'> {
   })
 
   constructor(
-    private updateSource: Observable<number>,
+    private totalCarsCount: Observable<number>,
     private readonly itemsPerPage: number,
-    private currentPage: number,
-    previousBtnCallback: () => void,
-    nextBtnCallback: () => void,
+    private currentPage: Observable<number>,
   ) {
     super((totalCount) => this.updatePagesAmount(totalCount), { className: 'pagination' })
-    this.updateSource.subscribe(this)
+    this.totalCarsCount.subscribe(this)
     this.previousBtn = new Button(
       {
         className: 'pagination__btn pagination__btn--previous',
         content: '&lt;',
       },
       () => {
-        previousBtnCallback()
-        this.changePage(this.currentPage - 1)
+        this.changePage(this.currentPage.getValue() - 1)
       },
     )
 
@@ -38,8 +35,7 @@ export class Pagination extends ObserverComponent<number, 'div'> {
         content: '&gt;',
       },
       () => {
-        nextBtnCallback()
-        this.changePage(this.currentPage + 1)
+        this.changePage(this.currentPage.getValue() + 1)
       },
     )
     this.append(this.previousBtn, this.counterElement, this.nextBtn)
@@ -47,25 +43,28 @@ export class Pagination extends ObserverComponent<number, 'div'> {
 
   private updatePagesAmount(totalCount: number): void {
     this.pagesAmount = Math.ceil(totalCount / this.itemsPerPage)
+    if (this.currentPage.getValue() > this.pagesAmount) {
+      this.currentPage.setValue(this.pagesAmount)
+    }
     this.updateCounterElement()
     this.toggleButtonsDisability()
   }
 
   private toggleButtonsDisability(): void {
-    const isFirstPage = this.currentPage === 1
-    const isLastPage = this.currentPage === this.pagesAmount
+    const isFirstPage = this.currentPage.getValue() === 1
+    const isLastPage = this.currentPage.getValue() === this.pagesAmount
     this.previousBtn.toggleDisable(isFirstPage)
     this.nextBtn.toggleDisable(isLastPage)
   }
 
   private changePage(pageNumber: number): void {
-    this.currentPage = pageNumber
+    this.currentPage.setValue(pageNumber)
     this.updateCounterElement()
     this.toggleButtonsDisability()
   }
 
   private updateCounterElement(): void {
-    this.counterElement.setContent(`Page ${this.currentPage} / ${this.pagesAmount}`)
+    this.counterElement.setContent(`Page ${this.currentPage.getValue()} / ${this.pagesAmount}`)
   }
 
   public lockButtons(isLocked: boolean): void {
