@@ -6,46 +6,67 @@ import { BaseComponent } from '@utils/base-component'
 type Props = {
   carName: string
   carColor: string
-  placeholder: string
-  btnText: string
+  submitText: string
+  cancelText?: string
+  onSubmit: ({ name, color }: Record<string, string>) => void
   onTextChange?: (value: string) => void
   onColorChange?: (value: string) => void
-  onBtnClick: ({ name, color }: Record<string, string>) => void
+  onCancel?: () => void
 }
 export class GarageForm extends BaseComponent {
   private carNameInput: Input
   private carColorInput: Input
   private submitBtn: Button
+  private cancelBtn: Button | null = null
 
-  constructor({ carName, carColor, placeholder, btnText, onTextChange, onColorChange, onBtnClick }: Props) {
+  constructor({ carName, carColor, submitText, onTextChange, onColorChange, onSubmit, onCancel }: Props) {
     super({ className: 'garage__form' })
-    this.carColorInput = new Input({
+    this.carColorInput = this.createColorInput(carColor, onColorChange)
+    this.carNameInput = this.createTextInput(carName, onTextChange)
+    this.submitBtn = new Button({ className: 'btn', content: submitText }, () => {
+      onSubmit({ name: this.carNameInput.value, color: this.carColorInput.value })
+      this.carNameInput.reset()
+      this.checkValidity()
+    })
+
+    if (onCancel) {
+      this.cancelBtn = new Button({ className: 'btn', content: 'Cancel' }, () => {
+        onCancel()
+        this.carNameInput.reset()
+        this.checkValidity()
+      })
+    }
+
+    this.append(this.carNameInput, this.carColorInput, this.submitBtn, this.cancelBtn ?? '')
+    this.checkValidity()
+  }
+
+  private createColorInput(value: string, onColorChange?: (value: string) => void): Input {
+    return new Input({
       type: 'color',
-      value: carColor,
+      value,
       onChange: onColorChange
         ? (): void => {
             onColorChange(this.carColorInput.value)
           }
         : undefined,
     })
-    this.carNameInput = new Input({
+  }
+
+  private createTextInput(value: string, onTextChange?: (value: string) => void): Input {
+    return new Input({
       type: 'text',
-      placeholder,
-      value: carName,
+      placeholder: 'Enter car name',
+      value,
       onChange: onTextChange
         ? (): void => {
-            this.checkValidity()
             onTextChange(this.carNameInput.value)
           }
-        : (): void => this.checkValidity(),
+        : undefined,
+      onInput: (): void => {
+        this.checkValidity()
+      },
     })
-    this.submitBtn = new Button({ className: 'btn', content: btnText }, () => {
-      onBtnClick({ name: this.carNameInput.value, color: this.carColorInput.value })
-      this.carNameInput.reset()
-      this.checkValidity()
-    })
-    this.append(this.carNameInput, this.carColorInput, this.submitBtn)
-    this.checkValidity()
   }
 
   private checkValidity(): void {
