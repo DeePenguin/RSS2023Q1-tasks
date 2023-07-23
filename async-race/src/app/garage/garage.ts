@@ -6,9 +6,10 @@ import { EventEmitter } from '@utils/event-emitter'
 import type { PageState } from '@core/types/types'
 import type { EventsMap } from '@core/models/events-map.model'
 import type { CarResponse } from '@core/models/car-response.model'
-import { GarageService } from './services/garage.service'
-import { GarageList } from './components/garage-list/garage-list'
-import { GarageControls } from './components/garage-controls/garage-controls'
+import { Observer } from '@utils/observer'
+import { GarageService } from '@garage/services/garage.service'
+import { GarageList } from '@garage/components/garage-list/garage-list'
+import { GarageControls } from '@garage/components/garage-controls/garage-controls'
 
 export class Garage extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.garage
@@ -18,20 +19,16 @@ export class Garage extends BaseComponent<'section'> {
   private pagination: Pagination
   private controls = new GarageControls(this.emitter, this.store)
   private list = new GarageList(this.emitter)
+  private pageChanger = new Observer<number>(() => this.renderPage())
 
   constructor(private store: PageState) {
     super({ tag: 'section', className: 'garage' })
     this.garageService = new GarageService(this.itemsPerPage)
     this.header = new PageHeader('Garage', this.garageService.carsCount)
-    this.pagination = new Pagination(
-      this.garageService.carsCount,
-      this.itemsPerPage,
-      this.store.currentPage,
-      () => this.previousPage(),
-      () => this.nextPage(),
-    )
+    this.pagination = new Pagination(this.garageService.carsCount, this.itemsPerPage, this.store.currentPage)
     this.append(this.header, this.pagination, this.controls, this.list)
     this.renderPage()
+    this.store.currentPage.subscribe(this.pageChanger)
     this.emitter.on('update-store', (property: string, value: string) => {
       this.store[property] = value
     })
@@ -50,21 +47,12 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private renderPage(): void {
-    const cars = this.garageService.getCars(this.store.currentPage)
+    const cars = this.garageService.getCars(this.store.currentPage.getValue())
     cars
       .then((carsData) => this.list.showCars(carsData))
       .catch((err) => {
         console.error(err)
       })
-  }
-
-  private previousPage(): void {
-    this.store.currentPage -= 1
-    this.renderPage()
-  }
-  private nextPage(): void {
-    this.store.currentPage += 1
-    this.renderPage()
   }
 
   private createCar(carProps: Omit<CarResponse, 'id'>): void {

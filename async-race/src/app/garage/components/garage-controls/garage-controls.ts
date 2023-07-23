@@ -4,6 +4,7 @@ import { BaseComponent } from '@utils/base-component'
 import type { EventEmitter } from '@utils/event-emitter'
 import type { CarResponse } from '@core/models/car-response.model'
 import { GarageForm } from '@garage/components/garage-form/garage-form'
+import type { PageState } from '@core/types/types'
 
 export class GarageControls extends BaseComponent {
   private startRaceBtn = new Button({ className: 'btn', content: 'Start Race' })
@@ -19,10 +20,7 @@ export class GarageControls extends BaseComponent {
   private updateCarForm: GarageForm
   private selectedCarId: number | null = null
 
-  constructor(
-    private emitter: EventEmitter<EventsMap>,
-    { carName = '', carColor = '' }: Record<string, string | number>,
-  ) {
+  constructor(private emitter: EventEmitter<EventsMap>, { carName = '', carColor = '' }: PageState) {
     super({ className: 'garage__controls' })
     this.createCarForm = new GarageForm({
       carName: carName as string,

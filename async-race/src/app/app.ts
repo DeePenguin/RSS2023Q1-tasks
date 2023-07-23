@@ -6,6 +6,7 @@ import { pages } from '@core/constants/pages'
 import type { Component } from '@core/models/component.model'
 import { NotFound } from '@core/components/not-found/not-found'
 import type { RoutesMap, PageState } from '@core/types/types'
+import { Observable } from '@utils/observable'
 
 export class App extends BaseComponent {
   private pages = pages
@@ -28,7 +29,7 @@ export class App extends BaseComponent {
 
     definedPages.forEach((page) => {
       const [hash, component] = page
-      this.store.set(hash, { currentPage: 1 })
+      this.store.set(hash, { currentPage: new Observable<number>(1) })
       routes.set(`#${hash}`, () => this.renderPage(component(this.store.get(hash) as PageState)))
     })
 
