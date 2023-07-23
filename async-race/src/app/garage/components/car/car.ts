@@ -30,7 +30,7 @@ export class Car extends BaseComponent {
 
   private createControls(handlers: CarHandlers): Component {
     const controlsContainer = new BaseComponent({ className: 'car__controls' })
-    const updateBtn = new Button({ className: 'car__controls-btn', content: 'Update' }, () => {
+    const updateBtn = new Button({ className: 'car__controls-btn', content: 'Change' }, () => {
       handlers.update({ id: this.id, name: this.name, color: this.color })
     })
     const deleteBtn = new Button({ className: 'car__controls-btn', content: 'Delete' }, () => {

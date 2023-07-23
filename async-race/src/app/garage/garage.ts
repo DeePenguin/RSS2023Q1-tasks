@@ -18,7 +18,7 @@ export class Garage extends BaseComponent<'section'> {
   private header: PageHeader
   private pagination: Pagination
   private controls = new GarageControls(this.emitter, this.store)
-  private list = new GarageList(this.emitter)
+  private list = new GarageList(this.emitter, this.itemsPerPage)
   private pageChanger = new Observer<number>(() => this.renderPage())
 
   constructor(private store: PageState) {
@@ -72,8 +72,15 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private deleteCar(id: number): void {
-    this.garageService.deleteCar(id).catch((err) => {
-      console.error(err)
-    })
+    this.garageService
+      .deleteCar(id)
+      .then(() => {
+        if (!this.pagination.isLastPage()) {
+          this.renderPage()
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 }

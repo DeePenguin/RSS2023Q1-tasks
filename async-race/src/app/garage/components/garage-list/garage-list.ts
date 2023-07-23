@@ -14,7 +14,7 @@ export class GarageList extends BaseComponent {
     start: (id: number): void => this.startCarHandler(id),
     stop: (id: number): void => this.stopCarHandler(id),
   }
-  constructor(private emitter: EventEmitter<EventsMap>) {
+  constructor(private emitter: EventEmitter<EventsMap>, private itemsPerPage: number) {
     super({ className: 'garage__list' })
   }
 
@@ -48,9 +48,11 @@ export class GarageList extends BaseComponent {
   }
 
   public addCar(carProps: CarResponse): void {
-    const car = new Car(carProps, this.carHandlers)
-    this.cars[carProps.id] = car
-    this.append(car)
+    if (Object.keys(this.cars).length < this.itemsPerPage) {
+      const car = new Car(carProps, this.carHandlers)
+      this.cars[carProps.id] = car
+      this.append(car)
+    }
   }
 
   public updateCar(carProps: CarResponse): void {
