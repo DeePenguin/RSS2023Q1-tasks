@@ -1,4 +1,6 @@
 import type { CarResponse } from '@core/models/car-response.model'
+import type { DriveStatus } from '@core/models/drive-status.model'
+import type { EngineResponse } from '@core/models/engine-response.model'
 import { engineApiService } from '@core/services/engine.api.service'
 import { garageApiService } from '@core/services/garage.api.service'
 import { winnersApiService } from '@core/services/winners.service'
@@ -52,5 +54,14 @@ export class GarageService {
     randomCars.map(async (car) => {
       await this.createCar(car)
     })
+  }
+
+  public async startCar(id: number): Promise<EngineResponse> {
+    const response = await this.engineApi.startEngine(id)
+    return response
+  }
+
+  public async driveCar(id: number): Promise<DriveStatus> {
+    return this.engineApi.startDrive(id)
   }
 }

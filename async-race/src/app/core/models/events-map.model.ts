@@ -7,4 +7,6 @@ export type EventsMap = {
   'request-random-cars-generation': () => void
   'update-car': (carProps: CarResponse) => void
   'delete-car': (id: number) => void
+  'start-car': (id: number) => void
+  'drive-car': (id: number) => void
 }

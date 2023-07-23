@@ -44,6 +44,14 @@ export class Garage extends BaseComponent<'section'> {
     this.emitter.on('request-random-cars-generation', () => {
       this.garageService.generateRandomCars()
     })
+    this.emitter.on('start-car', (id: number) => {
+      this.startCar(id)
+    })
+    this.emitter.on('drive-car', (id: number) => {
+      this.driveCar(id).catch((err) => {
+        console.error(err)
+      })
+    })
   }
 
   private renderPage(): void {
@@ -82,5 +90,28 @@ export class Garage extends BaseComponent<'section'> {
       .catch((err) => {
         console.error(err)
       })
+  }
+
+  private startCar(id: number): void {
+    this.garageService
+      .startCar(id)
+      .then(({ velocity, distance }) => {
+        const duration = distance / velocity
+        this.list.startCar(id, duration)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+
+  private async driveCar(id: number): Promise<void> {
+    try {
+      const { success } = await this.garageService.driveCar(id)
+      if (!success) {
+        this.list.pauseCar(id)
+      }
+    } catch (err) {
+      console.error(err)
+    }
   }
 }

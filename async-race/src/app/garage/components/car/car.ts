@@ -12,6 +12,8 @@ export class Car extends BaseComponent {
   private id: number
   private name: string
   private color: string
+  private isCarOnStart = true
+  private animationRequestId = 0
 
   constructor({ id, name, color }: CarResponse, handlers: CarHandlers) {
     super({ className: 'car__container' })
@@ -54,5 +56,36 @@ export class Car extends BaseComponent {
   public changeName(name: string): void {
     this.name = name
     this.title.setContent(this.name)
+  }
+
+  public animateCar(duration: number): void {
+    let animationStart: number | null = null
+    const startAnimation = (timestamp: number): void => {
+      if (!animationStart) {
+        animationStart = timestamp
+      }
+      const progress = Math.floor((100 * (timestamp - animationStart)) / duration)
+      this.carItem.setStyle({ transform: `translateX(${progress}%)` })
+
+      if (progress < 100) {
+        this.animationRequestId = window.requestAnimationFrame(startAnimation)
+      } else {
+        window.cancelAnimationFrame(this.animationRequestId)
+      }
+    }
+    this.animationRequestId = window.requestAnimationFrame(startAnimation)
+    this.isCarOnStart = false
+  }
+
+  public pauseAnimation(): void {
+    if (!this.isCarOnStart && this.animationRequestId) {
+      window.cancelAnimationFrame(this.animationRequestId)
+      this.animationRequestId = 0
+    }
+  }
+
+  public returnToStart(): void {
+    this.isCarOnStart = true
+    this.carItem.setStyle({ transform: 'translateX(0)' })
   }
 }

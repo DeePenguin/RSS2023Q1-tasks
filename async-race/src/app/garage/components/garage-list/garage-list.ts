@@ -33,6 +33,7 @@ export class GarageList extends BaseComponent {
   }
   private startCarHandler(id: number): void {
     console.log('start', id)
+    this.emitter.emit('start-car', id)
   }
   private stopCarHandler(id: number): void {
     console.log('stop', id)
@@ -58,5 +59,15 @@ export class GarageList extends BaseComponent {
   public updateCar(carProps: CarResponse): void {
     this.cars[carProps.id].changeColor(carProps.color)
     this.cars[carProps.id].changeName(carProps.name)
+  }
+
+  public startCar(id: number, duration: number): void {
+    console.log(id, duration)
+    this.cars[id].animateCar(duration)
+    this.emitter.emit('drive-car', id)
+  }
+
+  public pauseCar(id: number): void {
+    this.cars[id].pauseAnimation()
   }
 }
