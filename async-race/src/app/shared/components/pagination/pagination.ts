@@ -67,6 +67,10 @@ export class Pagination extends ObserverComponent<number, 'div'> {
     this.counterElement.setContent(`Page ${this.currentPage.getValue()} / ${this.pagesAmount}`)
   }
 
+  public isLastPage(): boolean {
+    return this.currentPage.getValue() === this.pagesAmount
+  }
+
   public lockButtons(isLocked: boolean): void {
     if (!isLocked) {
       this.toggleButtonsDisability()
