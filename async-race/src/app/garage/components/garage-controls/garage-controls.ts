@@ -25,21 +25,25 @@ export class GarageControls extends BaseComponent {
     this.createCarForm = new GarageForm({
       carName: carName as string,
       carColor: carColor as string,
-      placeholder: 'Enter car name',
-      btnText: 'Create',
+      submitText: 'Create',
       onTextChange: (value: string): void => this.emitter.emit('update-store', 'carName', value),
       onColorChange: (value: string): void => this.emitter.emit('update-store', 'carColor', value),
-      onBtnClick: ({ name, color }: Record<string, string>): void =>
+      onSubmit: ({ name, color }: Record<string, string>): void =>
         this.emitter.emit('request-add-car', { name, color }),
     })
 
     this.updateCarForm = new GarageForm({
       carName: '',
       carColor: '',
-      placeholder: 'Enter car name',
-      btnText: 'Update',
-      onBtnClick: ({ name, color }: Record<string, string>): void => {
+      submitText: 'Update',
+      cancelText: 'Cancel',
+      onSubmit: ({ name, color }: Record<string, string>): void => {
         this.emitter.emit('request-update-car', { id: this.selectedCarId as number, name, color })
+        this.createCarForm.show()
+        this.updateCarForm.hide()
+        this.selectedCarId = null
+      },
+      onCancel: (): void => {
         this.createCarForm.show()
         this.updateCarForm.hide()
         this.selectedCarId = null

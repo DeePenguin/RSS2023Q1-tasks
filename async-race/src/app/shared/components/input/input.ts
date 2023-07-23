@@ -30,15 +30,19 @@ type InputComponentProps = Partial<Omit<ComponentProps<'input'>, 'tag'>> & {
   placeholder?: string
   value?: number | string
   onChange?: (value: string) => void
+  onInput?: (value: string) => void
 }
 
 export class Input extends BaseComponent<'input'> {
   constructor(props: InputComponentProps) {
     super({ ...props, tag: 'input' })
-    const { type, placeholder = '', value = '', onChange } = props
+    const { type, placeholder = '', value = '', onChange, onInput } = props
     this.setAttributes({ type, placeholder, value: value.toString() })
     if (onChange) {
       this.addListener('change', () => onChange(this.value))
+    }
+    if (onInput) {
+      this.addListener('input', () => onInput(this.value))
     }
   }
 
