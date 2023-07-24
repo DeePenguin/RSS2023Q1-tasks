@@ -35,7 +35,6 @@ export class Table extends BaseComponent<'table'> {
     callBack: (sortBy: WinnersSortable) => void,
   ): BaseComponent<'thead'> {
     const sortable = Object.values(WinnersSortable) as string[]
-    console.log(sortable)
     const columns = ['№', 'car', 'name', 'wins', 'time']
     const header = new BaseComponent({ tag: 'thead', className: 'winners__thead' })
     const tr = new BaseComponent({ parent: header, tag: 'tr', className: 'winners__tr' })
