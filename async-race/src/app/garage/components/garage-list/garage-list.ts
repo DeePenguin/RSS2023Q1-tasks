@@ -6,11 +6,12 @@ import { Car } from '@garage/components/car/car'
 import type { CarHandlers } from '@garage/models/carHandlers.model'
 import type { Observable } from '@utils/observable'
 import { Observer } from '@utils/observer'
+import { RaceState } from '@garage/enums/race-state'
 import './garage-list.scss'
 
 export class GarageList extends BaseComponent {
   private cars: Record<string, Car> = {}
-  private raceObserver = new Observer<boolean>((value: boolean) => this.handleRace(value))
+  private raceObserver = new Observer<RaceState>((value) => this.handleRace(value))
   private carHandlers: CarHandlers = {
     update: (carProps: CarResponse): void => this.updateCarHandler(carProps),
     delete: (id: number): void => this.deleteCarHandler(id),
@@ -19,7 +20,7 @@ export class GarageList extends BaseComponent {
   }
   constructor(
     private emitter: EventEmitter<EventsMap>,
-    isRaceInProgress: Observable<boolean>,
+    isRaceInProgress: Observable<RaceState>,
     private itemsPerPage: number,
   ) {
     super({ className: 'garage__list' })
@@ -89,15 +90,20 @@ export class GarageList extends BaseComponent {
     return Object.keys(this.cars).map((id) => Number(id))
   }
 
-  private handleRace(isRaceActive: boolean): void {
-    if (isRaceActive) {
-      Object.values(this.cars).forEach((car) => {
-        car.lockControls()
-      })
-    } else {
-      Object.values(this.cars).forEach((car) => {
-        car.unlockControls()
-      })
+  private handleRace(state: RaceState): void {
+    switch (state) {
+      case RaceState.InProgress:
+        Object.values(this.cars).forEach((car) => {
+          car.lockControls()
+        })
+        break
+      case RaceState.OnFinish:
+        Object.values(this.cars).forEach((car) => {
+          car.unlockControls()
+        })
+        break
+      default:
+        break
     }
   }
 }

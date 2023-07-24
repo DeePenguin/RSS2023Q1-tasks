@@ -78,7 +78,7 @@ export class Car extends BaseComponent {
         animationStart = timestamp
         this.isCarDriving = true
       }
-      const progress = (100 * (timestamp - animationStart)) / duration
+      const progress = Math.min(100, (100 * (timestamp - animationStart)) / duration)
       this.carItem.setStyle({ transform: `translateX(${progress}%)` })
 
       if (progress < 100) {
@@ -105,6 +105,7 @@ export class Car extends BaseComponent {
     this.carItem.setStyle({ transform: 'translateX(0)' })
     this.isCarOnStart = true
     this.startBtn.toggleDisable(false)
+    this.stopBtn.toggleDisable(true)
     this.updateBtn.toggleDisable(false)
     this.deleteBtn.toggleDisable(false)
   }
@@ -123,7 +124,7 @@ export class Car extends BaseComponent {
   public unlockControls(): void {
     this.updateBtn.toggleDisable(false)
     this.deleteBtn.toggleDisable(false)
-    this.startBtn.toggleDisable(this.isCarOnStart)
-    this.stopBtn.toggleDisable(!this.isCarOnStart)
+    this.startBtn.toggleDisable(!this.isCarOnStart)
+    this.stopBtn.toggleDisable(this.isCarOnStart)
   }
 }
