@@ -10,6 +10,14 @@
     color: $font-color-light;
     text-align: center;
     text-transform: capitalize;
+
+    &--sortable {
+      cursor: pointer;
+    }
+
+    &--active {
+      color: $font-color-light-xl;
+    }
   }
 
   &__td {
