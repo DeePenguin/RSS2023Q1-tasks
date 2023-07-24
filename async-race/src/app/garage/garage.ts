@@ -12,6 +12,7 @@ import { GarageList } from '@garage/components/garage-list/garage-list'
 import { GarageControls } from '@garage/components/garage-controls/garage-controls'
 import type { DriveStatus } from '@core/models/drive-status.model'
 import { Observable } from '@utils/observable'
+import { RaceState } from './enums/race-state'
 
 export class Garage extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.garage
@@ -19,9 +20,9 @@ export class Garage extends BaseComponent<'section'> {
   private garageService = new GarageService(this.itemsPerPage)
   private header: PageHeader
   private pagination: Pagination
-  private controls = new GarageControls(this.emitter, this.store)
-  private isRaceInProgress = new Observable<boolean>(false)
-  private list = new GarageList(this.emitter, this.isRaceInProgress, this.itemsPerPage)
+  private raceState = new Observable<RaceState>(RaceState.OnStart)
+  private controls = new GarageControls(this.emitter, this.store, this.raceState)
+  private list = new GarageList(this.emitter, this.raceState, this.itemsPerPage)
   private pageChanger = new Observer<number>(() => this.renderPage())
 
   constructor(private store: PageState) {
@@ -143,15 +144,23 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private startRace(): void {
-    this.isRaceInProgress.setValue(true)
+    this.raceState.setValue(RaceState.InProgress)
     const ids = this.list.getCars()
-    Promise.any(ids.map((id) => this.startCar(id)))
+    const carResponses = ids.map((id) => this.startCar(id))
+    Promise.any(carResponses)
       .then((car) => {
         this.addWinner({ id: car.id, time: car.duration })
       })
       .catch(() => {
-        this.isRaceInProgress.setValue(false)
+        this.raceState.setValue(RaceState.OnFinish)
         console.log('all cars are broken')
+      })
+    Promise.allSettled(carResponses)
+      .then(() => {
+        this.raceState.setValue(RaceState.OnFinish)
+      })
+      .catch((err) => {
+        console.error(err)
       })
   }
 
@@ -161,7 +170,7 @@ export class Garage extends BaseComponent<'section'> {
       this.list.pauseCar(id)
       this.stopCar(id)
     })
-    this.isRaceInProgress.setValue(false)
+    this.raceState.setValue(RaceState.OnStart)
   }
 
   private addWinner({ id, time }: Record<string, number>): void {
