@@ -11,6 +11,7 @@ import { GarageService } from '@garage/services/garage.service'
 import { GarageList } from '@garage/components/garage-list/garage-list'
 import { GarageControls } from '@garage/components/garage-controls/garage-controls'
 import type { DriveStatus } from '@core/models/drive-status.model'
+import { Observable } from '@utils/observable'
 
 export class Garage extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.garage
@@ -21,6 +22,7 @@ export class Garage extends BaseComponent<'section'> {
   private controls = new GarageControls(this.emitter, this.store)
   private list = new GarageList(this.emitter, this.itemsPerPage)
   private pageChanger = new Observer<number>(() => this.renderPage())
+  private isRaceInProgress = new Observable<boolean>(false)
 
   constructor(private store: PageState) {
     super({ tag: 'section', className: 'garage' })
@@ -54,6 +56,9 @@ export class Garage extends BaseComponent<'section'> {
     })
     this.emitter.on('request-race', () => {
       this.startRace()
+    })
+    this.emitter.on('request-reset-race', () => {
+      this.stopRace()
     })
   }
 
@@ -138,13 +143,30 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private startRace(): void {
+    this.isRaceInProgress.setValue(true)
     const ids = this.list.getCars()
     Promise.any(ids.map((id) => this.startCar(id)))
       .then((car) => {
-        console.log('winner', car)
+        this.addWinner({ id: car.id, time: car.duration })
       })
       .catch(() => {
+        this.isRaceInProgress.setValue(false)
         console.log('all cars are broken')
       })
+  }
+
+  private stopRace(): void {
+    const ids = this.list.getCars()
+    ids.forEach((id) => {
+      this.list.pauseCar(id)
+      this.stopCar(id)
+    })
+    this.isRaceInProgress.setValue(false)
+  }
+
+  private addWinner({ id, time }: Record<string, number>): void {
+    this.garageService.addWinner({ id, time }).catch((err) => {
+      console.error(err)
+    })
   }
 }

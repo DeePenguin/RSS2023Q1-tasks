@@ -8,7 +8,10 @@ export type ComponentProps<T> = {
   content: string
   attr: Record<string, string>
 }
-export type PageState = { currentPage: Observable<number>; [key: string]: string | number | Observable<number> }
+export type PageState = {
+  currentPage: Observable<number>
+  [key: string]: string | number | Observable<number>
+}
 export type PagesRecord = Record<string, (state: PageState) => Promise<Component>>
 export type RoutesMap = Map<string, () => void>
 export type RequestOptions = { body?: string; headers?: Record<string, string> }

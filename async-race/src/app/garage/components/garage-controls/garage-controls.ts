@@ -10,7 +10,9 @@ export class GarageControls extends BaseComponent {
   private startRaceBtn = new Button({ className: 'btn', content: 'Start Race' }, () =>
     this.emitter.emit('request-race'),
   )
-  private stopRaceBtn = new Button({ className: 'btn', content: 'Reset' })
+  private stopRaceBtn = new Button({ className: 'btn', content: 'Reset' }, () =>
+    this.emitter.emit('request-reset-race'),
+  )
   private generateRandomCarsBtn = new Button(
     {
       className: 'btn',
