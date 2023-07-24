@@ -146,6 +146,7 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private startRace(): void {
+    this.pagination.lockButtons(true)
     this.raceState.setValue(RaceState.InProgress)
     const ids = this.list.getCars()
     const carResponses = ids.map((id) => this.startCar(id))
@@ -161,6 +162,7 @@ export class Garage extends BaseComponent<'section'> {
     Promise.allSettled(carResponses)
       .then(() => {
         this.raceState.setValue(RaceState.OnFinish)
+        this.pagination.lockButtons(false)
       })
       .catch((err) => {
         console.error(err)
