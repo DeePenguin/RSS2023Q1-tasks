@@ -152,8 +152,10 @@ export class Garage extends BaseComponent<'section'> {
     const carResponses = ids.map((id) => this.startCar(id))
     Promise.any(carResponses)
       .then((car) => {
-        this.addWinner({ id: car.id, time: car.duration })
-        this.showWinner(car.id, car.duration)
+        if (this.raceState.getValue() === RaceState.InProgress) {
+          this.addWinner({ id: car.id, time: car.duration })
+          this.showWinner(car.id, car.duration)
+        }
       })
       .catch(() => {
         this.raceState.setValue(RaceState.OnFinish)
