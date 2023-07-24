@@ -10,4 +10,5 @@ export type EventsMap = {
   'start-car': (id: number) => void
   'stop-car': (id: number) => void
   'request-race': () => void
+  'request-reset-race': () => void
 }

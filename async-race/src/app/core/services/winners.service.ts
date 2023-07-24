@@ -17,6 +17,9 @@ class WinnersApiService {
 
   public async getWinner(id: number): Promise<WinnerResponse> {
     const response = await this.http.get(this.endPoint, { url: id })
+    if (response.status === 404) {
+      throw new Error('Winner not found')
+    }
     const data = (await response.json()) as WinnerResponse
     return data
   }

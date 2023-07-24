@@ -69,4 +69,15 @@ export class GarageService {
   public async driveCar(id: number, duration: number): Promise<DriveStatus> {
     return this.engineApi.startDrive(id, duration)
   }
+
+  public async addWinner({ id, time }: Record<string, number>): Promise<void> {
+    const currentTime = Number((time / 1000).toFixed(2))
+    try {
+      const winner = await this.winnersApi.getWinner(id)
+      const newTime = Math.min(currentTime, winner.time)
+      await this.winnersApi.updateWinner(id, { time: newTime, wins: winner.wins + 1 })
+    } catch (err) {
+      await this.winnersApi.createWinner({ id, time: currentTime, wins: 1 })
+    }
+  }
 }
