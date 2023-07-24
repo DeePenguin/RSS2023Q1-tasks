@@ -19,6 +19,7 @@ export class Car extends BaseComponent {
   private isCarOnStart = true
   private isCarDriving = false
   private animationRequestId = 0
+  private isSingleStart = false
 
   constructor({ id, name, color }: CarResponse, handlers: CarHandlers) {
     super({ className: 'car__container' })
@@ -45,10 +46,14 @@ export class Car extends BaseComponent {
     })
     this.startBtn = new Button({ className: 'car__controls-btn', content: 'Start' }, () => {
       this.startBtn.toggleDisable(true)
+      this.updateBtn.toggleDisable(true)
+      this.deleteBtn.toggleDisable(true)
+      this.isSingleStart = true
       handlers.start(this.id)
     })
     this.stopBtn = new Button({ className: 'car__controls-btn', content: 'Stop' }, () => {
       this.stopBtn.toggleDisable(true)
+      this.isSingleStart = false
       handlers.stop(this.id)
     })
     controlsContainer.append(this.updateBtn, this.deleteBtn, this.startBtn, this.stopBtn)
@@ -83,7 +88,7 @@ export class Car extends BaseComponent {
         this.isCarDriving = false
       }
     }
-    this.stopBtn.toggleDisable(false)
+    this.stopBtn.toggleDisable(!this.isSingleStart)
     this.animationRequestId = window.requestAnimationFrame(startAnimation)
     this.isCarOnStart = false
   }
@@ -100,9 +105,25 @@ export class Car extends BaseComponent {
     this.carItem.setStyle({ transform: 'translateX(0)' })
     this.isCarOnStart = true
     this.startBtn.toggleDisable(false)
+    this.updateBtn.toggleDisable(false)
+    this.deleteBtn.toggleDisable(false)
   }
 
   public get isDriving(): boolean {
     return this.isCarDriving
+  }
+
+  public lockControls(): void {
+    this.updateBtn.toggleDisable(true)
+    this.deleteBtn.toggleDisable(true)
+    this.startBtn.toggleDisable(true)
+    this.stopBtn.toggleDisable(true)
+  }
+
+  public unlockControls(): void {
+    this.updateBtn.toggleDisable(false)
+    this.deleteBtn.toggleDisable(false)
+    this.startBtn.toggleDisable(this.isCarOnStart)
+    this.stopBtn.toggleDisable(!this.isCarOnStart)
   }
 }
