@@ -2,9 +2,7 @@ import { pageLimits } from '@core/constants/page-limits'
 import { PageHeader } from '@shared/components/page-header/page-header'
 import { Pagination } from '@shared/components/pagination/pagination'
 import { BaseComponent } from '@utils/base-component'
-import { EventEmitter } from '@utils/event-emitter'
 import type { PageState } from '@core/types/types'
-import type { EventsMap } from '@core/models/events-map.model'
 import { Observer } from '@utils/observer'
 import { Observable } from '@utils/observable'
 import { WinnersSortable } from '@core/enums/winners-sortable'
@@ -15,7 +13,6 @@ import { Table } from './components/table/table'
 
 export class Winners extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.winners
-  private emitter = new EventEmitter<EventsMap>()
   private winnersService = new WinnersService(this.itemsPerPage)
   private header: PageHeader
   private pagination: Pagination
@@ -33,6 +30,7 @@ export class Winners extends BaseComponent<'section'> {
       this.store.currentPage,
       this.store.sortBy as WinnersSortable,
       this.store.sortOrder as SortOrder,
+      (sortBy: WinnersSortable) => this.sort(sortBy),
     )
     this.append(this.header, this.pagination, this.table)
     this.renderPage()
@@ -50,5 +48,15 @@ export class Winners extends BaseComponent<'section'> {
       .catch((err) => {
         console.error(err)
       })
+  }
+
+  private sort(sortBy: WinnersSortable): void {
+    if (sortBy === this.store.sortBy) {
+      this.store.sortOrder = this.store.sortOrder === SortOrder.Asc ? SortOrder.Desc : SortOrder.Asc
+    } else {
+      this.store.sortBy = sortBy
+      this.store.sortOrder = SortOrder.Asc
+    }
+    this.renderPage()
   }
 }
