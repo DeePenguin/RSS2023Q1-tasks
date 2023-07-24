@@ -4,18 +4,26 @@ import type { EventEmitter } from '@utils/event-emitter'
 import type { EventsMap } from '@core/models/events-map.model'
 import { Car } from '@garage/components/car/car'
 import type { CarHandlers } from '@garage/models/carHandlers.model'
+import type { Observable } from '@utils/observable'
+import { Observer } from '@utils/observer'
 import './garage-list.scss'
 
 export class GarageList extends BaseComponent {
   private cars: Record<string, Car> = {}
+  private raceObserver = new Observer<boolean>((value: boolean) => this.handleRace(value))
   private carHandlers: CarHandlers = {
     update: (carProps: CarResponse): void => this.updateCarHandler(carProps),
     delete: (id: number): void => this.deleteCarHandler(id),
     start: (id: number): void => this.startCarHandler(id),
     stop: (id: number): void => this.stopCarHandler(id),
   }
-  constructor(private emitter: EventEmitter<EventsMap>, private itemsPerPage: number) {
+  constructor(
+    private emitter: EventEmitter<EventsMap>,
+    isRaceInProgress: Observable<boolean>,
+    private itemsPerPage: number,
+  ) {
     super({ className: 'garage__list' })
+    isRaceInProgress.subscribe(this.raceObserver)
   }
 
   private clear(): void {
@@ -79,5 +87,17 @@ export class GarageList extends BaseComponent {
 
   public getCars(): number[] {
     return Object.keys(this.cars).map((id) => Number(id))
+  }
+
+  private handleRace(isRaceActive: boolean): void {
+    if (isRaceActive) {
+      Object.values(this.cars).forEach((car) => {
+        car.lockControls()
+      })
+    } else {
+      Object.values(this.cars).forEach((car) => {
+        car.unlockControls()
+      })
+    }
   }
 }

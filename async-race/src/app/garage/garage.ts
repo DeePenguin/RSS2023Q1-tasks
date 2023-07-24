@@ -20,9 +20,9 @@ export class Garage extends BaseComponent<'section'> {
   private header: PageHeader
   private pagination: Pagination
   private controls = new GarageControls(this.emitter, this.store)
-  private list = new GarageList(this.emitter, this.itemsPerPage)
-  private pageChanger = new Observer<number>(() => this.renderPage())
   private isRaceInProgress = new Observable<boolean>(false)
+  private list = new GarageList(this.emitter, this.isRaceInProgress, this.itemsPerPage)
+  private pageChanger = new Observer<number>(() => this.renderPage())
 
   constructor(private store: PageState) {
     super({ tag: 'section', className: 'garage' })
