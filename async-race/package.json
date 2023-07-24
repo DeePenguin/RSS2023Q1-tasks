@@ -5,7 +5,7 @@
   "main": "index.ts",
   "author": "DeePenguin",
   "scripts": {
-    "deploy": "npm run build && gh-pages -d dist -e rs-selectors -m \"feat: update deploy\"",
+    "deploy": "npm run build && gh-pages -d dist -e async-race -m \"feat: update deploy\"",
     "stylelint": "stylelint **/*.scss",
     "stylelint:fix": "stylelint **/*.scss --fix",
     "lint": "eslint . --color",
