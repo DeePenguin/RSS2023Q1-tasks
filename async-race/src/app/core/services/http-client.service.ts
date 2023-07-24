@@ -3,7 +3,7 @@ import { HttpMethods } from '@core/enums/http-methods'
 import type { Endpoints } from '@core/enums/endpoints'
 import type { RequestOptions, RequestProps } from '@core/types/types'
 
-class HttpService {
+class HttpClientService {
   protected readonly baseUrl = baseUrl
 
   public async get(endPoint: Endpoints, options?: RequestProps): Promise<Response> {
@@ -61,4 +61,4 @@ class HttpService {
   }
 }
 
-export const httpService = new HttpService()
+export const httpService = new HttpClientService()

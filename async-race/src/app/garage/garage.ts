@@ -13,6 +13,7 @@ import { GarageControls } from '@garage/components/garage-controls/garage-contro
 import type { DriveStatus } from '@core/models/drive-status.model'
 import { Observable } from '@utils/observable'
 import { RaceState } from './enums/race-state'
+import './garage.scss'
 
 export class Garage extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.garage
@@ -64,6 +65,7 @@ export class Garage extends BaseComponent<'section'> {
   }
 
   private renderPage(): void {
+    this.raceState.setValue(RaceState.OnStart)
     const cars = this.garageService.getCars(this.store.currentPage.getValue())
     cars
       .then((carsData) => this.list.showCars(carsData))
@@ -150,10 +152,11 @@ export class Garage extends BaseComponent<'section'> {
     Promise.any(carResponses)
       .then((car) => {
         this.addWinner({ id: car.id, time: car.duration })
+        this.showWinner(car.id, car.duration)
       })
       .catch(() => {
         this.raceState.setValue(RaceState.OnFinish)
-        console.log('all cars are broken')
+        this.showModal('All cars are broken')
       })
     Promise.allSettled(carResponses)
       .then(() => {
@@ -177,5 +180,19 @@ export class Garage extends BaseComponent<'section'> {
     this.garageService.addWinner({ id, time }).catch((err) => {
       console.error(err)
     })
+  }
+
+  private showWinner(id: number, time: number): void {
+    const name = this.list.getCar(id)
+    const content = `Car ${name} finished in ${time / 1000} seconds`
+    this.showModal(content)
+  }
+
+  private showModal(content: string): void {
+    const modal = new BaseComponent({ className: 'modal', content })
+    this.append(modal)
+    setTimeout(() => {
+      modal.remove()
+    }, 5000)
   }
 }
