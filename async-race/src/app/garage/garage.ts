@@ -10,11 +10,12 @@ import { Observer } from '@utils/observer'
 import { GarageService } from '@garage/services/garage.service'
 import { GarageList } from '@garage/components/garage-list/garage-list'
 import { GarageControls } from '@garage/components/garage-controls/garage-controls'
+import type { DriveStatus } from '@core/models/drive-status.model'
 
 export class Garage extends BaseComponent<'section'> {
   private itemsPerPage = pageLimits.garage
   private emitter = new EventEmitter<EventsMap>()
-  private garageService: GarageService
+  private garageService = new GarageService(this.itemsPerPage)
   private header: PageHeader
   private pagination: Pagination
   private controls = new GarageControls(this.emitter, this.store)
@@ -23,7 +24,6 @@ export class Garage extends BaseComponent<'section'> {
 
   constructor(private store: PageState) {
     super({ tag: 'section', className: 'garage' })
-    this.garageService = new GarageService(this.itemsPerPage)
     this.header = new PageHeader('Garage', this.garageService.carsCount)
     this.pagination = new Pagination(this.garageService.carsCount, this.itemsPerPage, this.store.currentPage)
     this.append(this.header, this.pagination, this.controls, this.list)
@@ -45,12 +45,15 @@ export class Garage extends BaseComponent<'section'> {
       this.garageService.generateRandomCars()
     })
     this.emitter.on('start-car', (id: number) => {
-      this.startCar(id)
-    })
-    this.emitter.on('drive-car', (id: number) => {
-      this.driveCar(id).catch((err) => {
+      this.startCar(id).catch((err) => {
         console.error(err)
       })
+    })
+    this.emitter.on('stop-car', (id: number) => {
+      this.stopCar(id)
+    })
+    this.emitter.on('request-race', () => {
+      this.startRace()
     })
   }
 
@@ -92,26 +95,56 @@ export class Garage extends BaseComponent<'section'> {
       })
   }
 
-  private startCar(id: number): void {
+  private startCar(id: number): Promise<DriveStatus> {
+    const promise = new Promise<DriveStatus>((resolve) => {
+      this.garageService
+        .startCar(id)
+        .then((duration) => {
+          this.list.startCar(id, duration)
+          resolve(this.driveCar(id, duration))
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
+    return promise
+  }
+
+  private stopCar(id: number): void {
     this.garageService
-      .startCar(id)
-      .then(({ velocity, distance }) => {
-        const duration = distance / velocity
-        this.list.startCar(id, duration)
-      })
+      .stopCar(id)
+      .then(() => this.list.stopCar(id))
       .catch((err) => {
         console.error(err)
       })
   }
 
-  private async driveCar(id: number): Promise<void> {
-    try {
-      const { success } = await this.garageService.driveCar(id)
-      if (!success) {
-        this.list.pauseCar(id)
-      }
-    } catch (err) {
-      console.error(err)
-    }
+  private driveCar(id: number, duration: number): Promise<DriveStatus> {
+    const promise = new Promise<DriveStatus>((resolve, reject) => {
+      this.garageService
+        .driveCar(id, duration)
+        .then((response) => {
+          if (!response.success) {
+            this.list.pauseCar(id)
+            reject(response)
+          }
+          resolve(response)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
+    return promise
+  }
+
+  private startRace(): void {
+    const ids = this.list.getCars()
+    Promise.any(ids.map((id) => this.startCar(id)))
+      .then((car) => {
+        console.log('winner', car)
+      })
+      .catch(() => {
+        console.log('all cars are broken')
+      })
   }
 }

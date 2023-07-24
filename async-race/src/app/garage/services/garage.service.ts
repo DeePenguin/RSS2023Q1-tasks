@@ -56,12 +56,17 @@ export class GarageService {
     })
   }
 
-  public async startCar(id: number): Promise<EngineResponse> {
-    const response = await this.engineApi.startEngine(id)
+  public async startCar(id: number): Promise<number> {
+    const { velocity, distance } = await this.engineApi.startEngine(id)
+    return Math.round(distance / velocity)
+  }
+
+  public async stopCar(id: number): Promise<EngineResponse> {
+    const response = await this.engineApi.stopEngine(id)
     return response
   }
 
-  public async driveCar(id: number): Promise<DriveStatus> {
-    return this.engineApi.startDrive(id)
+  public async driveCar(id: number, duration: number): Promise<DriveStatus> {
+    return this.engineApi.startDrive(id, duration)
   }
 }

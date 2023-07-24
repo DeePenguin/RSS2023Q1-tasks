@@ -32,11 +32,15 @@ export class GarageList extends BaseComponent {
     delete this.cars[id]
   }
   private startCarHandler(id: number): void {
-    console.log('start', id)
     this.emitter.emit('start-car', id)
   }
   private stopCarHandler(id: number): void {
-    console.log('stop', id)
+    if (this.cars[id].isDriving) {
+      this.pauseCar(id)
+      this.emitter.emit('stop-car', id)
+    } else {
+      this.cars[id].returnToStart()
+    }
   }
 
   public showCars(cars: CarResponse[]): void {
@@ -62,12 +66,18 @@ export class GarageList extends BaseComponent {
   }
 
   public startCar(id: number, duration: number): void {
-    console.log(id, duration)
     this.cars[id].animateCar(duration)
-    this.emitter.emit('drive-car', id)
   }
 
   public pauseCar(id: number): void {
     this.cars[id].pauseAnimation()
+  }
+
+  public stopCar(id: number): void {
+    this.cars[id].returnToStart()
+  }
+
+  public getCars(): number[] {
+    return Object.keys(this.cars).map((id) => Number(id))
   }
 }

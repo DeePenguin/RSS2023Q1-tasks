@@ -7,7 +7,9 @@ import { GarageForm } from '@garage/components/garage-form/garage-form'
 import type { PageState } from '@core/types/types'
 
 export class GarageControls extends BaseComponent {
-  private startRaceBtn = new Button({ className: 'btn', content: 'Start Race' })
+  private startRaceBtn = new Button({ className: 'btn', content: 'Start Race' }, () =>
+    this.emitter.emit('request-race'),
+  )
   private stopRaceBtn = new Button({ className: 'btn', content: 'Reset' })
   private generateRandomCarsBtn = new Button(
     {

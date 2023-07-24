@@ -20,13 +20,13 @@ class EngineApiService {
     return data
   }
 
-  public async startDrive(id: number): Promise<DriveStatus> {
+  public async startDrive(id: number, duration: number): Promise<DriveStatus> {
     try {
       const response = await this.http.patch(this.endPoint, { query: { id, status: EngineStatuses.Drive } })
-      const data = (await response.json()) as DriveStatus
-      return data
+      const data = (await response.json()) as { success: boolean }
+      return { id, duration, ...data }
     } catch (error) {
-      return { success: false }
+      return { id, duration, success: false }
     }
   }
 }
