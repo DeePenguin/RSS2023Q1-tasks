@@ -3,7 +3,7 @@ import type { SortOrder } from '@core/enums/sort-order'
 import type { WinnersSortable } from '@core/enums/winners-sortable'
 import type { WinnerResponse } from '@core/models/winner-response.model'
 import type { WinnersResponse } from '@core/models/winners-response.model'
-import { httpService } from '@core/services/http.service'
+import { httpService } from '@core/services/http-client.service'
 
 class WinnersApiService {
   private readonly endPoint = Endpoints.Winners

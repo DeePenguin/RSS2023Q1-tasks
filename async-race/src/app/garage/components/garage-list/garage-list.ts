@@ -90,6 +90,10 @@ export class GarageList extends BaseComponent {
     return Object.keys(this.cars).map((id) => Number(id))
   }
 
+  public getCar(id: number): string {
+    return this.cars[id].getName()
+  }
+
   private handleRace(state: RaceState): void {
     switch (state) {
       case RaceState.InProgress:

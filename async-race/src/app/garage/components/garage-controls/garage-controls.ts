@@ -87,9 +87,9 @@ export class GarageControls extends BaseComponent {
   }
 
   private raceHandler(state: RaceState): void {
-    console.log(state)
     switch (state) {
       case RaceState.OnStart:
+        this.lastActiveForm.show()
         this.stopRaceBtn.toggleDisable(true)
         this.startRaceBtn.toggleDisable(false)
         break

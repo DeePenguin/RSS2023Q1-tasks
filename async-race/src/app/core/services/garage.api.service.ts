@@ -1,7 +1,7 @@
 import { Endpoints } from '@core/enums/endpoints'
 import type { CarResponse } from '@core/models/car-response.model'
 import type { CarsResponse } from '@core/models/cars-response.model'
-import { httpService } from '@core/services/http.service'
+import { httpService } from '@core/services/http-client.service'
 
 class GarageApiService {
   private readonly endPoint = Endpoints.Garage

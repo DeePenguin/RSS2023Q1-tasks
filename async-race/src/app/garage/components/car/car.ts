@@ -127,4 +127,8 @@ export class Car extends BaseComponent {
     this.startBtn.toggleDisable(!this.isCarOnStart)
     this.stopBtn.toggleDisable(this.isCarOnStart)
   }
+
+  public getName(): string {
+    return this.name
+  }
 }

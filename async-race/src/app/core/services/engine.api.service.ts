@@ -2,7 +2,7 @@ import { Endpoints } from '@core/enums/endpoints'
 import { EngineStatuses } from '@core/enums/engine-statuses'
 import type { DriveStatus } from '@core/models/drive-status.model'
 import type { EngineResponse } from '@core/models/engine-response.model'
-import { httpService } from '@core/services/http.service'
+import { httpService } from '@core/services/http-client.service'
 
 class EngineApiService {
   private readonly endPoint = Endpoints.Engine
