@@ -9,10 +9,15 @@ import './car.scss'
 export class Car extends BaseComponent {
   private carItem: CarItem
   private title = new BaseComponent({ tag: 'h3', className: 'car__title' })
+  private startBtn!: Button
+  private stopBtn!: Button
+  private updateBtn!: Button
+  private deleteBtn!: Button
   private id: number
   private name: string
   private color: string
   private isCarOnStart = true
+  private isCarDriving = false
   private animationRequestId = 0
 
   constructor({ id, name, color }: CarResponse, handlers: CarHandlers) {
@@ -32,19 +37,22 @@ export class Car extends BaseComponent {
 
   private createControls(handlers: CarHandlers): Component {
     const controlsContainer = new BaseComponent({ className: 'car__controls' })
-    const updateBtn = new Button({ className: 'car__controls-btn', content: 'Change' }, () => {
+    this.updateBtn = new Button({ className: 'car__controls-btn', content: 'Change' }, () => {
       handlers.update({ id: this.id, name: this.name, color: this.color })
     })
-    const deleteBtn = new Button({ className: 'car__controls-btn', content: 'Delete' }, () => {
+    this.deleteBtn = new Button({ className: 'car__controls-btn', content: 'Delete' }, () => {
       handlers.delete(this.id)
     })
-    const startBtn = new Button({ className: 'car__controls-btn', content: 'Start' }, () => {
+    this.startBtn = new Button({ className: 'car__controls-btn', content: 'Start' }, () => {
+      this.startBtn.toggleDisable(true)
       handlers.start(this.id)
     })
-    const stopBtn = new Button({ className: 'car__controls-btn', content: 'Stop' }, () => {
+    this.stopBtn = new Button({ className: 'car__controls-btn', content: 'Stop' }, () => {
+      this.stopBtn.toggleDisable(true)
       handlers.stop(this.id)
     })
-    controlsContainer.append(updateBtn, deleteBtn, startBtn, stopBtn)
+    controlsContainer.append(this.updateBtn, this.deleteBtn, this.startBtn, this.stopBtn)
+    this.stopBtn.toggleDisable(true)
     return controlsContainer
   }
 
@@ -63,29 +71,38 @@ export class Car extends BaseComponent {
     const startAnimation = (timestamp: number): void => {
       if (!animationStart) {
         animationStart = timestamp
+        this.isCarDriving = true
       }
-      const progress = Math.floor((100 * (timestamp - animationStart)) / duration)
+      const progress = (100 * (timestamp - animationStart)) / duration
       this.carItem.setStyle({ transform: `translateX(${progress}%)` })
 
       if (progress < 100) {
         this.animationRequestId = window.requestAnimationFrame(startAnimation)
       } else {
         window.cancelAnimationFrame(this.animationRequestId)
+        this.isCarDriving = false
       }
     }
+    this.stopBtn.toggleDisable(false)
     this.animationRequestId = window.requestAnimationFrame(startAnimation)
     this.isCarOnStart = false
   }
 
   public pauseAnimation(): void {
-    if (!this.isCarOnStart && this.animationRequestId) {
+    if (this.isCarDriving) {
       window.cancelAnimationFrame(this.animationRequestId)
+      this.isCarDriving = false
       this.animationRequestId = 0
     }
   }
 
   public returnToStart(): void {
-    this.isCarOnStart = true
     this.carItem.setStyle({ transform: 'translateX(0)' })
+    this.isCarOnStart = true
+    this.startBtn.toggleDisable(false)
+  }
+
+  public get isDriving(): boolean {
+    return this.isCarDriving
   }
 }
