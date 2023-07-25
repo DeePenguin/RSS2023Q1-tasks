@@ -70,8 +70,11 @@ export class GarageList extends BaseComponent {
   }
 
   public updateCar(carProps: CarResponse): void {
-    this.cars[carProps.id].changeColor(carProps.color)
-    this.cars[carProps.id].changeName(carProps.name)
+    const car = this.cars[carProps.id]
+    if (car) {
+      car.changeColor(carProps.color)
+      car.changeName(carProps.name)
+    }
   }
 
   public startCar(id: number, duration: number): void {
