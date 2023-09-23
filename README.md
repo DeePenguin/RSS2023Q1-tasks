@@ -1,10 +1,8 @@
 # deepenguin-JSFE2023Q1
-[Shelter](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/shelter/index.html)
+[Shelter](https://deepenguin.github.io/RSS2023Q1-tasks/shelter/index.html)
 
-[Minesweeper](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/minesweeper/)
+[Minesweeper](https://deepenguin.github.io/RSS2023Q1-tasks/minesweeper/)
 
-[Self introduction](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/self-introduction/)
+[Rs-selectors](https://deepenguin.github.io/RSS2023Q1-tasks/rs-selectors/)
 
-[Rs-selectors](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/rs-selectors/)
-
-[Async-race](https://rolling-scopes-school.github.io/deepenguin-JSFE2023Q1/async-race/)
+[Async-race](https://deepenguin.github.io/RSS2023Q1-tasks/async-race/)
