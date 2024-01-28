@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES6",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2023"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "sourceMap": true,
+
+    "alwaysStrict": true,
+    "strict": true,
+    "noImplicitAny": true
+  },
+  "include": ["./src/**/*", "./src/modules.d.ts", "./*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

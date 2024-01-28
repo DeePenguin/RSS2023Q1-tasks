@@ -1,0 +1,105 @@
+.levels {
+  @extend %transition-s;
+
+  @include flex-col($jc: start, $ali: center);
+
+  @include m-custom(900px) {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  position: relative;
+
+  grid-area: levels;
+  gap: 10px;
+
+  width: $levels-width;
+  padding: 10px 0;
+
+  color: $font-color-light;
+
+  background-color: $bg-dark;
+
+  &__header {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 20px;
+
+    font-size: 1.6em;
+    font-weight: 600;
+  }
+
+  &__burger {
+    @extend %transition-s;
+
+    @include flex-col($jc: space-between, $ali: stretch);
+
+    @include m-custom(900px) {
+      pointer-events: all;
+      opacity: 0.5;
+    }
+
+    @include m-hover {
+      opacity: 0.7;
+    }
+
+    pointer-events: none;
+    cursor: pointer;
+
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    right: 100%;
+    transform: rotate(0deg);
+
+    aspect-ratio: 1.2 / 1;
+    height: 30px;
+    margin: 10px;
+    padding: 0;
+
+    color: inherit;
+
+    opacity: 0;
+    border: none;
+    outline: none;
+
+    transition: 0.5s ease-in-out;
+
+    .bar {
+      @extend %transition-s;
+
+      transform-origin: left;
+      transform: rotate(0deg);
+
+      height: 4px;
+
+      opacity: 1;
+      background-color: $burger-color;
+      border-radius: 5px;
+    }
+
+    &.open {
+      .bar {
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:nth-child(1) {
+          transform: rotate(45deg);
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}

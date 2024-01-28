@@ -1,0 +1,75 @@
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.game {
+  @include flex-col($jc: start);
+
+  grid-area: game;
+  gap: 10px;
+  padding: 10px 20px;
+
+  &__header {
+    @include flex;
+
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  &__title {
+    flex-grow: 1;
+
+    margin: 0;
+
+    font-size: 1.3em;
+    color: $font-color-light;
+    text-align: center;
+  }
+
+  &__hint-button {
+    @extend %transition-s;
+
+    @include flex($jc: center);
+
+    @include m-hover {
+      opacity: 1;
+
+      &:active {
+        transform: scale(1.2);
+      }
+    }
+
+    cursor: pointer;
+
+    aspect-ratio: 1 / 1;
+    height: 1.6em;
+    padding: 0;
+
+    color: $font-color-light;
+
+    opacity: 0.6;
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 50%;
+    outline: none;
+  }
+
+  .shake {
+    animation: shake 0.2s 5;
+  }
+}

@@ -1,0 +1,50 @@
+.editor {
+  @include flex($wrap: wrap, $jc: start, $ali: stretch);
+
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 700px;
+
+  font-size: 0.8em;
+
+  background: $editor-bg;
+  border: 1px solid $font-color;
+  border-radius: 5px;
+
+  &__header {
+    @include flex;
+
+    flex-basis: 100%;
+    gap: 15px;
+    padding: 10px;
+    background-color: $accent-color;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 600;
+    color: $font-color-light;
+  }
+
+  &__counter,
+  &__content {
+    line-height: 1.2;
+  }
+
+  &__counter {
+    @include flex-col($ali: end);
+
+    width: 30px;
+    padding: 0 0.6em;
+    text-align: right;
+    background-color: $editor-counter;
+  }
+
+  &__content {
+    position: relative;
+    flex-grow: 1;
+    color: $font-color-light;
+  }
+}

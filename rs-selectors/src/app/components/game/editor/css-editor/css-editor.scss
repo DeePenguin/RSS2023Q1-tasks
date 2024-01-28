@@ -1,0 +1,120 @@
+@keyframes blink {
+  0% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: $blink-color;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.editor {
+  &-css &__content {
+    @include flex;
+
+    max-width: calc(100% - 30px);
+  }
+
+  &-css &__counter {
+    justify-content: center;
+    padding: 0 0.6em;
+  }
+
+  &-css &__answer {
+    $padding: 2ch;
+
+    position: relative;
+    flex-grow: 1;
+    max-width: calc(100% - 70px);
+    height: 100%;
+  }
+
+  &-css &__markup,
+  &-css &__input {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 2ch;
+  }
+
+  &-css &__input {
+    resize: none;
+
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+
+    display: block;
+
+    color: transparent;
+    white-space: nowrap;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    caret-color: $font-color-light;
+
+    &::placeholder {
+      color: $font-color-light;
+    }
+
+    &:disabled::placeholder {
+      color: transparent;
+    }
+  }
+
+  &-css &__markup {
+    @include flex($jc: start);
+
+    height: 100%;
+    color: #ea51b2;
+    white-space: pre;
+    background-color: transparent;
+
+    .hljs-selector-class {
+      color: #b45bcf;
+    }
+
+    .hljs-selector-pseudo {
+      color: #ffc37b;
+    }
+
+    .hljs-selector-id {
+      color: #62d6e8;
+    }
+  }
+
+  &-css:not(:focus-within) &__markup:empty {
+    animation: blink 1s ease infinite;
+  }
+
+  &-css &__button {
+    @extend %transition-s;
+
+    @include m-hover {
+      background-color: $editor-btn-hover;
+    }
+
+    cursor: pointer;
+
+    width: 70px;
+    height: 100%;
+    padding: 10px 15px;
+
+    font-size: 1.1em;
+    font-weight: 600;
+    color: $font-color-light-xl;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 20%);
+    letter-spacing: 0.08em;
+
+    background-color: $editor-btn;
+    border: none;
+    outline: none;
+  }
+}
