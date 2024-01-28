@@ -1,0 +1,49 @@
+@import 'normalize.css';
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.page {
+  @include flex-col($ali: stretch, $jc: start);
+
+  overflow-x: hidden;
+
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100%;
+  margin: 0;
+
+  background-color: $bg-color;
+}
+
+.root {
+  @include primary-font;
+  @include flex-col($ali: stretch, $jc: start);
+
+  flex-grow: 1;
+
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  color: $font-color;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 10px 15px;
+}

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES5",
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2023"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "sourceMap": true,
+
+    "alwaysStrict": true,
+    "strict": true,
+    "noImplicitAny": true,
+
+    "baseUrl": "./src",
+    "paths": {
+      "@garage/*": ["app/garage/*"],
+      "@winners/*": ["app/winners/*"],
+      "@assets/*": ["assets/*"],
+      "@core/*": ["app/core/*"],
+      "@shared/*": ["app/shared/*"],
+      "@utils/*": ["app/utils/*"]
+    }
+  },
+  "include": ["./src/**/*", "./src/modules.d.ts", "./*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
