@@ -1,0 +1,37 @@
+body {
+  overflow: overlay;
+}
+
+*::-webkit-scrollbar {
+  display: block;
+  width: 14px;
+
+  &-button {
+    display: none;
+  }
+
+  &-track {
+    background-color: rgba(0, 0, 0, 0);
+
+    &-piece {
+      background-color: adjust-color($color-light-xl, $alpha: -0.95);
+    }
+  }
+
+  &-thumb {
+    border-radius: 30px;
+    background-color: $color-primary;
+    border: 3px solid rgba(0, 0, 0, 0);
+    background-clip: content-box;
+
+    &:hover {
+      background-color: $color-primary-light;
+      border-width: 0px;
+    }
+  }
+}
+
+* {
+    scrollbar-color: $color-primary adjust-color($color-light-xl, $alpha: -0.95);
+    scrollbar-width: thin;
+}

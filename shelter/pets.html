@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./styles/normalize.css" rel="stylesheet">
+  <link href="./styles/style.css" rel="stylesheet">
+  <link href="./assets/favicon/apple-icon-57x57.png" rel="apple-touch-icon" sizes="57x57">
+  <link href="./assets/favicon/apple-icon-60x60.png" rel="apple-touch-icon" sizes="60x60">
+  <link href="./assets/favicon/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+  <link href="./assets/favicon/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76">
+  <link href="./assets/favicon/apple-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+  <link href="./assets/favicon/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120">
+  <link href="./assets/favicon/apple-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+  <link href="./assets/favicon/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152">
+  <link href="./assets/favicon/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180">
+  <link type="image/png" href="./assets/favicon/android-icon-192x192.png" rel="icon" sizes="192x192">
+  <link type="image/png" href="./assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32">
+  <link type="image/png" href="./assets/favicon/favicon-96x96.png" rel="icon" sizes="96x96">
+  <link type="image/png" href="./assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16">
+  <!-- <link rel="manifest" href="./assets/favicon/manifest.json"> -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <title>Cozy House - Find a friend</title>
+</head>
+
+<body class="page">
+  <header class="page-header">
+    <div class="container header-container">
+      <a class="logo" href="./index.html">
+        <h1 class="title">
+          Cozy House
+        </h1>
+        <p class="subtitle">
+          Shelter for pets in Boston
+        </p>
+      </a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html">About the shelter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#no_scroll">Our pets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./index.html#help">Help the shelter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacts">Contacts</a>
+          </li>
+        </ul>
+        <div class="burger">
+          <span class="burger-icon"></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="page-main">
+    <section class="section section-main pets section_dark">
+      <div class="container">
+        <div class="section-content">
+          <h3 class="section-title section-title_centered">
+            Our friends who <br> are looking for a house
+          </h3>
+          <div class="cards-wrapper">
+          </div>
+          <div class="pagination">
+            <button class="btn btn_round" id="first-page" type="button"> &lt;&lt;</button>
+            <button class="btn btn_round" id="previous-page" type="button"> &lt;</button>
+            <button class="btn btn_round btn_filled" id="current-page" type="button"></button>
+            <button class="btn btn_round" id="next-page" type="button">&gt;</button>
+            <button class="btn btn_round" id="last-page" type="button">&gt;&gt;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer">
+    <div class="container footer-container">
+      <section class="section contacts" id="contacts">
+        <h3 class="section-title section-title_light">
+          For questions and suggestions
+        </h3>
+        <ul class="section-list">
+          <li class="list-item">
+            <a class="list-link icon icon-mail" href="mailto:email@shelter.com">email@shelter.com</a>
+          </li>
+          <li class="list-item">
+            <a class="list-link icon icon-phone" href="tel:+136745677554">+13&nbsp;674&nbsp;567&nbsp;75&nbsp;54</a>
+          </li>
+        </ul>
+      </section>
+      <section class="section locations">
+        <h3 class="section-title section-title_light">
+          We are waiting for your&nbsp;visit
+        </h3>
+        <ul class="section-list">
+          <li class="list-item">
+            <a class="list-link icon icon-pin" href="https://goo.gl/maps/PFwxWMK9HS6qXJtj6" target="_blank">1 Central
+              Street, Boston (entrance from the store)</a>
+          </li>
+          <li class="list-item">
+            <a class="list-link icon icon-pin" href="https://goo.gl/maps/GHzsD8DcAiMQ6zEm8" target="_blank">18 South
+              Park, London</a>
+          </li>
+        </ul>
+      </section>
+      <div class="footer-puppy">
+        <img class="img" src="./assets/images/footer-puppy.png" alt>
+      </div>
+    </div>
+  </footer>
+  <script src="./scripts/pets.js" type="module"></script>
+</body>
+
+</html>
