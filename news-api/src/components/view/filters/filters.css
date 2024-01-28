@@ -1,0 +1,58 @@
+.filters {
+  order: 1;
+}
+
+.filters__title {
+  margin: 10px;
+  text-align: center;
+}
+
+.filters__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.filters__item {
+  color: #7c8386;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border-bottom: 1px dashed;
+}
+
+.filters__item-name {
+  color: #ffffff;
+  text-transform: capitalize;
+  padding: 5px;
+}
+
+.filters__item-values {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  width: 85%;
+}
+
+.filters__item-label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid;
+  font-size: 0.8em;
+  transition: 0.3s ease-in-out;
+}
+
+.filters__item-label:has(input:checked) {
+  color: #69db7e;
+}
+
+.filters__item-checkbox {
+  appearance: none;
+  margin: 0;
+}
