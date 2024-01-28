@@ -1,0 +1,45 @@
+@import './normalize.css';
+
+.root {
+  --bg-color: rgb(255 230 221);
+  --bg-color-additional: rgba(244, 192, 115, 0.5);
+  --title-color: #ba274a;
+  --game-bg: rgb(250, 201, 184);
+  --font-color: rgb(240, 94, 133);
+  --font-color-additional: rgb(111 83 137);
+  --cell-bg: rgb(255 183 197 / 70%);
+  --cell-bg-open: rgba(255, 255, 255, 0.58);
+  --cell-bg-neighbor: rgb(255 0 125 / 50%);
+  --cell-border-color: rgb(0 0 0 / 50%);
+  --scroll-bg: rgba(240, 94, 133, 0.7);
+  --button-bg: rgb(250, 201, 184);
+  --button-color: rgb(240, 94, 133);
+  --button-border: rgb(232, 172, 176);
+
+  @include flex-col($jc: start);
+  @include primary_font;
+  @extend %transition-s;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 15px;
+  background: var(--bg-color);
+  gap: 1vh;
+
+  &.theme-dark {
+    --bg-color: rgb(35, 29, 63);
+    --bg-color-additional: rgba(116, 94, 137, 0.5);
+    --title-color: rgb(195, 228, 255);
+    --game-bg: rgb(44, 42, 88);
+    --font-color: rgb(200, 198, 246);
+    --font-color-additional: rgb(193, 229, 237);
+    --cell-bg: rgba(67, 56, 91, 0.7);
+    --cell-bg-open: rgba(218, 219, 243, 0.58);
+    --cell-bg-neighbor: rgba(146, 126, 238, 0.5);
+    --cell-border-color: rgba(0, 0, 0, 0.5);
+    --scroll-bg: rgba(149, 179, 203, 0.67);
+    --button-bg: rgb(44, 42, 88);
+    --button-color: rgb(200, 198, 246);
+    --button-border: rgb(61, 59, 98);
+  }
+}

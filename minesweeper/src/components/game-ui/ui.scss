@@ -1,0 +1,202 @@
+.settings {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  @include flex-col();
+  gap: 10px;
+
+  &-wrapper {
+    @include flex();
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.game-buttons {
+  @include flex($wrap: nowrap, $jc: center);
+  gap: 20px;
+}
+
+.btn {
+  @extend %transition-s;
+  padding: 10px 5px;
+  border-radius: 5px;
+  background: var(--button-bg);
+  border: 2px solid var(--button-border);
+  color: var(--button-color);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2), inset 1px 1px 5px rgba(255, 255, 255, 0.3);
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+}
+
+.settings-icon {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: transparent center no-repeat;
+  background-size: 100%;
+  filter: brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%);
+  .theme-dark & {
+    filter: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%);
+  }
+
+  &-score {
+    background-image: url("./img/trophy.svg");
+  }
+  &-level {
+    background-image: url("./img/settings.svg");
+  }
+
+  &-sound {
+    background-image: url("./img/volume.svg");
+    &.muted {
+      background-image: url("./img/mute.svg");
+    }
+  }
+
+  &-theme {
+    background-image: url("./img/shine.svg");
+    &.dark {
+      background-image: url("./img/moon.svg");
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 10;
+  @include flex-col($ali: center, $jc: center);
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+
+  &.open {
+    width: 100%;
+    height: 100%;
+  }
+
+  &-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--title-color);
+    color: var(--title-color);
+    align-self: end;
+    margin: 0 5%;
+    cursor: pointer;
+  }
+
+  &-content {
+    @include flex-col();
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    padding: 15px;
+    gap: 15px;
+    width: 80%;
+    max-width: 900px;
+  }
+
+  &-header {
+    margin: 0;
+    font-weight: normal;
+    font-size: 1.8em;
+    color: var(--title-color);
+  }
+}
+
+.score-table {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--game-bg);
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  color: var(--font-color-additional);
+
+  .thead {
+    background-color: var(--bg-color-additional);
+    color: var(--font-color);
+    font-size: 1.2em;
+  }
+
+  .th {
+    padding: 10px;
+    font-weight: normal;
+  }
+
+  .t-row {
+    &:nth-child(even) {
+      background-color: rgba(254, 254, 254, 0.4);
+    }
+    td {
+      padding: 6px 0;
+    }
+  }
+
+}
+
+.levels {
+  @include flex($jc: center, $ali: start);
+  gap: 20px;
+  padding: 15px 0;
+
+  &-title {
+    font-weight: normal;
+    margin: 0;
+    padding: 0.3em;
+    color: var(--title-color);
+  }
+
+  &-default {
+    @include flex-col();
+    gap: 10px;
+  }
+
+  .level {
+    @include flex();
+    width: 100%;
+    gap: 20px;
+
+    &-title{
+      font-weight: normal;
+      margin: 0;
+      text-transform: capitalize;
+      color: var(--font-color);
+    }
+  }
+
+  &-custom {
+    @include flex-col();
+    gap: 10px;
+
+
+    .label {
+      @include flex($wrap: nowrap);
+      gap: 10px;
+      width: 100%;
+      text-transform: capitalize;
+      color: var(--font-color);
+
+      .input {
+        display: inline-block;
+        max-width: 200px;
+        padding-left: 10px;
+        color: var(--font-color-additional);
+        background-color: rgba(255, 255, 255, 0.322);
+        border: 2px solid var(--font-color);
+        border-radius: 5px;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,77 @@
+@keyframes not-flagged {
+  0% {
+    background-color: var(--cell-bg);
+  }
+  50% {
+    background-color: var(--cell-bg-neighbor);
+  }
+  100% {
+    background-color: var(--cell-bg);
+  }
+}
+
+.cell {
+  border: 1px solid var(--cell-border-color);
+  height: 35px;
+  width: 35px;
+  background: transparent center / 80% no-repeat;
+  background-color: var(--cell-bg);
+  @include flex($jc: center);
+  &::after {
+    display: block;
+    content: "";
+  }
+
+  &.open {
+    background-color: var(--cell-bg-open);
+    &::after {
+      content: attr(data-bombs);
+    }
+  }
+
+  &[data-bombs='1'] {
+    color: rgb(25, 122, 25);
+  }
+
+  &[data-bombs='2'] {
+    color: rgb(9, 13, 220);
+  }
+
+  &[data-bombs='3'] {
+    color: rgb(222, 96, 12);
+  }
+
+  &[data-bombs='4'] {
+    color: rgb(161, 12, 9);
+  }
+
+  &[data-bombs='5'] {
+    color: rgb(197, 11, 197);
+  }
+
+  &[data-bombs='6'] {
+    color: rgb(201, 176, 33);
+  }
+
+  &[data-bombs='7'] {
+    color: rgb(112, 23, 160);
+  }
+
+  &[data-bombs='8'] {
+    color: rgb(9, 178, 178);
+  }
+
+  &.bomb {
+    background-color: rgba(228, 29, 29, 0.8);
+    background-image: url("./img/bomb.png");
+  }
+
+  &.flag {
+    background-image: url("./img/flag.png");
+  }
+
+  &.neighbour {
+    animation-name: not-flagged;
+    animation-duration: 0.5s;
+  }
+}

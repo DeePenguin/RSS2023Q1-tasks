@@ -1,0 +1,77 @@
+.game {
+  position: relative;
+  max-width: clamp(300px, 100%, 1200px);
+  @include flex-col();
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--game-bg);
+  box-shadow: 2px 2px 5px rgb(0 0 0 / 30%),
+    inset 2px 2px 5px rgb(255 255 255 / 50%);
+
+  &-status {
+    @include flex();
+    gap: 10px;
+    width: 100%;
+    color: var(--font-color);
+  }
+
+  &-result {
+    color: var(--title-color);
+  }
+
+  &-bombs,
+  &-flags,
+  &-moves,
+  &-time {
+    @include flex();
+    gap: 10px;
+    &::before {
+      display: block;
+      content: "";
+      width: 25px;
+      height: 25px;
+      background: transparent center no-repeat;
+      background-size: 100%;
+      filter: brightness(0) saturate(100%) invert(22%) sepia(45%) saturate(4001%) hue-rotate(327deg) brightness(86%) contrast(91%);
+    .theme-dark & {
+      filter: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(369%) hue-rotate(179deg) brightness(103%) contrast(101%);
+    }
+    }
+  }
+
+  &-bombs::before {
+    background-image: url("./img/bomb.svg");
+  }
+
+  &-flags::before {
+    background-image: url("./img/flag.svg");
+  }
+
+  &-moves::before {
+    background-image: url("./img/click.svg");
+  }
+
+  &-time::before {
+    background-image: url("./img/time.svg");
+  }
+
+  .game-blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+
+    &.active {
+      width: 100%;
+      height: 100%;
+
+    }
+
+    &.paused {
+      backdrop-filter: blur(5px);
+    }
+  }
+
+}

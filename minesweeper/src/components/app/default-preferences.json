@@ -1,0 +1,21 @@
+{
+  "levels" : {
+    "easy" : {
+      "rows" : 10,
+      "cols" : 10,
+      "bombs" : 10
+    },
+    "medium" : {
+      "rows" : 15,
+      "cols" : 15,
+      "bombs" : 20
+    },
+    "hard" : {
+      "rows" : 25,
+      "cols" : 25,
+      "bombs" : 40
+    }
+  },
+  "sounds": true,
+  "darkTheme": false
+}
